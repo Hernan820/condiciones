@@ -20,3 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::post('condicion/bancosagrega', [App\Http\Controllers\BancoController::class, 'create']);
+
+ });

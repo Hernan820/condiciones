@@ -22,9 +22,13 @@ class BancoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Request $request)
+    {/*
+        $banco = new banco;
+        $banco->nombre_banco = $request->banconombre;
+        $banco->save();*/
+
+        return $request->banconombre;
     }
 
     /**
