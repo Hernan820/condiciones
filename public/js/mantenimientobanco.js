@@ -7,13 +7,11 @@ $('#mantBancos').on('click', function() {
 
 $('#agregabanco').on('click', function() {
 
-
    var datos = new FormData(document.getElementById("frmbanco"));
 
    axios.post(principalUrl + "condicion/bancosagrega",datos)
    .then((respuesta) => {
       respuesta.data
-
    })
    .catch((error) => {
        if (error.response) {
@@ -21,5 +19,23 @@ $('#agregabanco').on('click', function() {
        }
    });
 
-   
+});
+
+
+$('#vistabancos').on('click', function() {
+   event.preventDefault();
+   $.ajax({
+      type:'GET',
+      url: principalUrl+'condicion/vistaprueba',
+      success: function(respuesta){
+
+		$(".sidebar-item").removeClass("active");
+        $("#opcioncondiciones").addClass("active");
+
+          $('.contenido').html(respuesta);
+      },
+      error: function (){
+          console.log('Error');
+      }
+  })
 });

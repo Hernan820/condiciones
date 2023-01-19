@@ -1,8 +1,4 @@
 
-
-@extends('layouts.app')
-
-@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,13 +9,13 @@
 	<meta name="description" content="Modern, flexible and responsive Bootstrap 5 admin &amp; dashboard template">
 	<meta name="author" content="Bootlab">
 
-	<title>Spark - Bootstrap 5 Admin &amp; Dashboard Template</title>
+	<title></title>
 
 	<!-- PICK ONE OF THE STYLES BELOW -->
 	<!-- <link href="css/modern.css" rel="stylesheet"> -->
 	<!-- <link href="css/classic.css" rel="stylesheet"> -->
 	<!-- <link href="css/dark.css" rel="stylesheet"> -->
-	<!-- <link href="css/light.css" rel="stylesheet"> -->
+	 <link href="css/light.css" rel="stylesheet"> 
 
 	<!-- BEGIN SETTINGS -->
 	<!-- You can remove this after picking a style -->
@@ -139,4 +135,3 @@
 </body>
 
 </html>
-@endsection
