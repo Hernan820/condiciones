@@ -26,9 +26,15 @@ class HomeController extends Controller
         return view('home');
     }
 
-    /* */
+    /* *********** */
 
     public function vistacondiciones(){
         return view('condiciones');
+    }
+
+    /* *********** */
+
+    public function vistaregistro(){
+        return view('registros');
     }
 }

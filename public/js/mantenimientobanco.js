@@ -39,3 +39,23 @@ $('#vistabancos').on('click', function() {
       }
   })
 });
+
+$('#vistaregistro').on('click', function() {
+   event.preventDefault();
+
+   $.ajax({
+      type:'GET',
+      url: principalUrl+'condicion/vistaregistros',
+      success: function(respuesta){
+
+		$(".sidebar-item").removeClass("active");
+        $("#itemregistro").addClass("active");
+
+          $('.contenido').html(respuesta);
+      },
+      error: function (){
+          console.log('Error');
+      }
+  })
+
+});

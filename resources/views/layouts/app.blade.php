@@ -8,7 +8,7 @@
     <meta name="description" content="Modern, flexible and responsive Bootstrap 5 admin &amp; dashboard template">
     <meta name="author" content="Bootlab">
 
-    <title>Spark - Bootstrap 5 Admin &amp; Dashboard Template</title>
+    <title>Spark</title>
 
     <!-- PICK ONE OF THE STYLES BELOW -->
     <!-- <link href="css/modern.css" rel="stylesheet"> -->
@@ -41,8 +41,8 @@
         @guest
         @else
         <nav id="sidebar" class="sidebar">
-            <a class="sidebar-brand" href="">
-                Contigo Mortgage
+            <a class="sidebar-brand" href="" id="nombrempresa">
+                
             </a>
             <div class="sidebar-content">
                 <div class="sidebar-user">
@@ -55,15 +55,15 @@
                     <li class="sidebar-header">
                         Main
                     </li>
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="">
+                    <li class="sidebar-item " id="itemregistro">
+                        <a class="sidebar-link" href="" id="vistaregistro" >
                             <i class="align-middle me-2 fas fa-fw fa-list"></i> <span
                                 class="align-middle">RECORDS</span>
                         </a>
                     </li>
                     <li class="sidebar-item" id="opcioncondiciones">
                         <a class="sidebar-link" id="vistabancos" href="">
-                            <i class="align-middle me-2 fas fa-fw fa-home"></i> <span class="align-middle">BANCOS</span>
+                            <i class="align-middle me-2 fas fa-fw fa-home"></i> <span class="align-middle">CONDICIONES</span>
                         </a>
                     </li>
                 </ul>

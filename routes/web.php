@@ -27,4 +27,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('condicion/vistaprueba', [App\Http\Controllers\HomeController::class, 'vistacondiciones']);
 
+    Route::get('condicion/vistaregistros', [App\Http\Controllers\HomeController::class, 'vistaregistro']);
+
+    Route::post('condicion/compania', [App\Http\Controllers\CompaniaController::class, 'index']);
+
+    
  });
