@@ -46,16 +46,13 @@ $('#vistaregistro').on('click', function() {
    $.ajax({
       type:'GET',
       url: principalUrl+'condicion/vistaregistros',
-      success: function(respuesta){
+      dataType:"html",
+  }).done(function(data) {
+    $(".sidebar-item").removeClass("active");
+    $("#itemregistro").addClass("active");
 
-		$(".sidebar-item").removeClass("active");
-        $("#itemregistro").addClass("active");
+      $('.contenido').html(data);   
 
-          $('.contenido').html(respuesta);
-      },
-      error: function (){
-          console.log('Error');
-      }
-  })
+    });
 
 });

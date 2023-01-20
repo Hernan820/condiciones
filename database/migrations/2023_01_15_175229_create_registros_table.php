@@ -33,6 +33,8 @@ return new class extends Migration
             $table->foreign('id_cliente')->references('id')->on('clientes');  
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')->references('id')->on('users');
+            $table->unsignedBigInteger('id_compania');
+            $table->foreign('id_compania')->references('id')->on('companias');
             $table->timestamps();
         });
     }

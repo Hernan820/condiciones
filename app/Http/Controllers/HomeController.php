@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use View;
 class HomeController extends Controller
 {
     /**
@@ -29,12 +29,14 @@ class HomeController extends Controller
     /* *********** */
 
     public function vistacondiciones(){
-        return view('condiciones');
+        return View::make('condiciones')->render();
+        //return view('condiciones')->render();
     }
 
     /* *********** */
 
     public function vistaregistro(){
-        return view('registros');
+        return View::make('registros')->render();
+       // return view('registros')->render();
     }
 }

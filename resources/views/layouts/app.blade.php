@@ -373,7 +373,6 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/mantenimientobanco.js') }}"></script>
     <script src="{{ asset('js/master.js') }}"></script>
-    <script src="{{ asset('js/registros.js') }}"></script>
 
 
 </body>
