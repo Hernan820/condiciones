@@ -20,13 +20,16 @@ return new class extends Migration
             $table->text('dowpayment')->nullable();
             $table->text('precio_casa')->nullable();
             $table->text('estado')->nullable();
-            $table->text('tipo_prestamo')->nullable();
             $table->text('drive')->nullable();
             $table->text('num_prestamo')->nullable();   
             $table->text('direccion_casa')->nullable();   
             $table->text('notas')->nullable();   
             $table->text('procesador')->nullable();
             $table->text('Appraisal')->nullable();
+            
+            $table->unsignedBigInteger('id_prestamo');
+            $table->foreign('id_prestamo')->references('id')->on('prestamos');  
+
             $table->unsignedBigInteger('id_banco');
             $table->foreign('id_banco')->references('id')->on('bancos');  
             $table->unsignedBigInteger('id_cliente');
