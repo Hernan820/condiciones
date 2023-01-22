@@ -1,17 +1,24 @@
 
-    alert('archivo registro js');
-
     $('#idcrearegistro').on('click', function() {
         console.log("si funciona al darle clik aqui este bton");
-        alert('boton desde registro');
     });
 
 
-    
-var datatablesButtons = $("#datatables-buttons").DataTable({
-    responsive: true,
-    lengthChange: !1,
-    buttons: ["copy", "print"]
-});
-datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)");
+    			// Datatables Responsive
+			$("#datatables-reponsive").DataTable({
+				responsive: true
+			});
+
+			$('#datetimepicker-minimum').datetimepicker({format: 'L'});
+			$('#datetimepicker-minimum2').datetimepicker();
+
+			// Select2
+			$(".select2").each(function() {
+				$(this)
+					.wrap("<div class=\"position-relative\"></div>")
+					.select2({
+						placeholder: "Select value",
+						dropdownParent: $(this).parent()
+					});
+			})
     

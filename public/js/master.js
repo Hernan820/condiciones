@@ -9,7 +9,7 @@ $(document).ready(function () {
     axios.post(principalUrl + "condicion/compania",datos)
     .then((respuesta) => {
         
-        $("#nombrempresa").html(respuesta.data.nombre);       
+        $("#nombrempresa").text(respuesta.data.nombre);       
     })
     .catch((error) => {
         if (error.response) {

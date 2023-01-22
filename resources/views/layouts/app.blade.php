@@ -41,14 +41,16 @@
         @guest
         @else
         <nav id="sidebar" class="sidebar">
-            <a class="sidebar-brand" href="" id="nombrempresa">
-                
+            <a class="sidebar-brand" href="" >
+            <img src="{{ asset('img/avatars/avatar.jpeg') }}" style="width:40px">
+                <span id="nombrempresa" >  </span>
             </a>
             <div class="sidebar-content">
                 <div class="sidebar-user">
-                    <img src="{{ asset('img/avatars/avatar.jpeg') }}" class="img-fluid rounded-circle mb-2"
+                    <img src="{{ asset('img/avatars/avatar-2.jpg') }}" class="img-fluid rounded-circle mb-2"
                         style="height: 94px !important ; width: 94px  !important ;" alt="Linda Miller" />
                     <div class="fw-bold">{{ Auth::user()->name }}</div>
+                    <small>File Processor</small>
                 </div>
 
                 <ul class="sidebar-nav">
@@ -57,8 +59,7 @@
                     </li>
                     <li class="sidebar-item " id="itemregistro">
                         <a class="sidebar-link" href="" id="vistaregistro" >
-                            <i class="align-middle me-2 fas fa-fw fa-list"></i> <span
-                                class="align-middle">RECORDS</span>
+                        <i class="align-middle me-2 fas fa-fw fa-file-text"></i> <span class="align-middle">Files in process</span>
                         </a>
                     </li>
                     <li class="sidebar-item" id="opcioncondiciones">
@@ -303,9 +304,9 @@
                             </ul>
                         </div>
                         <div class="col-4 text-end">
-                            <p class="mb-0">
-                                &copy; 2022 - <a href="" class="text-muted">Spark</a>
-                            </p>
+                        <p class="mb-0">
+								&copy; 2022 - <a href="https://contigomortgage.com" class="text-muted">Contigo Mortgage</a>
+							</p>
                         </div>
                     </div>
                 </div>
