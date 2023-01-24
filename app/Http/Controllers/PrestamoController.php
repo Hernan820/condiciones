@@ -44,9 +44,11 @@ class PrestamoController extends Controller
      * @param  \App\Models\prestamo  $prestamo
      * @return \Illuminate\Http\Response
      */
-    public function show(prestamo $prestamo)
+    public function show()
     {
-        //
+        $prestamo = prestamo::where("prestamos.estado_prestamo","=",1)->get();
+
+        return response()->json($prestamo);
     }
 
     /**

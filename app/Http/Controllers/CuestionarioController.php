@@ -44,9 +44,12 @@ class CuestionarioController extends Controller
      * @param  \App\Models\cuestionario  $cuestionario
      * @return \Illuminate\Http\Response
      */
-    public function show(cuestionario $cuestionario)
+    public function show( )
     {
-        //
+        $cuestionario = cuestionario::all();
+
+        return response()->json($cuestionario);
+
     }
 
     /**

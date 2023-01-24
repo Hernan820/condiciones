@@ -31,5 +31,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('condicion/compania', [App\Http\Controllers\CompaniaController::class, 'index']);
 
-    
+    Route::post('condicion/agregaregistro', [App\Http\Controllers\RegistroController::class, 'create']);
+
+    Route::post('condicion/documentos', [App\Http\Controllers\DocumentoController::class, 'show']);
+
+    Route::post('condicion/cuestionario', [App\Http\Controllers\CuestionarioController::class, 'show']);
+
+    Route::post('condicion/prestamos', [App\Http\Controllers\PrestamoController::class, 'show']);
+
+
  });

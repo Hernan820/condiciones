@@ -17,6 +17,11 @@ return new class extends Migration
             $table->id();
             $table->text('nombre_cliente')->nullable(); 
             $table->text('telefono')->nullable(); 
+            $table->text('correo')->nullable(); 
+            $table->text('direccion')->nullable(); 
+            $table->text('direcionalternativa')->nullable(); 
+            $table->text('status')->nullable(); 
+            $table->text('socials_number')->nullable(); 
             $table->timestamps();
         });
     }

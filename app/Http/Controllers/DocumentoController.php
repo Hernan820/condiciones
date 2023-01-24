@@ -44,9 +44,11 @@ class DocumentoController extends Controller
      * @param  \App\Models\documento  $documento
      * @return \Illuminate\Http\Response
      */
-    public function show(documento $documento)
+    public function show()
     {
-        //
+        $doc = documento::where("documentos.estado_doc","=",1)->get();
+
+        return response()->json($doc);
     }
 
     /**
