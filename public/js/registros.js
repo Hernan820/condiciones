@@ -46,6 +46,7 @@ $(document).ready(function () {
 function datosfile(){
 
 	$("#formregistro")[0].reset();
+	$('#iditemprimero').tab('show');
 
 	// MUESTRA DOCUMENTOS
 	$("#listdocumentos").empty();
@@ -58,7 +59,7 @@ function datosfile(){
 		$("#listdocumentos").append("<label class='col-form-label  pt-sm-0'>Documents</label>"); 
    
 		respuesta.data.forEach(function (element) {
-		   $("#listdocumentos").append("<div class='mb-3 row'><div class='col-sm-10'> <label class='form-check m-0'><input type='checkbox' class='form-check-input' id='ssmm' name='chekcdocument[]' value="+element.id+"> <span class='form-check-label'>"+element.nombre_doc+"</span> </label> </div>  </div>"); 
+		   $("#listdocumentos").append("<div class='mb-3 row'><div class='col-sm-10'> <label class='form-check m-0'><input type='checkbox' class='form-check-input checkdocumento' id='ssmm' name='chekcdocument[]' value="+element.id+"> <span class='form-check-label'>"+element.nombre_doc+"</span> </label> </div>  </div>"); 
 	    });
 
 	   respuesta.data.forEach(function (element) {
@@ -80,7 +81,7 @@ axios.post(principalUrl + "condicion/cuestionario")
 	$("#cuestionarios").append("<label class='col-form-label  pt-sm-0'>Questionnaire catalog</label>"); 
 
 	respuesta.data.forEach(function (element) {
-	   $("#cuestionarios").append("<div class='mb-3 row'> <div class='col-sm-10'> <label class='form-check m-0'> <input type='checkbox' class='form-check-input' name='checkcuestionario[]' value="+element.id+"> <span class='form-check-label'>"+element.nombre+"</span></label></div></div>"); 
+	   $("#cuestionarios").append("<div class='mb-3 row'> <div class='col-sm-10'> <label class='form-check m-0'> <input type='checkbox' class='form-check-input checkcuest' name='checkcuestionario[]' value="+element.id+"> <span class='form-check-label'>"+element.nombre+"</span></label></div></div>"); 
 	});
 
 })
@@ -171,12 +172,12 @@ axios.post(principalUrl + "condicion/prestamos")
 	}
 });
 
-
-
 }
 
     
 $('#guardaregistro').on('click', function() { 
+
+	if (validaform() == false) {return;}
 
 	var datos = new FormData(document.getElementById("formregistro"));
 	     datos.append("estadocasa",$('#estadoscasa').val());
@@ -201,6 +202,72 @@ $('#guardaregistro').on('click', function() {
     });
 
 });
+
+
+function validaform(){
+	var valido = true;
+	var docs = 0 ;
+	var cuest = 0 ;	
+    var name = $("#nameclient").val();
+	var telef = $("#customerPhone").val();
+    var estatus = $("input[name=radio_status]").val();
+    var fechacontrato = $("#datecontrac").val();
+    var fecharecibido = $("#datereceipt").val();
+    var tipoprestamo = $("#typeloan").val();
+    var emailcliente = $("#emailclient").val();
+	var checkdoc = $(".checkdocumento:checked");  
+	var checkcuestionari = $(".checkcuest:checked");  
+
+	checkdoc.each(function(i) { docs++;});
+
+	checkcuestionari.each(function(i) {cuest++;	});
+
+	if(docs < 5){
+        Swal.fire("¡debe asignar mas de 4 documentos!");
+		$('#itemsegundo').tab('show');
+        valido = false;}
+
+	if(cuest <= 0){
+        Swal.fire("¡debe asignar cuestionarios!");
+		$('#itemtercero').tab('show');
+        valido = false; }
+
+	if(name == ""){
+		Swal.fire("¡Agrege el nombre del cliente!");
+		valido = false; }
+
+	if(telef == ""){
+		Swal.fire("¡Agrege el telefono del cliente!");
+		valido = false; }
+
+	if(estatus == ""){
+		Swal.fire("¡Agrege el estatus del cliente!");
+		valido = false; }
+
+	if(fechacontrato == ""){
+		Swal.fire("¡Agrege la fecha del contrato!");
+		valido = false; }
+	
+	if(fecharecibido == ""){
+		Swal.fire("¡Agrege la fecha de recepcion del contrato!");
+		valido = false; }
+
+	if(tipoprestamo == ""){
+		Swal.fire("¡Agrege tipo de prestamo!");
+		valido = false; }
+
+	if(emailcliente == ""){
+		Swal.fire("¡Agrege el email del cliente!");
+		valido = false; }
+
+    return valido;
+}
+
+
+
+
+
+
 
 
 console.log('aqui llega a registro js  actualizado');

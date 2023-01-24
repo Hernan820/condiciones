@@ -195,19 +195,19 @@
                                 <h5 class="card-title mb-0">File information</h5>
                             </div>
 
-                            <div class="list-group list-group-flush" role="tablist">
+                            <div class="list-group list-group-flush" id="tabitems" role="tablist">
                                 <a class="list-group-item list-group-item-action active itemprimero" id="iditemprimero" data-bs-toggle="list"
                                     href="#account" role="tab" >
                                     <i class="align-middle me-2" data-feather="edit"></i>
                                     Contract info
                                 </a>
                                 <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#password"
-                                    role="tab">
+                                   id="itemsegundo" role="tab">
                                     <i class="align-middle me-2" data-feather="list"></i>
                                     Document list
                                 </a>
                                 <a class="list-group-item list-group-item-action" data-bs-toggle="list"
-                                    href="#Questionnaires" role="tab">
+                                   id="itemtercero" href="#Questionnaires" role="tab">
                                     <i class="align-middle me-2" data-feather="layout"></i>
                                     Questionnaires
                                 </a>
