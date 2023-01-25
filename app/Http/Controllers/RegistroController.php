@@ -52,10 +52,11 @@ class RegistroController extends Controller
         $registro->telefono_precesador      = $request->realtorphone;
 
         //$registro->Appraisal       = $request->             #MAS ADELANTE SE LLENARAN
-        $registro->id_prestamo      = 1;    
+        $registro->id_prestamo     = 1;    
         $registro->id_banco        = 1;                     #MAS ADELANTE SE LLENARAN
         $registro->id_cliente      = $cliente->id;
         $registro->id_usuario      = auth()->user()->id; 
+        $registro->id_estado       = 1;
         $registro->id_compania     = 1;
         $registro->estado_registro = 1; 
         $registro->save();
@@ -111,6 +112,7 @@ class RegistroController extends Controller
         ->join("prestamos","prestamos.id", "=", "registros.id_prestamo")
         ->select("prestamos.*","clientes.*","registros.*","registros.id as idregister")
         ->where("registros.estado_registro","=",1)
+        ->where("registros.id_estado","=",1)
         ->get();
 
         return response()->json($registros);        

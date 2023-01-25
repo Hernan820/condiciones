@@ -33,7 +33,7 @@ $(document).ready(function () {
 	  $(this).val('$' + valor);
 	});
 	$('#dowpayment').mask('00%');
-
+	$('#realtorphone').mask('(000) 000-0000');
 	$('#customerPhone').mask('(000) 000-0000');
 	registrotbl();
  });

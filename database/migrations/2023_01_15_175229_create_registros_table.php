@@ -25,11 +25,10 @@ return new class extends Migration
             $table->text('direccion_casa')->nullable();   
             $table->text('notas')->nullable();   
             $table->text('procesador')->nullable();
-            $table->text('Appraisal')->nullable();
-            
+            $table->text('telefono_precesador')->nullable();
+            $table->text('Appraisal')->nullable();            
             $table->unsignedBigInteger('id_prestamo');
             $table->foreign('id_prestamo')->references('id')->on('prestamos');  
-
             $table->unsignedBigInteger('id_banco');
             $table->foreign('id_banco')->references('id')->on('bancos');  
             $table->unsignedBigInteger('id_cliente');
@@ -38,6 +37,9 @@ return new class extends Migration
             $table->foreign('id_usuario')->references('id')->on('users');
             $table->unsignedBigInteger('id_compania');
             $table->foreign('id_compania')->references('id')->on('companias');
+            $table->unsignedBigInteger('id_estado');
+            $table->foreign('id_estado')->references('id')->on('estados');
+            $table->text('estado_registro')->nullable();
             $table->timestamps();
         });
     }

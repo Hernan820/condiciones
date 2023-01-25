@@ -284,8 +284,8 @@
                                                         <div class="mb-3 col-md-12">
                                                             <div class="mb-3 col-md-12">
                                                                 <label for="realtorphone">Realtor telephone</label>
-                                                                <input type="text" name="realtorphone" placeholder=""
-                                                                autocomplete="off"  class="form-control">
+                                                                <input type="text" name="realtorphone" id="realtorphone" 
+                                                                autocomplete="off" placeholder="(631) 609-9108" class="form-control">
                                                             </div>
                                                         </div>
                                                     </div>
