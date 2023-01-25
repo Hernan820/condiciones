@@ -39,5 +39,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('condicion/prestamos', [App\Http\Controllers\PrestamoController::class, 'show']);
 
+    Route::get('condiciones/registro', [App\Http\Controllers\RegistroController::class, 'show']);
+
+
 
  });

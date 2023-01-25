@@ -57,6 +57,7 @@ class RegistroController extends Controller
         $registro->id_cliente      = $cliente->id;
         $registro->id_usuario      = auth()->user()->id; 
         $registro->id_compania     = 1;
+        $registro->estado_registro = 1; 
         $registro->save();
 
         foreach ($request->chekcdocument as $docs) {
@@ -104,9 +105,15 @@ class RegistroController extends Controller
      * @param  \App\Models\registro  $registro
      * @return \Illuminate\Http\Response
      */
-    public function show(registro $registro)
+    public function show()
     {
-        //
+        $registros = registro::join("clientes","clientes.id", "=", "registros.id_cliente")
+        ->join("prestamos","prestamos.id", "=", "registros.id_prestamo")
+        ->select("prestamos.*","clientes.*","registros.*","registros.id as idregister")
+        ->where("registros.estado_registro","=",1)
+        ->get();
+
+        return response()->json($registros);        
     }
 
     /**

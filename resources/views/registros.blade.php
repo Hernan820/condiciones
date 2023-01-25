@@ -5,8 +5,10 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="header-title mb-0">
-                    Welcome to file processing! 
+                    Welcome to file processing!
                 </h5>
+                <i class="align-middle me-2" data-feather="upload-cloud"></i>
+
             </div>
             <div class="card-body">
                 <div class="my-5"></div>
@@ -17,12 +19,16 @@
     <div class="col-12 col-lg-12">
         <div class="tab">
             <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item"><a class="nav-link active" href="#tab-1" data-bs-toggle="tab" role="tab"><i
-                            class="align-middle me-2 fas fa-fw fa-user-check"></i> Active files</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#tab-1" data-bs-toggle="tab" role="tab">
+                        <i class="align-middle me-2 fas fa-fw fa-user-check"></i> Active files</a>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="#tab-2" data-bs-toggle="tab" role="tab">
-                        <i class="align-middle me-2" data-feather="upload-cloud"></i> Files send to opening</a></li>
+                        <i class="align-middle me-2 fas fa-fw fa-cloud-upload-alt" data-feather="upload-cloud"></i>Files
+                        send to opening</a>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="#tab-3" data-bs-toggle="tab" role="tab">
-                        <i class="align-middle me-2" data-feather="user-x"></i> Files cancelled</a></li>
+                        <i class="align-middle me-2 fas fa-fw fa-user-times" data-feather="user-x"></i> Files
+                        cancelled</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab-1" role="tabpanel">
@@ -47,101 +53,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>01/15/2023</td>
-                                    <td>01/17/2023</td>
-                                    <td>JUAN MARIA TACURI</td>
-                                    <td>NEW YORK</td>
-                                    <td>CONVENTIONAL</td>
-                                    <td>35 West Main St Smithtown NY 11787</td>
-                                    <td style="text-align: center;">
-                                        <a href=""><i class="align-middle me-2 fas fa-fw fa-external-link-alt"
-                                                data-feather="external-link"></i></a>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn mb-1 btn-primary dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Options
-                                            </button>
-                                            <div class="dropdown-menu" style="">
-                                                <a class="dropdown-item" href="#"><i class="align-middle me-2"
-                                                        data-feather="more-vertical"></i> See details</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" data-bs-toggle="modal"
-                                                    data-bs-target="#sizedModalSm">
-                                                    <i class="align-middle me-2" data-feather="edit"></i> Get customer
-                                                    info
 
-                                                </a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#"><i class="align-middle me-2"
-                                                        data-feather="x-square"></i> Cancel file</a>
-
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#"><i class="align-middle me-2"
-                                                        data-feather="shuffle"></i> File with Problems</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#"><i class="align-middle me-2"
-                                                        data-feather="send"></i> Send to opening</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01/15/2023</td>
-                                    <td>01/17/2023</td>
-                                    <td>JUAN MARIA TACURI</td>
-                                    <td>NEW YORK</td>
-                                    <td>CONVENTIONAL</td>
-                                    <td>35 West Main St Smithtown NY 11787</td>
-                                    <td style="text-align: center;">
-                                        <a href=""><i class="align-middle me-2 fas fa-fw fa-external-link-alt"
-                                                data-feather="external-link"></i></a>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn mb-1 btn-primary dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Options
-                                            </button>
-                                            <div class="dropdown-menu" style="">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Separated link</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01/15/2023</td>
-                                    <td>01/17/2023</td>
-                                    <td>JUAN MARIA TACURI</td>
-                                    <td>NEW YORK</td>
-                                    <td>CONVENTIONAL</td>
-                                    <td>35 West Main St Smithtown NY 11787</td>
-                                    <td style="text-align: center;">
-                                        <a href=""><i class="align-middle me-2 fas fa-fw fa-external-link-alt"
-                                                data-feather="external-link"></i></a>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn mb-1 btn-primary dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Options
-                                            </button>
-                                            <div class="dropdown-menu" style="">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Separated link</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -196,19 +108,19 @@
                             </div>
 
                             <div class="list-group list-group-flush" id="tabitems" role="tablist">
-                                <a class="list-group-item list-group-item-action active itemprimero" id="iditemprimero" data-bs-toggle="list"
-                                    href="#account" role="tab" >
-                                    <i class="align-middle me-2" data-feather="edit"></i>
+                                <a class="list-group-item list-group-item-action active itemprimero" id="iditemprimero"
+                                    data-bs-toggle="list" href="#account" role="tab">
+                                    <i class="align-middle me-2 far fa-fw fa-edit" data-feather="edit"></i>
                                     Contract info
                                 </a>
                                 <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#password"
-                                   id="itemsegundo" role="tab">
-                                    <i class="align-middle me-2" data-feather="list"></i>
+                                    id="itemsegundo" role="tab">
+                                    <i class="align-middle me-2 fas fa-fw fa-list" data-feather="list"></i>
                                     Document list
                                 </a>
-                                <a class="list-group-item list-group-item-action" data-bs-toggle="list"
-                                   id="itemtercero" href="#Questionnaires" role="tab">
-                                    <i class="align-middle me-2" data-feather="layout"></i>
+                                <a class="list-group-item list-group-item-action" data-bs-toggle="list" id="itemtercero"
+                                    href="#Questionnaires" role="tab">
+                                    <i class="align-middle me-2 far fa-fw fa-file" data-feather="layout"></i>
                                     Questionnaires
                                 </a>
                             </div>
@@ -230,13 +142,13 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label for="nameclient">Customer name</label>
-                                                        <input type="text" class="form-control" id="nameclient" name="nameclient"
-                                                            placeholder="First name">
+                                                        <input type="text" class="form-control" id="nameclient"
+                                                            name="nameclient" placeholder="First name">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="inputLastName">Customer telephone</label>
-                                                        <input type="text" class="form-control" id="customerPhone" name="customerPhone"
-                                                            placeholder="(631) 609-9108">
+                                                        <input type="text" class="form-control" id="customerPhone"
+                                                            name="customerPhone" placeholder="(631) 609-9108">
                                                     </div>
                                                 </div>
 
@@ -333,18 +245,19 @@
                                                     <div class="row" style="margin-top:7px">
                                                         <div class="mb-3 col-md-4">
                                                             <label for="purchaceprice">Purchace Price</label>
-                                                            <input type="text" name="purchaceprice" placeholder="$" id="purchaceprice"
-                                                                class="form-control">
+                                                            <input type="text" name="purchaceprice" placeholder="$"
+                                                                id="purchaceprice" class="form-control">
                                                         </div>
                                                         <div class="mb-3 col-md-4">
                                                             <label for="dowpayment">Down payment</label>
-                                                            <input type="text"  placeholder="%"
-                                                                id="dowpayment" name="dowpayment" class="form-control">
+                                                            <input type="text" placeholder="%" id="dowpayment"
+                                                                name="dowpayment" class="form-control">
                                                         </div>
                                                         <div class="mb-3 col-md-4">
                                                             <label for="inputState">State</label>
-                                                            <select class="form-control" name="validation-select2" value=""
-                                                                id="estadoscasa" name="estadoscasa" style="width: 100%">
+                                                            <select class="form-control" name="validation-select2"
+                                                                value="" id="estadoscasa" name="estadoscasa"
+                                                                style="width: 100%">
                                                             </select>
                                                         </div>
                                                         <div class="mb-3 col-md-12">
@@ -500,22 +413,7 @@
     </div>
 </div>
 <!-- -->
-<select class="form-control" name="validation-select2"
-                                                                id="" style="width: 100%">
-                                                                    <option value="pitons">Pitons</option>
-                                                                    <option value="cams">Cams</option>
-                                                                    <option value="nuts">Nuts</option>
-                                                                    <option value="bolts">Bolts</option>
-                                                                    <option value="stoppers">Stoppers</option>
-                                                                    <option value="sling">Sling</option>
-                                                                    <option value="skis">Skis</option>
-                                                                    <option value="skins">Skins</option>
-                                                                    <option value="poles">Poles</option>
-                                                            </select>       
-
 
 <script>
-
-
 $.getScript("{{ asset('js/registros.js') }}");
 </script>
