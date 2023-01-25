@@ -61,29 +61,47 @@
                 </div>
                 <div class="tab-pane" id="tab-2" role="tabpanel">
                     <h4 class="tab-title">Another one</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor tellus
-                        eget condimentum
-                        rhoncus. Aenean massa. Cum sociis natoque penatibus et magnis neque dis parturient montes,
-                        nascetur ridiculus mus.
-                    </p>
-                    <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis
-                        enim. Donec pede
-                        justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-                        venenatis vitae,
-                        justo.</p>
+                    <div class="card-body">
+                        <table id="datatableactivos-reponsive" class="table table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>CONTRACT DATE</th>
+                                    <th>RECEPTION DATE</th>
+                                    <th>CUSTOMER</th>
+                                    <th>STATE</th>
+                                    <th>TYPE OF LOAN</th>
+                                    <th>PROPERTY ADDRESS</th>
+                                    <th>DRIVE</th>
+                                    <th>Manage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="tab-pane" id="tab-3" role="tabpanel">
                     <h4 class="tab-title">One more</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor tellus
-                        eget condimentum
-                        rhoncus. Aenean massa. Cum sociis natoque penatibus et magnis neque dis parturient montes,
-                        nascetur ridiculus mus.
-                    </p>
-                    <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis
-                        enim. Donec pede
-                        justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-                        venenatis vitae,
-                        justo.</p>
+                    <div class="card-body">
+                        <table id="datatablecancel-reponsive" class="table table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>CONTRACT DATE</th>
+                                    <th>RECEPTION DATE</th>
+                                    <th>CUSTOMER</th>
+                                    <th>STATE</th>
+                                    <th>TYPE OF LOAN</th>
+                                    <th>PROPERTY ADDRESS</th>
+                                    <th>DRIVE</th>
+                                    <th>Manage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

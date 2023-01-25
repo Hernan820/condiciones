@@ -106,13 +106,13 @@ class RegistroController extends Controller
      * @param  \App\Models\registro  $registro
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
         $registros = registro::join("clientes","clientes.id", "=", "registros.id_cliente")
         ->join("prestamos","prestamos.id", "=", "registros.id_prestamo")
         ->select("prestamos.*","clientes.*","registros.*","registros.id as idregister")
         ->where("registros.estado_registro","=",1)
-        ->where("registros.id_estado","=",1)
+        ->where("registros.id_estado","=",$id)
         ->get();
 
         return response()->json($registros);        

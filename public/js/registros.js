@@ -1,7 +1,4 @@
 
-
-
-
 $('#datetimepicker-minimum').datetimepicker({format: 'L'});
 $('#datetimepicker-minimum2').datetimepicker();
 
@@ -35,7 +32,10 @@ $(document).ready(function () {
 	$('#dowpayment').mask('00%');
 	$('#realtorphone').mask('(000) 000-0000');
 	$('#customerPhone').mask('(000) 000-0000');
-	registrotbl();
+
+	pendientestbl();
+	activostbl();
+	canceladotbl();
  });
 
 
@@ -182,7 +182,7 @@ $('#guardaregistro').on('click', function() {
 
     axios.post(principalUrl + "condicion/agregaregistro",datos)
     .then((respuesta) => {
-		registrotbl();
+		pendientestbl();
 
 		$('#newFile').modal('hide');
 		Swal.fire({
@@ -288,14 +288,14 @@ function validaform(){
     return valido;
 }
 
-function registrotbl(){
+function pendientestbl(){
 	var registertbl	= $("#datatables-reponsive").DataTable();
         registertbl.destroy();
 
     var registertbl	= $("#datatables-reponsive").DataTable({
 		responsive: true,
 		ajax: {
-            url: principalUrl + "condiciones/registro",
+            url: principalUrl + "condiciones/registro/1",
             dataSrc: "",
         },
 		columns: [
@@ -322,8 +322,75 @@ function registrotbl(){
 	});
 }
 
+function activostbl(){
 
+	var registertbl	= $("#datatableactivos-reponsive").DataTable();
+        registertbl.destroy();
 
+    var registertbl	= $("#datatableactivos-reponsive").DataTable({
+		responsive: true,
+		ajax: {
+            url: principalUrl + "condiciones/registro/3",
+            dataSrc: "",
+        },
+		columns: [
+            { data: "fecha_firma" },
+            { data: "fecha_recepcion" },
+            { data: "nombre_cliente" },
+            { data: "estado" },
+            { data: "nombre_prestamo" },
+            { data: "direccion_casa" },
+            { data: "drive",
+			render: function (data) {
+				if(data != null){
+					return ("<a href="+data+"><i class='align-middle me-2 fas fa-fw fa-external-link-alt' data-feather='external-link'></i></a>");
+				}else{
+					return ("");
+				}
+			}, },
+			{ data: "idregister",
+			render: function (data) {
+				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item' href='#'><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#sizedModalSm'><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='align-middle me-2 far fa-fw fa-paper-plane' data-feather='send'></i> Send to opening</a></div></div>");
+			},
+		    },
+		]
+	});
+}
+
+function canceladotbl(){
+
+	var registertbl	= $("#datatablecancel-reponsive").DataTable();
+        registertbl.destroy();
+
+    var registertbl	= $("#datatablecancel-reponsive").DataTable({
+		responsive: true,
+		ajax: {
+            url: principalUrl + "condiciones/registro/2",
+            dataSrc: "",
+        },
+		columns: [
+            { data: "fecha_firma" },
+            { data: "fecha_recepcion" },
+            { data: "nombre_cliente" },
+            { data: "estado" },
+            { data: "nombre_prestamo" },
+            { data: "direccion_casa" },
+            { data: "drive",
+			render: function (data) {
+				if(data != null){
+					return ("<a href="+data+"><i class='align-middle me-2 fas fa-fw fa-external-link-alt' data-feather='external-link'></i></a>");
+				}else{
+					return ("");
+				}
+			}, },
+			{ data: "idregister",
+			render: function (data) {
+				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item' href='#'><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#sizedModalSm'><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='align-middle me-2 far fa-fw fa-paper-plane' data-feather='send'></i> Send to opening</a></div></div>");
+			},
+		    },
+		]
+	});
+}
 
 console.log('aqui llega a registro js  actualizado');
 
