@@ -1,4 +1,5 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 
 <div class="row">
     <div class="col-12">
@@ -143,12 +144,12 @@
                                                     <div class="mb-3">
                                                         <label for="nameclient">Customer name</label>
                                                         <input type="text" class="form-control" id="nameclient"
-                                                            name="nameclient" placeholder="First name">
+                                                            name="nameclient" placeholder="First name" autocomplete="off" >
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="inputLastName">Customer telephone</label>
                                                         <input type="text" class="form-control" id="customerPhone"
-                                                            name="customerPhone" placeholder="(631) 609-9108">
+                                                            name="customerPhone" placeholder="(631) 609-9108" autocomplete="off"  >
                                                     </div>
                                                 </div>
 
@@ -158,7 +159,7 @@
                                                         <div class="input-group date" id="datetimepicker-minimum"
                                                             data-target-input="nearest">
                                                             <input type="text" class="form-control datetimepicker-input"
-                                                                id="datecontrac" name="datecontrac"
+                                                                id="datecontrac" name="datecontrac"autocomplete="off"
                                                                 data-target="#datetimepicker-minimum" />
                                                             <div class="input-group-text"
                                                                 data-target="#datetimepicker-minimum"
@@ -173,7 +174,7 @@
                                                         <div class="input-group date" id="datetimepicker-minimum2"
                                                             data-target-input="nearest">
                                                             <input type="text" class="form-control datetimepicker-input"
-                                                                id="datereceipt" name="datereceipt"
+                                                                id="datereceipt" name="datereceipt" autocomplete="off"
                                                                 data-target="#datetimepicker-minimum2" />
                                                             <div class="input-group-text"
                                                                 data-target="#datetimepicker-minimum2"
@@ -216,22 +217,22 @@
                                                     <div class="mb-3">
                                                         <label for="ssn" style="margin-top: 7px;">SSN</label>
                                                         <input type="email" class="form-control" id="ssn" name="ssn"
-                                                            placeholder="">
+                                                            placeholder="" autocomplete="off">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="inputEmail4" style="margin-top: 7px;">Email</label>
-                                                        <input type="email" class="form-control" id="inputEmail4"
+                                                        <input type="email" class="form-control" autocomplete="off"
                                                             placeholder="Email" id="emailclient" name="emailclient">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="inputAddress">Customer current address</label>
                                                         <input type="text" class="form-control" id="inputAddress"
-                                                            name="inputAddress" placeholder="1234 Main St">
+                                                        autocomplete="off" name="inputAddress" placeholder="1234 Main St">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="inputAddress2">Address 2</label>
                                                         <input type="text" class="form-control" id="inputAddress2"
-                                                            name="inputAddress2"
+                                                            name="inputAddress2" autocomplete="off"
                                                             placeholder="Apartment, studio, or floor">
                                                     </div>
                                                     <div class="mb-3">
@@ -246,12 +247,12 @@
                                                         <div class="mb-3 col-md-4">
                                                             <label for="purchaceprice">Purchace Price</label>
                                                             <input type="text" name="purchaceprice" placeholder="$"
-                                                                id="purchaceprice" class="form-control">
+                                                            autocomplete="off"  id="purchaceprice" class="form-control" maxlength="15">
                                                         </div>
                                                         <div class="mb-3 col-md-4">
                                                             <label for="dowpayment">Down payment</label>
                                                             <input type="text" placeholder="%" id="dowpayment"
-                                                                name="dowpayment" class="form-control">
+                                                            autocomplete="off"  name="dowpayment" class="form-control">
                                                         </div>
                                                         <div class="mb-3 col-md-4">
                                                             <label for="inputState">State</label>
@@ -270,21 +271,21 @@
                                                             <div class="input-group col-md-12">
                                                                 <span class="input-group-text">Drive</span>
                                                                 <input type="text" id="drive" name="drive"
-                                                                    class="form-control">
+                                                                autocomplete="off" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="mb-3 col-md-12">
                                                             <div class="mb-3 col-md-12">
                                                                 <label for="realtorname">Realtor name</label>
                                                                 <input type="text" name="realtorname" placeholder=""
-                                                                    class="form-control">
+                                                                autocomplete="off"  class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="mb-3 col-md-12">
                                                             <div class="mb-3 col-md-12">
                                                                 <label for="realtorphone">Realtor telephone</label>
                                                                 <input type="text" name="realtorphone" placeholder=""
-                                                                    class="form-control">
+                                                                autocomplete="off"  class="form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -334,7 +335,7 @@
                                                                 <div class="mb-3 col-md-8">
                                                                     <label for="newdoc">New Doc</label>
                                                                     <input type="text" name="newdoc" id="newdoc"
-                                                                        placeholder="" class="form-control">
+                                                                    autocomplete="off"   placeholder="" class="form-control">
                                                                 </div>
                                                                 <div class="mb-3 col-md-4"><br>
                                                                     <button class="btn btn-primary">

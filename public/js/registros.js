@@ -6,7 +6,7 @@ $('#datetimepicker-minimum').datetimepicker({format: 'L'});
 $('#datetimepicker-minimum2').datetimepicker();
 
 // Select2
-$(".select2").each(function() {
+$(".select2").each(function() { 
 	$(this)
 		.wrap("<div class=\"position-relative\"></div>")
 		.select2({
@@ -26,6 +26,15 @@ $(document).ready(function () {
         placeholder: 'select..'
         //data: data
     });*/
+	//$('#datecontrac').mask('00/00/00');	
+	$('#purchaceprice').mask('#,##0.00', {reverse: true});
+	$('#purchaceprice').change(function () {
+	  var valor = $(this).val();  
+	  $(this).val('$' + valor);
+	});
+	$('#dowpayment').mask('00%');
+
+	$('#customerPhone').mask('(000) 000-0000');
 	registrotbl();
  });
 
@@ -39,12 +48,10 @@ function datosfile(){
 
 	$("#formregistro")[0].reset();
 	$('#iditemprimero').tab('show');
-
-	// MUESTRA DOCUMENTOS
 	$("#listdocumentos").empty();
 	$("#tbldoc").empty();
+	$("#nameclient").focus();
 
-	
 	axios.post(principalUrl + "condicion/documentos")
 	.then((respuesta) => {   
 
@@ -195,6 +202,12 @@ $('#guardaregistro').on('click', function() {
 
 });
 
+const validateEmail = (email) => {
+    var format =
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return format.test(email);
+};
+
 
 function validaform(){
 	var valido = true;
@@ -211,9 +224,7 @@ function validaform(){
 	var checkcuestionari = $(".checkcuest:checked");  
 
 	checkdoc.each(function(i) { docs++;});
-
 	checkcuestionari.each(function(i) {cuest++;	});
-
 
 	if(name == ""){
 		Swal.fire("¡Agrege el nombre del cliente!");
@@ -250,11 +261,19 @@ function validaform(){
 		$("#typeloan").focus();
 		return valido = false; }
 
-	if(emailcliente == ""){
+	if(emailcliente != ""){
+		if (validateEmail(emailcliente) == false) {
+			Swal.fire("¡Error formato de correo no correcto!");
+			$('#iditemprimero').tab('show');
+			return valido = false;
+		}
+	}else{
 		Swal.fire("¡Agrege el email del cliente!");
 		$('#iditemprimero').tab('show');
 		$("#emailclient").focus();
-		return valido = false; }
+		return valido = false;
+	}
+
 
 	if(docs < 5){
         Swal.fire("¡debe asignar mas de 4 documentos!");
@@ -269,13 +288,11 @@ function validaform(){
     return valido;
 }
 
-
 function registrotbl(){
 	var registertbl	= $("#datatables-reponsive").DataTable();
+        registertbl.destroy();
 
-    registertbl.destroy();
-
-var registertbl	= $("#datatables-reponsive").DataTable({
+    var registertbl	= $("#datatables-reponsive").DataTable({
 		responsive: true,
 		ajax: {
             url: principalUrl + "condiciones/registro",
@@ -301,11 +318,8 @@ var registertbl	= $("#datatables-reponsive").DataTable({
 				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item' href='#'><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#sizedModalSm'><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='align-middle me-2 far fa-fw fa-paper-plane' data-feather='send'></i> Send to opening</a></div></div>");
 			},
 		    },
-
-			
 		]
 	});
-
 }
 
 
