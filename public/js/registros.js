@@ -214,43 +214,57 @@ function validaform(){
 
 	checkcuestionari.each(function(i) {cuest++;	});
 
+
+	if(name == ""){
+		Swal.fire("¡Agrege el nombre del cliente!");
+		$('#iditemprimero').tab('show');
+        $("#nameclient").focus();
+		return valido = false; }
+
+	if(telef == ""){
+		Swal.fire("¡Agrege el telefono del cliente!");
+		$('#iditemprimero').tab('show');
+		$("#customerPhone").focus();
+		return valido = false; }
+
+	if(estatus == ""){
+		Swal.fire("¡Agrege el estatus del cliente!");
+		$('#iditemprimero').tab('show');
+		return valido = false; }
+
+	if(fechacontrato == ""){
+		Swal.fire("¡Agrege la fecha del contrato!");
+		$('#iditemprimero').tab('show');
+		$("#datecontrac").focus();
+		return valido = false; }
+	
+	if(fecharecibido == ""){
+		Swal.fire("¡Agrege la fecha de recepcion del contrato!");
+		$('#iditemprimero').tab('show');
+		$("#datereceipt").focus();
+		return valido = false; }
+
+	if(tipoprestamo == ""){
+		Swal.fire("¡Agrege tipo de prestamo!");
+		$('#iditemprimero').tab('show');
+		$("#typeloan").focus();
+		return valido = false; }
+
+	if(emailcliente == ""){
+		Swal.fire("¡Agrege el email del cliente!");
+		$('#iditemprimero').tab('show');
+		$("#emailclient").focus();
+		return valido = false; }
+
 	if(docs < 5){
         Swal.fire("¡debe asignar mas de 4 documentos!");
 		$('#itemsegundo').tab('show');
-        valido = false;}
+        return valido = false;}
 
 	if(cuest <= 0){
         Swal.fire("¡debe asignar cuestionarios!");
 		$('#itemtercero').tab('show');
-        valido = false; }
-
-	if(name == ""){
-		Swal.fire("¡Agrege el nombre del cliente!");
-		valido = false; }
-
-	if(telef == ""){
-		Swal.fire("¡Agrege el telefono del cliente!");
-		valido = false; }
-
-	if(estatus == ""){
-		Swal.fire("¡Agrege el estatus del cliente!");
-		valido = false; }
-
-	if(fechacontrato == ""){
-		Swal.fire("¡Agrege la fecha del contrato!");
-		valido = false; }
-	
-	if(fecharecibido == ""){
-		Swal.fire("¡Agrege la fecha de recepcion del contrato!");
-		valido = false; }
-
-	if(tipoprestamo == ""){
-		Swal.fire("¡Agrege tipo de prestamo!");
-		valido = false; }
-
-	if(emailcliente == ""){
-		Swal.fire("¡Agrege el email del cliente!");
-		valido = false; }
+        return valido = false; }
 
     return valido;
 }
