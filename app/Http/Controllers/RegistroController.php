@@ -147,8 +147,27 @@ class RegistroController extends Controller
      * @param  \App\Models\registro  $registro
      * @return \Illuminate\Http\Response
      */
-    public function destroy(registro $registro)
+    public function cancelado(request $request)
     {
-        //
+        $registro= registro::find($request->id_registro);
+        $registro->id_estado = 2 ;
+        $registro->motivo = $request->motivo_cancel;
+        $registro->save();
+
+        return 1 ;
+    }
+
+    /**
+     * Remove the specified resource from sto
+     */
+    public function estado($estado,$id)
+    {
+
+    $registro= registro::find($id);
+    $registro->id_estado = $estado ;
+    $registro->save();
+
+    return 1 ;
+
     }
 }

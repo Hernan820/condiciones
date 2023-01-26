@@ -41,6 +41,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('condiciones/registro/{id}', [App\Http\Controllers\RegistroController::class, 'show']);
 
+    #cambio de estados
+
+    Route::post('condiciones/cambioestado/{estado}/{id}', [App\Http\Controllers\RegistroController::class, 'estado']);
+
+    Route::post('condicion/cancelacion', [App\Http\Controllers\RegistroController::class, 'cancelado']);
 
 
  });

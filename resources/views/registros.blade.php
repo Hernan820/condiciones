@@ -162,12 +162,14 @@
                                                     <div class="mb-3">
                                                         <label for="nameclient">Customer name</label>
                                                         <input type="text" class="form-control" id="nameclient"
-                                                            name="nameclient" placeholder="First name" autocomplete="off" >
+                                                            name="nameclient" placeholder="First name"
+                                                            autocomplete="off">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="inputLastName">Customer telephone</label>
                                                         <input type="text" class="form-control" id="customerPhone"
-                                                            name="customerPhone" placeholder="(631) 609-9108" autocomplete="off"  >
+                                                            name="customerPhone" placeholder="(631) 609-9108"
+                                                            autocomplete="off">
                                                     </div>
                                                 </div>
 
@@ -177,7 +179,7 @@
                                                         <div class="input-group date" id="datetimepicker-minimum"
                                                             data-target-input="nearest">
                                                             <input type="text" class="form-control datetimepicker-input"
-                                                                id="datecontrac" name="datecontrac"autocomplete="off"
+                                                                id="datecontrac" name="datecontrac" autocomplete="off"
                                                                 data-target="#datetimepicker-minimum" />
                                                             <div class="input-group-text"
                                                                 data-target="#datetimepicker-minimum"
@@ -245,7 +247,8 @@
                                                     <div class="mb-3">
                                                         <label for="inputAddress">Customer current address</label>
                                                         <input type="text" class="form-control" id="inputAddress"
-                                                        autocomplete="off" name="inputAddress" placeholder="1234 Main St">
+                                                            autocomplete="off" name="inputAddress"
+                                                            placeholder="1234 Main St">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="inputAddress2">Address 2</label>
@@ -265,12 +268,14 @@
                                                         <div class="mb-3 col-md-4">
                                                             <label for="purchaceprice">Purchace Price</label>
                                                             <input type="text" name="purchaceprice" placeholder="$"
-                                                            autocomplete="off"  id="purchaceprice" class="form-control" maxlength="15">
+                                                                autocomplete="off" id="purchaceprice"
+                                                                class="form-control" maxlength="15">
                                                         </div>
                                                         <div class="mb-3 col-md-4">
                                                             <label for="dowpayment">Down payment</label>
                                                             <input type="text" placeholder="%" id="dowpayment"
-                                                            autocomplete="off"  name="dowpayment" class="form-control">
+                                                                autocomplete="off" name="dowpayment"
+                                                                class="form-control">
                                                         </div>
                                                         <div class="mb-3 col-md-4">
                                                             <label for="inputState">State</label>
@@ -289,21 +294,22 @@
                                                             <div class="input-group col-md-12">
                                                                 <span class="input-group-text">Drive</span>
                                                                 <input type="text" id="drive" name="drive"
-                                                                autocomplete="off" class="form-control">
+                                                                    autocomplete="off" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="mb-3 col-md-12">
                                                             <div class="mb-3 col-md-12">
                                                                 <label for="realtorname">Realtor name</label>
                                                                 <input type="text" name="realtorname" placeholder=""
-                                                                autocomplete="off"  class="form-control">
+                                                                    autocomplete="off" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="mb-3 col-md-12">
                                                             <div class="mb-3 col-md-12">
                                                                 <label for="realtorphone">Realtor telephone</label>
-                                                                <input type="text" name="realtorphone" id="realtorphone" 
-                                                                autocomplete="off" placeholder="(631) 609-9108" class="form-control">
+                                                                <input type="text" name="realtorphone" id="realtorphone"
+                                                                    autocomplete="off" placeholder="(631) 609-9108"
+                                                                    class="form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -353,7 +359,8 @@
                                                                 <div class="mb-3 col-md-8">
                                                                     <label for="newdoc">New Doc</label>
                                                                     <input type="text" name="newdoc" id="newdoc"
-                                                                    autocomplete="off"   placeholder="" class="form-control">
+                                                                        autocomplete="off" placeholder=""
+                                                                        class="form-control">
                                                                 </div>
                                                                 <div class="mb-3 col-md-4"><br>
                                                                     <button class="btn btn-primary">
@@ -413,20 +420,23 @@
 
 
 <!-- MODAL GET INFO CLIENTE -->
-<div class="modal fade" id="sizedModalSm" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modacancel" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Small modal</h5>
+                <h5 class="modal-title">Cancel </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body m-3">
-                <p class="mb-0">Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user
-                    notifications, or completely custom content.</p>
+                <div class="mb-3">
+                    <label class="form-label">reason for cancellation</label>
+                    <textarea class="form-control" id="cancelacionmotivo" name="cancelacionmotivo" placeholder="Textarea" rows="3"></textarea>
+                </div>
+                <input type="hidden" name="id_registro" id="id_registro" value="" >
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" id="btncancelacion">Save changes</button>
             </div>
         </div>
     </div>

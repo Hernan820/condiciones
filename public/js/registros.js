@@ -315,7 +315,7 @@ function pendientestbl(){
 			}, },
 			{ data: "idregister",
 			render: function (data) {
-				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item' href='#'><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#sizedModalSm'><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='align-middle me-2 far fa-fw fa-paper-plane' data-feather='send'></i> Send to opening</a></div></div>");
+				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesitem' id='itemuno' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem'  id='itemdos' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemtres' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcuatro' href='#'><input type='hidden' class='data' value="+data+" ><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcinco' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-paper-plane'  data-feather='send'></i> Send to opening</a></div></div>");
 			},
 		    },
 		]
@@ -350,7 +350,7 @@ function activostbl(){
 			}, },
 			{ data: "idregister",
 			render: function (data) {
-				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item' href='#'><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#sizedModalSm'><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='align-middle me-2 far fa-fw fa-paper-plane' data-feather='send'></i> Send to opening</a></div></div>");
+				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesitem' id='itemuno' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem'  id='itemdos' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemtres' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcuatro' href='#'><input type='hidden' class='data' value="+data+" ><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcinco' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-paper-plane'  data-feather='send'></i> Send to opening</a></div></div>");
 			},
 		    },
 		]
@@ -385,15 +385,105 @@ function canceladotbl(){
 			}, },
 			{ data: "idregister",
 			render: function (data) {
-				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item' href='#'><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#sizedModalSm'><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item' href='#'><i class='align-middle me-2 far fa-fw fa-paper-plane' data-feather='send'></i> Send to opening</a></div></div>");
+				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesitem' id='itemuno' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem'  id='itemdos' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemtres' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcuatro' href='#'><input type='hidden' class='data' value="+data+" ><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcinco' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-paper-plane'  data-feather='send'></i> Send to opening</a></div></div>");
 			},
 		    },
 		]
 	});
 }
 
-console.log('aqui llega a registro js  actualizado');
+$(document).on('click', '.opcionesitem',function() { 
 
+
+	console.log(this.id);
+	console.log($(this).find(".data").val());
+
+
+	var idregistro = $(this).find(".data").val();
+
+	if(this.id == 'itemuno'){
+
+	}else if(this.id == 'itemdos'){
+
+	}else if(this.id == 'itemtres'){
+	  $('#id_registro').val(idregistro)
+	  $('#modacancel').modal('show');
+	}else if(this.id == 'itemcuatro'){
+
+	}else if(this.id == 'itemcinco'){
+
+		Swal.fire({
+			title: "Cambio estado",
+			text: "¿Estas seguro cambiar de estado este registro?",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Continuar",
+			cancelButtonText: "Cancelar",
+		}).then((result) => {
+			if (result.isConfirmed) {
+		
+				axios.post(principalUrl + "condiciones/cambioestado/3/"+idregistro)
+					.then((respuesta) => {
+						respuesta.data
+						Swal.fire({
+							position: "top-end",
+							icon: "success",
+							title: "registro actualizado!",
+							showConfirmButton: false,
+							timer: 1000,
+						});
+						pendientestbl();
+						activostbl();
+						canceladotbl();
+					})
+					.catch((error) => {
+						if (error.response) {
+							console.log(error.response.data);
+						}
+					});
+			} else {
+			}
+		});
+	}
+});
+
+
+
+
+$('#btncancelacion').on('click', function() { 
+
+	if ( $("#cancelacionmotivo").val() == "") {Swal.fire("¡Add a reason for cancellation!"); return;}
+
+	var datos = new FormData();
+	    datos.append("motivo_cancel",$('#cancelacionmotivo').val());
+		datos.append("id_registro",$('#id_registro').val());
+
+    axios.post(principalUrl+"condicion/cancelacion",datos)
+    .then((respuesta) => {
+		Swal.fire({
+			position: "top-end",
+			icon: "success",
+			title: "registration canceled!",
+			showConfirmButton: false,
+			timer: 1200,
+		});
+		pendientestbl();
+		activostbl();
+		canceladotbl();
+	  $('#modacancel').modal('hide');
+    })
+    .catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+        }
+    });
+
+});
+
+
+console.log('aqui llega a registro js  actualizado');
 
 
 
