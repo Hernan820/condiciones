@@ -61,12 +61,13 @@
                         <a class="sidebar-link" href="" id="vistaregistro" >
                         <i class="align-middle me-2 fas fa-fw fa-file-text"></i> <span class="align-middle">Files in process</span>
                         </a>
-                    </li>
+                    </li>    <!-- END  
+
                     <li class="sidebar-item" id="opcioncondiciones">
                         <a class="sidebar-link" id="vistabancos" href="">
                             <i class="align-middle me-2 fas fa-fw fa-home"></i> <span class="align-middle">CONDICIONES</span>
                         </a>
-                    </li>
+                    </li>         -->
                 </ul>
             </div>
         </nav>

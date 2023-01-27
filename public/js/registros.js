@@ -195,7 +195,7 @@ $('#guardaregistro').on('click', function() {
 		Swal.fire({
 			position: "top-end",
 			icon: "success",
-			title: "Registro guardado!",
+			title: "record saved!",
 			showConfirmButton: false,
 			timer: 1200,
 		});
@@ -415,14 +415,14 @@ $(document).on('click', '.opcionesitem',function() {
 	}else if(this.id == 'itemcinco'){
 
 		Swal.fire({
-			title: "Cambio estado",
-			text: "¿Estas seguro cambiar de estado este registro?",
+			title: "Change state",
+			text: "Are you sure to change the status of this record?",
 			icon: "warning",
 			showCancelButton: true,
 			confirmButtonColor: "#3085d6",
 			cancelButtonColor: "#d33",
-			confirmButtonText: "Continuar",
-			cancelButtonText: "Cancelar",
+			confirmButtonText: "Continuer",
+			cancelButtonText: "Cancel",
 		}).then((result) => {
 			if (result.isConfirmed) {
 		

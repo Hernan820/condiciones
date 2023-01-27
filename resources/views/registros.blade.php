@@ -434,7 +434,7 @@
             <div class="modal-body m-3">
                 <div class="mb-3">
                     <label class="form-label">reason for cancellation</label>
-                    <textarea class="form-control" id="cancelacionmotivo" name="cancelacionmotivo" placeholder="Textarea" rows="3"></textarea>
+                    <textarea class="form-control" id="cancelacionmotivo" name="cancelacionmotivo" placeholder="Write a reason" rows="3"></textarea>
                 </div>
                 <input type="hidden" name="id_registro" id="id_registro" value="" >
             </div>
