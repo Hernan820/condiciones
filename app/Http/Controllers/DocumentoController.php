@@ -35,7 +35,11 @@ class DocumentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $doc = new documento;
+        $doc->nombre_doc = $request->nombredoc;
+        $doc->estado_doc = 1 ;
+        $doc->save();
+        return 1 ;
     }
 
     /**
@@ -57,9 +61,10 @@ class DocumentoController extends Controller
      * @param  \App\Models\documento  $documento
      * @return \Illuminate\Http\Response
      */
-    public function edit(documento $documento)
+    public function edit($id)
     {
-        //
+        $doc = documento::find($id);
+        return response()->json($doc);        
     }
 
     /**
@@ -69,9 +74,12 @@ class DocumentoController extends Controller
      * @param  \App\Models\documento  $documento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, documento $documento)
+    public function update(Request $request)
     {
-        //
+        $doc = documento::find($request->iddoc);
+        $doc->nombre_doc = $request->nombredoc;
+        $doc->save();
+        return 1 ;
     }
 
     /**
@@ -80,8 +88,11 @@ class DocumentoController extends Controller
      * @param  \App\Models\documento  $documento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(documento $documento)
+    public function destroy($id)
     {
-        //
+        $doc = documento::find($id);
+        $doc->estado_doc = 0;
+        $doc->save();
+        return 1 ;
     }
 }

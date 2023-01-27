@@ -47,5 +47,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('condicion/cancelacion', [App\Http\Controllers\RegistroController::class, 'cancelado']);
 
+    #documentos
+
+    Route::post('doc/edita/{id}', [App\Http\Controllers\DocumentoController::class, 'edit']);
+
+    Route::post('doc/actualiza', [App\Http\Controllers\DocumentoController::class, 'update']);
+
+    Route::post('doc/agrega', [App\Http\Controllers\DocumentoController::class, 'store']);
+
+    Route::post('doc/elimina/{id}', [App\Http\Controllers\DocumentoController::class, 'destroy']);
 
  });

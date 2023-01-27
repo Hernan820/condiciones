@@ -356,17 +356,21 @@
                                                             </h6>
                                                             <br><br>
                                                             <div class="row" style="margin-top:7px">
-                                                                <div class="mb-3 col-md-8">
+                                                                <div class="mb-3 col-md-6">
                                                                     <label for="newdoc">New Doc</label>
                                                                     <input type="text" name="newdoc" id="newdoc"
                                                                         autocomplete="off" placeholder=""
                                                                         class="form-control">
-                                                                </div>
-                                                                <div class="mb-3 col-md-4"><br>
-                                                                    <button class="btn btn-primary">
+                                                                </div><input type='hidden' id='iddocument' value="" >
+                                                                <div class="mb-3 col-md-3"><br>
+                                                                    <button class="btn btn-primary" id="btngregadoc">
                                                                         <i class="align-middle me-2"
-                                                                            data-feather="edit-3"></i>
-                                                                        Add new</button>
+                                                                            data-feather="edit-3"></i>Add</button>
+                                                                </div>
+                                                                <div class="mb-3 col-md-3"  id="btonnuevo"><br>
+                                                                    <button class="btn btn-primary" id="btnnuevo">
+                                                                        <i class="align-middle me-2"
+                                                                            data-feather="edit-3"></i>new</button>
                                                                 </div>
                                                             </div>
                                                         </div>

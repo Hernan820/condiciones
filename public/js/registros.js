@@ -24,6 +24,7 @@ $(document).ready(function () {
         //data: data
     });*/
 	//$('#datecontrac').mask('00/00/00');	
+	$("#btonnuevo").hide();
 	$('#purchaceprice').mask('#,##0.00', {reverse: true});
 	$('#purchaceprice').change(function () {
 	  var valor = $(this).val();  
@@ -48,29 +49,10 @@ function datosfile(){
 
 	$("#formregistro")[0].reset();
 	$('#iditemprimero').tab('show');
-	$("#listdocumentos").empty();
-	$("#tbldoc").empty();
 	$("#nameclient").focus();
 
-	axios.post(principalUrl + "condicion/documentos")
-	.then((respuesta) => {   
-
-		$("#listdocumentos").append("<label class='col-form-label  pt-sm-0'>Documents</label>"); 
-   
-		respuesta.data.forEach(function (element) {
-		   $("#listdocumentos").append("<div class='mb-3 row'><div class='col-sm-10'> <label class='form-check m-0'><input type='checkbox' class='form-check-input checkdocumento' id='ssmm' name='chekcdocument[]' value="+element.id+"> <span class='form-check-label'>"+element.nombre_doc+"</span> </label> </div>  </div>"); 
-	    });
-
-	   respuesta.data.forEach(function (element) {
-		$("#tbldoc").append("<tr> <td>"+element.nombre_doc+"</td> <td class='table-action'> <a href='#'><i class='align-middle fas fa-fw fa-pen'></i></i></a> <a href='#'><i class='align-middle fas fa-fw fa-trash'></i></a> </td> </tr>"); 
-	   });
-   
-	})
-	.catch((error) => {
-		if (error.response) {
-			console.log(error.response.data);
-		}
-	});
+	documentos();
+	nuevobtn();
 /***CUESTIONARIOS */
 
 $("#cuestionarios").empty();
@@ -173,6 +155,31 @@ axios.post(principalUrl + "condicion/prestamos")
 
 }
 
+function documentos(){
+	$("#listdocumentos").empty();
+	$("#tbldoc").empty();
+
+	axios.post(principalUrl + "condicion/documentos")
+	.then((respuesta) => {   
+
+		$("#listdocumentos").append("<label class='col-form-label  pt-sm-0'>Documents</label>"); 
+   
+		respuesta.data.forEach(function (element) {
+		   $("#listdocumentos").append("<div class='mb-3 row'><div class='col-sm-10'> <label class='form-check m-0'><input type='checkbox' class='form-check-input checkdocumento' id='ssmm' name='chekcdocument[]' value="+element.id+"> <span class='form-check-label'>"+element.nombre_doc+"</span> </label> </div>  </div>"); 
+	    });
+
+	   respuesta.data.forEach(function (element) {
+		$("#tbldoc").append("<tr> <td>"+element.nombre_doc+"</td> <td class='table-action'> <a href='#' class='itemdoc' id='itemedita' ><input type='hidden' class='data' value="+element.id+" ><i class='align-middle fas fa-fw fa-pen'></i></i></a> <a href='#' class='itemdoc' id='itemborra' ><input type='hidden' class='data' value="+element.id+" ><i class='align-middle fas fa-fw fa-trash'></i></a> </td> </tr>"); 
+	   });
+   
+	})
+	.catch((error) => {
+		if (error.response) {
+			console.log(error.response.data);
+		}
+	});
+}
+
 $('#guardaregistro').on('click', function() { 
 
 	if (validaform() == false) {return;}
@@ -215,7 +222,7 @@ function validaform(){
 	var cuest = 0 ;	
     var name = $("#nameclient").val();
 	var telef = $("#customerPhone").val();
-    var estatus = $("input[name=radio_status]").val();
+    var estatus = $("input[name=radio_status]:radio").is(':checked');
     var fechacontrato = $("#datecontrac").val();
     var fecharecibido = $("#datereceipt").val();
     var tipoprestamo = $("#typeloan").val();
@@ -227,48 +234,48 @@ function validaform(){
 	checkcuestionari.each(function(i) {cuest++;	});
 
 	if(name == ""){
-		Swal.fire("¡Agrege el nombre del cliente!");
+		Swal.fire("¡Add customer name!");
 		$('#iditemprimero').tab('show');
         $("#nameclient").focus();
 		return valido = false; }
 
 	if(telef == ""){
-		Swal.fire("¡Agrege el telefono del cliente!");
+		Swal.fire("¡Add customer phone!");
 		$('#iditemprimero').tab('show');
 		$("#customerPhone").focus();
 		return valido = false; }
 
-	if(estatus == ""){
-		Swal.fire("¡Agrege el estatus del cliente!");
+	if(estatus == false){
+		Swal.fire("¡Add customer status!");
 		$('#iditemprimero').tab('show');
 		return valido = false; }
 
 	if(fechacontrato == ""){
-		Swal.fire("¡Agrege la fecha del contrato!");
+		Swal.fire("¡Add contract date!");
 		$('#iditemprimero').tab('show');
 		$("#datecontrac").focus();
 		return valido = false; }
 	
 	if(fecharecibido == ""){
-		Swal.fire("¡Agrege la fecha de recepcion del contrato!");
+		Swal.fire("¡Add the date of receipt of the contract!");
 		$('#iditemprimero').tab('show');
 		$("#datereceipt").focus();
 		return valido = false; }
 
 	if(tipoprestamo == ""){
-		Swal.fire("¡Agrege tipo de prestamo!");
+		Swal.fire("¡Add type of loan!");
 		$('#iditemprimero').tab('show');
 		$("#typeloan").focus();
 		return valido = false; }
 
 	if(emailcliente != ""){
 		if (validateEmail(emailcliente) == false) {
-			Swal.fire("¡Error formato de correo no correcto!");
+			Swal.fire("¡Incorrect email format error!");
 			$('#iditemprimero').tab('show');
 			return valido = false;
 		}
 	}else{
-		Swal.fire("¡Agrege el email del cliente!");
+		Swal.fire("¡Add customer email!");
 		$('#iditemprimero').tab('show');
 		$("#emailclient").focus();
 		return valido = false;
@@ -276,12 +283,12 @@ function validaform(){
 
 
 	if(docs < 5){
-        Swal.fire("¡debe asignar mas de 4 documentos!");
+        Swal.fire("¡You must assign more than 4 documents!");
 		$('#itemsegundo').tab('show');
         return valido = false;}
 
 	if(cuest <= 0){
-        Swal.fire("¡debe asignar cuestionarios!");
+        Swal.fire("¡Must assign quizzes!");
 		$('#itemtercero').tab('show');
         return valido = false; }
 
@@ -394,11 +401,6 @@ function canceladotbl(){
 
 $(document).on('click', '.opcionesitem',function() { 
 
-
-	console.log(this.id);
-	console.log($(this).find(".data").val());
-
-
 	var idregistro = $(this).find(".data").val();
 
 	if(this.id == 'itemuno'){
@@ -449,9 +451,6 @@ $(document).on('click', '.opcionesitem',function() {
 	}
 });
 
-
-
-
 $('#btncancelacion').on('click', function() { 
 
 	if ( $("#cancelacionmotivo").val() == "") {Swal.fire("¡Add a reason for cancellation!"); return;}
@@ -482,7 +481,136 @@ $('#btncancelacion').on('click', function() {
 
 });
 
+$(document).on('click', '.itemdoc',function() {
+	var iddoc = $(this).find(".data").val();
 
+	if(this.id == "itemedita"){
+
+		axios.post(principalUrl+"doc/edita/"+iddoc)
+		.then((respuesta) => {
+			$('#newdoc').val(respuesta.data.nombre_doc);
+			$('#iddocument').val(respuesta.data.id);
+			$("#newdoc").focus();
+			document.getElementById("btngregadoc").innerText = "Update";
+			$("#btonnuevo").show();
+			})
+		.catch((error) => {
+			if (error.response) {
+				console.log(error.response.data);
+			}
+		});
+
+	}else if(this.id == "itemborra"){
+
+
+		Swal.fire({
+			title: "Remove",
+			text: "are you sure to delete document?",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Continue ",
+			cancelButtonText: "Cancel",
+		}).then((result) => {
+			if (result.isConfirmed) {
+		
+                axios.post(principalUrl+"doc/elimina/"+iddoc)
+                .then((respuesta) => {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "deleted document!",
+                        showConfirmButton: false,
+                        timer: 1200,
+                    });
+                    documentos();
+                    $('#newdoc').val("");
+                    $('#iddocument').val("");
+                    $("#newdoc").focus();
+                    $("#btonnuevo").hide();
+                    })
+                .catch((error) => {
+                    if (error.response) {
+                        console.log(error.response.data);
+                    }
+                });
+			} else {
+			}
+		});
+	}
+ });
+
+ $('#btngregadoc').on('click', function() { 
+	event.preventDefault();
+
+	if($('#newdoc').val() == ""){Swal.fire("¡Add a document!");$("#newdoc").focus(); return;}
+	
+	var document = new FormData();
+	    document.append("iddoc",$('#iddocument').val());
+	    document.append("nombredoc",$('#newdoc').val());
+
+		if($('#iddocument').val() != ""){
+
+	axios.post(principalUrl+"doc/actualiza",document)
+	.then((respuesta) => {
+		$('#btngregadoc').text("Add");
+		Swal.fire({
+			position: "top-end",
+			icon: "success",
+			title: "actualized document!",
+			showConfirmButton: false,
+			timer: 1200,
+		});
+		documentos();
+		$('#newdoc').val("");
+		$('#iddocument').val("");
+		$("#newdoc").focus();
+		$("#btonnuevo").hide();
+		})
+	.catch((error) => {
+		if (error.response) {
+			console.log(error.response.data);
+		}
+	});
+   }else{
+
+	axios.post(principalUrl+"doc/agrega",document)
+	.then((respuesta) => {
+
+		Swal.fire({
+			position: "top-end",
+			icon: "success",
+			title: "added document!",
+			showConfirmButton: false,
+			timer: 1200,
+		});
+		documentos();
+		$('#newdoc').val("");
+		$('#iddocument').val("");
+		$("#newdoc").focus();
+		$("#btonnuevo").hide();
+		})
+	.catch((error) => {
+		if (error.response) {
+			console.log(error.response.data);
+		}
+	});
+   }
+ });
+
+ $('#btnnuevo').on('click', function() { 
+	event.preventDefault();nuevobtn();
+});
+
+function nuevobtn(){
+	$('#btngregadoc').text("Add");
+	$('#newdoc').val("");
+	$('#iddocument').val("");
+	$("#newdoc").focus();
+	$("#btonnuevo").hide();
+}
+ 
 console.log('aqui llega a registro js  actualizado');
 
 
