@@ -30,9 +30,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_prestamo');
             $table->foreign('id_prestamo')->references('id')->on('prestamos');  
             $table->unsignedBigInteger('id_banco');
-            $table->foreign('id_banco')->references('id')->on('bancos');  
-            $table->unsignedBigInteger('id_cliente');
-            $table->foreign('id_cliente')->references('id')->on('clientes');  
+            $table->foreign('id_banco')->references('id')->on('bancos');   
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')->references('id')->on('users');
             $table->unsignedBigInteger('id_compania');
