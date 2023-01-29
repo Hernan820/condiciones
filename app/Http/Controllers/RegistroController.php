@@ -108,7 +108,8 @@ class RegistroController extends Controller
      */
     public function show($id)
     {
-        $registros = registro::join("clientes","clientes.id", "=", "registros.id_cliente")
+        $registros = registro::join("clientes_registros","clientes_registros.id", "=", "clientes_registros.id_registro")
+        ->join("clientes","clientes.id", "=", "clientes_registros.id_cliente")
         ->join("prestamos","prestamos.id", "=", "registros.id_prestamo")
         ->select("prestamos.*","clientes.*","registros.*","registros.id as idregister")
         ->where("registros.estado_registro","=",1)

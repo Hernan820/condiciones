@@ -48,7 +48,7 @@ $(document).ready(function () {
 function datosfile(){
 
 	$("#formregistro")[0].reset();
-	$('#iditemprimero').tab('show');
+	$('#iditemcliente').tab('show');
 	$("#nameclient").focus();
 
 	documentos();
@@ -220,35 +220,14 @@ function validaform(){
 	var valido = true;
 	var docs = 0 ;
 	var cuest = 0 ;	
-    var name = $("#nameclient").val();
-	var telef = $("#customerPhone").val();
-    var estatus = $("input[name=radio_status]:radio").is(':checked');
     var fechacontrato = $("#datecontrac").val();
     var fecharecibido = $("#datereceipt").val();
     var tipoprestamo = $("#typeloan").val();
-    var emailcliente = $("#emailclient").val();
 	var checkdoc = $(".checkdocumento:checked");  
 	var checkcuestionari = $(".checkcuest:checked");  
 
 	checkdoc.each(function(i) { docs++;});
 	checkcuestionari.each(function(i) {cuest++;	});
-
-	if(name == ""){
-		Swal.fire("¡Add customer name!");
-		$('#iditemprimero').tab('show');
-        $("#nameclient").focus();
-		return valido = false; }
-
-	if(telef == ""){
-		Swal.fire("¡Add customer phone!");
-		$('#iditemprimero').tab('show');
-		$("#customerPhone").focus();
-		return valido = false; }
-
-	if(estatus == false){
-		Swal.fire("¡Add customer status!");
-		$('#iditemprimero').tab('show');
-		return valido = false; }
 
 	if(fechacontrato == ""){
 		Swal.fire("¡Add contract date!");
@@ -267,20 +246,6 @@ function validaform(){
 		$('#iditemprimero').tab('show');
 		$("#typeloan").focus();
 		return valido = false; }
-
-	if(emailcliente != ""){
-		if (validateEmail(emailcliente) == false) {
-			Swal.fire("¡Incorrect email format error!");
-			$('#iditemprimero').tab('show');
-			return valido = false;
-		}
-	}else{
-		Swal.fire("¡Add customer email!");
-		$('#iditemprimero').tab('show');
-		$("#emailclient").focus();
-		return valido = false;
-	}
-
 
 	if(docs < 5){
         Swal.fire("¡You must assign more than 4 documents!");
@@ -611,6 +576,71 @@ function nuevobtn(){
 	$("#btonnuevo").hide();
 }
  
+
+$('#btncliente').on('click', function() {
+	if (validaclient() == false) {return;}
+
+	num = $('#tblcliente tbody tr.fila-fija').length;
+
+	if(num == 0){
+        var tr = $('<tr >');
+		$("#filasclientes").append(tr);
+
+		tr.append("<td >"+$('#nameclient').val()+" <input type='hidden' class='clientenombre' name='nombres[]' value="+$('#nameclient').val()+"> <input type='hidden' class='clientessn' name='ssn[]' value="+$('#ssn').val()+"></td>");
+		tr.append("<td >"+$('#customerPhone').val()+" <input type='hidden' class='clientetelefono' name='tel[]' value="+"'"+$('#customerPhone').val()+"'"+"> <input type='hidden' class='clientemail' name='email[]' value="+$('#emailclient').val()+"></td>");
+		tr.append("<td class='d-none d-md-table-cell' >"+$('input:radio[name=radio_status]:checked').val()+"<input type='hidden' class='clientestatus' name='status[]' value="+$('input:radio[name=radio_status]:checked').val()+"> <input type='hidden' class='clientedirecc' name='direccion[]' value="+$('#inputAddress').val()+"> <input type='hidden' class='clientedirecc2' name='direccion2[]' value="+$('#inputAddress2').val()+"></td>");
+		tr.append('<td class="table-action" ><a href="#"><i class="align-middle fas fa-fw fa-pen"></i></i></a><a href="#">&nbsp;<i class="align-middle fas fa-fw fa-trash"></i></a></td>');
+	}else{
+
+
+   $('#tblcliente tbody tr:eq(0)').clone().appendTo('#tblcliente');
+
+   $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(0)').html($('#nameclient').val()+" <input type='hidden' class='clientenombre' name='nombres[]' value="+$('#nameclient').val()+"> <input type='hidden' class='clientessn' name='ssn[]' value="+$('#ssn').val()+">");
+   $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(1)').html($('#customerPhone').val()+" <input type='hidden' class='clientetelefono' name='tel[]' value="+$('#customerPhone').val()+"> <input type='hidden' class='clientemail' name='email[]' value="+$('#emailclient').val()+">");
+   $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(2)').html($('input:radio[name=radio_status]:checked').val()+"<input type='hidden' class='clientestatus' name='status[]' value="+$('input:radio[name=radio_status]:checked').val()+"> <input type='hidden' class='clientedirecc' name='direccion[]' value="+$('#inputAddress').val()+">	<input type='hidden' class='clientedirecc2' name='direccion2[]' value="+$('#inputAddress2').val()+">");
+
+	}
+
+   $('.inputclient').val('');
+   $("input[name=radio_status]").prop('checked', false);
+
+});
+
+
+function validaclient(){
+	var valido = true;
+    var name = $("#nameclient").val();
+	var telef = $("#customerPhone").val();
+    var estatus = $("input[name=radio_status]:radio").is(':checked');
+    var emailcliente = $("#emailclient").val();
+
+	if(name == ""){
+		Swal.fire("¡Add customer name!");
+        $("#nameclient").focus();
+		return valido = false; }
+
+	if(telef == ""){
+		Swal.fire("¡Add customer phone!");
+		$("#customerPhone").focus();
+		return valido = false; }
+
+	if(estatus == false){
+		Swal.fire("¡Add customer status!");
+		return valido = false; }
+
+	if(emailcliente != ""){
+		if (validateEmail(emailcliente) == false) {
+			Swal.fire("¡Incorrect email format error!");
+			//$('#iditemprimero').tab('show');
+			return valido = false;
+		}
+	}
+
+return valido ;
+
+}
+
+
 console.log('aqui llega a registro js  actualizado');
 
 

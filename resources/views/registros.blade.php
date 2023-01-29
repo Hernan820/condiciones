@@ -127,7 +127,13 @@
                             </div>
 
                             <div class="list-group list-group-flush" id="tabitems" role="tablist">
-                                <a class="list-group-item list-group-item-action active itemprimero" id="iditemprimero"
+                                <a class="list-group-item list-group-item-action active" id="iditemcliente"
+                                    data-bs-toggle="list" href="#borrower" role="tab">
+                                    <i class="align-middle me-2 far fa-fw fa-user" data-feather="edit"></i>
+                                    Borrower
+                                </a>
+
+                                <a class="list-group-item list-group-item-action " id="iditemprimero"
                                     data-bs-toggle="list" href="#account" role="tab">
                                     <i class="align-middle me-2 far fa-fw fa-edit" data-feather="edit"></i>
                                     Contract info
@@ -149,32 +155,119 @@
                     <div class="col-md-9 col-xl-9">
                         <form id="formregistro">
                             <div class="tab-content">
-                                <div class="tab-pane fade show active" id="account" role="tabpanel">
 
+                                <div class="tab-pane fade  show active" id="borrower" role="tabpanel">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
 
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5 class="card-title mb-0"></h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="mb-3">
                                                         <label for="nameclient">Customer name</label>
-                                                        <input type="text" class="form-control" id="nameclient"
-                                                            name="nameclient" placeholder="First name"
+                                                        <input type="text" class="form-control inputclient"
+                                                            id="nameclient" name="nameclient" placeholder="First name"
                                                             autocomplete="off">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="inputLastName">Customer telephone</label>
-                                                        <input type="text" class="form-control" id="customerPhone"
-                                                            name="customerPhone" placeholder="(631) 609-9108"
-                                                            autocomplete="off">
+                                                        <input type="text" class="form-control inputclient"
+                                                            id="customerPhone" name="customerPhone"
+                                                            placeholder="(631) 609-9108" autocomplete="off">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label class="col-form-label text-sm-end pt-sm-0">Legal
+                                                            Status</label>
+                                                        <div class="col-sm-10">
+                                                            <label class="form-check">
+                                                                <input name="radio_status" type="radio"
+                                                                    class="form-check-input" value="social">
+                                                                <span class="form-check-label">Social</span>
+                                                            </label>
+                                                            <label class="form-check">
+                                                                <input name="radio_status" type="radio"
+                                                                    class="form-check-input" value="Tax ID">
+                                                                <span class="form-check-label">TAX ID</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
                                                     <div class="mb-3">
+                                                        <label for="ssn" style="margin-top: 7px;">SSN</label>
+                                                        <input type="email" class="form-control inputclient" id="ssn"
+                                                            name="ssn" placeholder="" autocomplete="off">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="inputEmail4" style="margin-top: 7px;">Email</label>
+                                                        <input type="email" class="form-control inputclient"
+                                                            autocomplete="off" placeholder="Email" id="emailclient"
+                                                            name="emailclient">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="inputAddress">Customer current address</label>
+                                                        <input type="text" class="form-control inputclient"
+                                                            id="inputAddress" autocomplete="off" name="inputAddress"
+                                                            placeholder="1234 Main St">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="inputAddress2">Address 2</label>
+                                                        <input type="text" class="form-control inputclient"
+                                                            id="inputAddress2" name="inputAddress2" autocomplete="off"
+                                                            placeholder="Apartment, studio, or floor">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <button type="button" class="btn btn-primary"
+                                                        id="btncliente">Add</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="col-12 col-xl-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h5 class="card-title">Basic Table</h5>
+                                                            <h6 class="card-subtitle text-muted">Using the most basic
+                                                                table markup, here’s how .table-based tables look in
+                                                                Bootstrap.
+                                                            </h6>
+                                                        </div>
+                                                        <table class="table table-striped table-sm" id="tblcliente">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width:40%;">Name</th>
+                                                                    <th style="width:25%">Phone Number</th>
+                                                                    <th class="d-none d-md-table-cell"
+                                                                        style="width:25%">Legal Status</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="filasclientes">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane fade" id="account" role="tabpanel">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">Titulo</h5>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                   <div class="mb-3">
                                                         <label for="inputFirstName">Contract date</label>
                                                         <div class="input-group date" id="datetimepicker-minimum"
                                                             data-target-input="nearest">
@@ -202,68 +295,7 @@
                                                                     class="fa fa-calendar"></i></div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
 
-                                                        <label class="col-form-label text-sm-end pt-sm-0">Legal
-                                                            Status</label>
-                                                        <div class="col-sm-10">
-                                                            <label class="form-check">
-                                                                <input name="radio_status" type="radio"
-                                                                    class="form-check-input" value="social">
-                                                                <span class="form-check-label">Social</span>
-                                                            </label>
-                                                            <label class="form-check">
-                                                                <input name="radio_status" type="radio"
-                                                                    class="form-check-input" value="Tax ID">
-                                                                <span class="form-check-label">TAX ID</span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6" style="padding-left: 25px;">
-                                                        <label for="property_address">
-                                                            Property adress
-                                                        </label>
-                                                        <input type="text" class="form-control" id="property_address"
-                                                            name="property_address" autocomplete="off">
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label for="ssn" style="margin-top: 7px;">SSN</label>
-                                                        <input type="email" class="form-control" id="ssn" name="ssn"
-                                                            placeholder="" autocomplete="off">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="inputEmail4" style="margin-top: 7px;">Email</label>
-                                                        <input type="email" class="form-control" autocomplete="off"
-                                                            placeholder="Email" id="emailclient" name="emailclient">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="inputAddress">Customer current address</label>
-                                                        <input type="text" class="form-control" id="inputAddress"
-                                                            autocomplete="off" name="inputAddress"
-                                                            placeholder="1234 Main St">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="inputAddress2">Address 2</label>
-                                                        <input type="text" class="form-control" id="inputAddress2"
-                                                            name="inputAddress2" autocomplete="off"
-                                                            placeholder="Apartment, studio, or floor">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="coborrowers">Co borrowers</label>
-                                                        <textarea class="form-control" name="coborrowers"
-                                                            rows="2"></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
                                                     <div class="row" style="margin-top:7px">
                                                         <div class="mb-3 col-md-4">
                                                             <label for="purchaceprice">Purchace Price</label>
@@ -289,31 +321,33 @@
                                                             <select id="typeloan" name="typeloan" class="form-control">
                                                             </select>
                                                         </div>
-                                                        <div class="mb-3 col-md-12" style="margin-top:7px">
-                                                            <label for="drive">Drive</label>
-                                                            <div class="input-group col-md-12">
-                                                                <span class="input-group-text">Drive</span>
-                                                                <input type="text" id="drive" name="drive"
-                                                                    autocomplete="off" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3 col-md-12">
-                                                            <div class="mb-3 col-md-12">
-                                                                <label for="realtorname">Realtor name</label>
-                                                                <input type="text" name="realtorname" placeholder=""
-                                                                    autocomplete="off" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3 col-md-12">
-                                                            <div class="mb-3 col-md-12">
-                                                                <label for="realtorphone">Realtor telephone</label>
-                                                                <input type="text" name="realtorphone" id="realtorphone"
-                                                                    autocomplete="off" placeholder="(631) 609-9108"
-                                                                    class="form-control">
-                                                            </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+
+                                                    <div class="mb-3 col-md-12" style="margin-top:7px">
+                                                        <label for="drive">Drive</label>
+                                                        <div class="input-group col-md-12">
+                                                            <span class="input-group-text">Drive</span>
+                                                            <input type="text" id="drive" name="drive"
+                                                                autocomplete="off" class="form-control">
                                                         </div>
                                                     </div>
-
+                                                    <div class="mb-3 col-md-12">
+                                                        <div class="mb-3 col-md-12">
+                                                            <label for="realtorname">Realtor name</label>
+                                                            <input type="text" name="realtorname" placeholder=""
+                                                                autocomplete="off" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 col-md-12">
+                                                        <div class="mb-3 col-md-12">
+                                                            <label for="realtorphone">Realtor telephone</label>
+                                                            <input type="text" name="realtorphone" id="realtorphone"
+                                                                autocomplete="off" placeholder="(631) 609-9108"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -324,11 +358,6 @@
                                                         rows="3"></textarea>
                                                 </div>
                                             </div>
-
-
-                                            <button type="submit" style="display: none;" class="btn btn-primary">Save
-                                                changes</button>
-
                                         </div>
                                     </div>
 
@@ -361,13 +390,13 @@
                                                                     <input type="text" name="newdoc" id="newdoc"
                                                                         autocomplete="off" placeholder=""
                                                                         class="form-control">
-                                                                </div><input type='hidden' id='iddocument' value="" >
+                                                                </div><input type='hidden' id='iddocument' value="">
                                                                 <div class="mb-3 col-md-3"><br>
                                                                     <button class="btn btn-primary" id="btngregadoc">
                                                                         <i class="align-middle me-2"
                                                                             data-feather="edit-3"></i>Add</button>
                                                                 </div>
-                                                                <div class="mb-3 col-md-3"  id="btonnuevo"><br>
+                                                                <div class="mb-3 col-md-3" id="btonnuevo"><br>
                                                                     <button class="btn btn-primary" id="btnnuevo">
                                                                         <i class="align-middle me-2"
                                                                             data-feather="edit-3"></i>new</button>
@@ -434,9 +463,10 @@
             <div class="modal-body m-3">
                 <div class="mb-3">
                     <label class="form-label">reason for cancellation</label>
-                    <textarea class="form-control" id="cancelacionmotivo" name="cancelacionmotivo" placeholder="Write a reason" rows="3"></textarea>
+                    <textarea class="form-control" id="cancelacionmotivo" name="cancelacionmotivo"
+                        placeholder="Write a reason" rows="3"></textarea>
                 </div>
-                <input type="hidden" name="id_registro" id="id_registro" value="" >
+                <input type="hidden" name="id_registro" id="id_registro" value="">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
