@@ -584,14 +584,14 @@ $('#btncliente').on('click', function() {
 	if(num == 0){
         var tr = $('<tr >');
 		$("#filasclientes").append(tr);
-		tr.append("<td >"+$('#nameclient').val()+" <input type='hidden' class='clientenombre' name='nombres[]' value="+$('#nameclient').val()+"> <input type='hidden' class='clientessn' name='ssn[]' value="+$('#ssn').val()+"></td>");
+		tr.append("<td >"+$('#nameclient').val()+" <input type='hidden' class='clientenombre' name='nombres[]' value="+$('#nameclient').val()+"> <input type='hidden' class='clientessn' name='securityn[]' value="+$('#ssn').val()+"></td>");
 		tr.append("<td >"+$('#customerPhone').val()+" <input type='hidden' class='clientetelefono' name='tel[]' value="+"'"+$('#customerPhone').val()+"'"+"> <input type='hidden' class='clientemail' name='email[]' value="+$('#emailclient').val()+"> <input type='hidden' class='tipocliente' name='typeclient[]' value="+$('input:radio[name=radio_typeclient]:checked').val()+"> </td>");
 		tr.append("<td class='d-none d-md-table-cell' >"+$('input:radio[name=radio_status]:checked').val()+"<input type='hidden' class='clientestatus' name='status[]' value="+"'"+$('input:radio[name=radio_status]:checked').val()+"'"+"> <input type='hidden' class='clientedirecc' name='direccion[]' value="+$('#inputAddress').val()+"> <input type='hidden' class='clientedirecc2' name='direccion2[]' value="+$('#inputAddress2').val()+"></td>");
 		tr.append('<td class="table-action" >&nbsp;<a href="#" class="eliminaclient"><i class="align-middle fas fa-fw fa-trash"></i></a></td>');
 	}else{
 
    $('#tblcliente tbody tr:eq(0)').clone().appendTo('#tblcliente');
-   $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(0)').html($('#nameclient').val()+" <input type='hidden' class='clientenombre' name='nombres[]' value="+$('#nameclient').val()+"> <input type='hidden' class='clientessn' name='ssn[]' value="+$('#ssn').val()+">");
+   $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(0)').html($('#nameclient').val()+" <input type='hidden' class='clientenombre' name='nombres[]' value="+$('#nameclient').val()+"> <input type='hidden' class='clientessn' name='securityn[]' value="+$('#ssn').val()+">");
    $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(1)').html($('#customerPhone').val()+" <input type='hidden' class='clientetelefono' name='tel[]' value="+$('#customerPhone').val()+"> <input type='hidden' class='clientemail' name='email[]' value="+$('#emailclient').val()+"> <input type='hidden' class='tipocliente' name='typeclient[]' value="+$('input:radio[name=radio_typeclient]:checked').val()+">");
    $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(2)').html($('input:radio[name=radio_status]:checked').val()+"<input type='hidden' class='clientestatus' name='status[]' value="+"'"+$('input:radio[name=radio_status]:checked').val()+"'"+"> <input type='hidden' class='clientedirecc' name='direccion[]' value="+$('#inputAddress').val()+">	<input type='hidden' class='clientedirecc2' name='direccion2[]' value="+$('#inputAddress2').val()+">");
 

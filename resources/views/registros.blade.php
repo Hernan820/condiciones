@@ -198,12 +198,12 @@
                                                         <div class="col-sm-10">
                                                             <label class="form-check">
                                                                 <input name="radio_typeclient" type="radio"
-                                                                    class="form-check-input" value="Headline">
+                                                                    class="form-check-input" value="1">
                                                                 <span class="form-check-label">Headline</span>
                                                             </label>
                                                             <label class="form-check">
                                                                 <input name="radio_typeclient" type="radio"
-                                                                    class="form-check-input" value="Co-borrower">
+                                                                    class="form-check-input" value="0">
                                                                 <span class="form-check-label">Co-borrower</span>
                                                             </label>
                                                         </div>

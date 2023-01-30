@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\cliente;
 use App\Models\detalle_documento;
 use App\Models\cuestionario_cliente;
-
+use App\Models\clientes_registro;
 use App\Models\registro;
 use Illuminate\Http\Request;
 
@@ -28,16 +28,6 @@ class RegistroController extends Controller
     public function create(Request $request)
     {
 
-        $cliente = new cliente;
-        $cliente->nombre_cliente       = $request->nameclient;
-        $cliente->telefono             = $request->customerPhone;
-        $cliente->correo               = $request->emailclient;
-        $cliente->direccion            = $request->inputAddress;
-        $cliente->direcionalternativa  = $request->inputAddress2;
-        $cliente->status               = $request->radio_status;
-        $cliente->socials_number       = $request->ssn;
-        $cliente->save();
-
         $registro = new registro;
         $registro->fecha_recepcion = $request->datereceipt;
         $registro->fecha_firma     = $request->datecontrac;
@@ -54,12 +44,36 @@ class RegistroController extends Controller
         //$registro->Appraisal       = $request->             #MAS ADELANTE SE LLENARAN
         $registro->id_prestamo     = 1;    
         $registro->id_banco        = 1;                     #MAS ADELANTE SE LLENARAN
-        $registro->id_cliente      = $cliente->id;
         $registro->id_usuario      = auth()->user()->id; 
         $registro->id_estado       = 1;
         $registro->id_compania     = 1;
         $registro->estado_registro = 1; 
         $registro->save();
+
+
+        
+        $index = 0;
+        foreach ($request->nombres  as $name) {
+            $cliente = new cliente;
+            $cliente->nombre_cliente       = $name;
+            $cliente->telefono             = $request->tel[$index];
+            $cliente->correo               = $request->email[$index];
+            $cliente->direccion            = $request->direccion[$index];
+            $cliente->direcionalternativa  = $request->direccion2[$index];
+            $cliente->status               = $request->status[$index];
+            $cliente->socials_number       = $request->securityn[$index];
+            $cliente->tipe_client          = $request->typeclient[$index];
+            $cliente->save();
+
+           $detallecliente =  new clientes_registro;
+           $detallecliente->id_cliente             = $cliente->id;
+           $detallecliente->id_registro            = $registro->id;
+           $detallecliente->titular                = $request->typeclient[$index];
+           $detallecliente->estado_clienteregistro = 1;
+           $detallecliente->save() ;
+            $index++;
+
+        }
 
         foreach ($request->chekcdocument as $docs) {
             $documentos_client = new detalle_documento;
@@ -85,7 +99,7 @@ class RegistroController extends Controller
             $cuestionario_client->save();
        };
       
-      return 1;
+      return $request->email ;
         
     }
 
