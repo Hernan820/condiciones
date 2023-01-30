@@ -42,6 +42,7 @@ $(document).ready(function () {
 
  $('#btnmodalfile').on('click', function() {
 	datosfile();
+	$('#tblcliente tr').slice(1).remove();
 	$('#newFile').modal('show');
   });
 
@@ -466,8 +467,6 @@ $(document).on('click', '.itemdoc',function() {
 		});
 
 	}else if(this.id == "itemborra"){
-
-
 		Swal.fire({
 			title: "Remove",
 			text: "are you sure to delete document?",
@@ -585,24 +584,23 @@ $('#btncliente').on('click', function() {
 	if(num == 0){
         var tr = $('<tr >');
 		$("#filasclientes").append(tr);
-
 		tr.append("<td >"+$('#nameclient').val()+" <input type='hidden' class='clientenombre' name='nombres[]' value="+$('#nameclient').val()+"> <input type='hidden' class='clientessn' name='ssn[]' value="+$('#ssn').val()+"></td>");
-		tr.append("<td >"+$('#customerPhone').val()+" <input type='hidden' class='clientetelefono' name='tel[]' value="+"'"+$('#customerPhone').val()+"'"+"> <input type='hidden' class='clientemail' name='email[]' value="+$('#emailclient').val()+"></td>");
-		tr.append("<td class='d-none d-md-table-cell' >"+$('input:radio[name=radio_status]:checked').val()+"<input type='hidden' class='clientestatus' name='status[]' value="+$('input:radio[name=radio_status]:checked').val()+"> <input type='hidden' class='clientedirecc' name='direccion[]' value="+$('#inputAddress').val()+"> <input type='hidden' class='clientedirecc2' name='direccion2[]' value="+$('#inputAddress2').val()+"></td>");
-		tr.append('<td class="table-action" ><a href="#"><i class="align-middle fas fa-fw fa-pen"></i></i></a><a href="#">&nbsp;<i class="align-middle fas fa-fw fa-trash"></i></a></td>');
+		tr.append("<td >"+$('#customerPhone').val()+" <input type='hidden' class='clientetelefono' name='tel[]' value="+"'"+$('#customerPhone').val()+"'"+"> <input type='hidden' class='clientemail' name='email[]' value="+$('#emailclient').val()+"> <input type='hidden' class='tipocliente' name='typeclient[]' value="+$('input:radio[name=radio_typeclient]:checked').val()+"> </td>");
+		tr.append("<td class='d-none d-md-table-cell' >"+$('input:radio[name=radio_status]:checked').val()+"<input type='hidden' class='clientestatus' name='status[]' value="+"'"+$('input:radio[name=radio_status]:checked').val()+"'"+"> <input type='hidden' class='clientedirecc' name='direccion[]' value="+$('#inputAddress').val()+"> <input type='hidden' class='clientedirecc2' name='direccion2[]' value="+$('#inputAddress2').val()+"></td>");
+		tr.append('<td class="table-action" >&nbsp;<a href="#" class="eliminaclient"><i class="align-middle fas fa-fw fa-trash"></i></a></td>');
 	}else{
 
-
    $('#tblcliente tbody tr:eq(0)').clone().appendTo('#tblcliente');
-
    $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(0)').html($('#nameclient').val()+" <input type='hidden' class='clientenombre' name='nombres[]' value="+$('#nameclient').val()+"> <input type='hidden' class='clientessn' name='ssn[]' value="+$('#ssn').val()+">");
-   $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(1)').html($('#customerPhone').val()+" <input type='hidden' class='clientetelefono' name='tel[]' value="+$('#customerPhone').val()+"> <input type='hidden' class='clientemail' name='email[]' value="+$('#emailclient').val()+">");
-   $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(2)').html($('input:radio[name=radio_status]:checked').val()+"<input type='hidden' class='clientestatus' name='status[]' value="+$('input:radio[name=radio_status]:checked').val()+"> <input type='hidden' class='clientedirecc' name='direccion[]' value="+$('#inputAddress').val()+">	<input type='hidden' class='clientedirecc2' name='direccion2[]' value="+$('#inputAddress2').val()+">");
+   $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(1)').html($('#customerPhone').val()+" <input type='hidden' class='clientetelefono' name='tel[]' value="+$('#customerPhone').val()+"> <input type='hidden' class='clientemail' name='email[]' value="+$('#emailclient').val()+"> <input type='hidden' class='tipocliente' name='typeclient[]' value="+$('input:radio[name=radio_typeclient]:checked').val()+">");
+   $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(2)').html($('input:radio[name=radio_status]:checked').val()+"<input type='hidden' class='clientestatus' name='status[]' value="+"'"+$('input:radio[name=radio_status]:checked').val()+"'"+"> <input type='hidden' class='clientedirecc' name='direccion[]' value="+$('#inputAddress').val()+">	<input type='hidden' class='clientedirecc2' name='direccion2[]' value="+$('#inputAddress2').val()+">");
 
 	}
 
    $('.inputclient').val('');
    $("input[name=radio_status]").prop('checked', false);
+   $("input[name=radio_typeclient]").prop('checked', false);
+   $("#nameclient").focus();
 
 });
 
@@ -612,6 +610,7 @@ function validaclient(){
     var name = $("#nameclient").val();
 	var telef = $("#customerPhone").val();
     var estatus = $("input[name=radio_status]:radio").is(':checked');
+	var cliente_tipo = $("input[name=radio_typeclient]:radio").is(':checked');
     var emailcliente = $("#emailclient").val();
 
 	if(name == ""){
@@ -619,13 +618,25 @@ function validaclient(){
         $("#nameclient").focus();
 		return valido = false; }
 
-	if(telef == ""){
+	if(telef != ""){
+
+		if(telef.length <14){
+			Swal.fire("¡The phone number is incomplete!");
+			$("#customerPhone").focus();
+			return valido = false;
+		}
+
+	}else if(telef == ""){
 		Swal.fire("¡Add customer phone!");
 		$("#customerPhone").focus();
 		return valido = false; }
 
 	if(estatus == false){
 		Swal.fire("¡Add customer status!");
+		return valido = false; }
+		
+	if(cliente_tipo == false){
+		Swal.fire("¡Add customer type!");
 		return valido = false; }
 
 	if(emailcliente != ""){
@@ -635,11 +646,28 @@ function validaclient(){
 			return valido = false;
 		}
 	}
-
 return valido ;
-
 }
 
+$(document).on('click', '.eliminaclient',function() {
+	Swal.fire({
+		title: "Remove",
+		text: "you want to delete this client?",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "Continue ",
+		cancelButtonText: "Cancel",
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$(this).closest('tr').remove();
+			$("#nameclient").focus();
+		} else {
+		}
+	});
+
+});
 
 console.log('aqui llega a registro js  actualizado');
 

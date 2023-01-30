@@ -177,7 +177,7 @@
                                                 </div>
 
                                                 <div class="row">
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6">
                                                         <label class="col-form-label text-sm-end pt-sm-0">Legal
                                                             Status</label>
                                                         <div class="col-sm-10">
@@ -190,6 +190,21 @@
                                                                 <input name="radio_status" type="radio"
                                                                     class="form-check-input" value="Tax ID">
                                                                 <span class="form-check-label">TAX ID</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="col-form-label text-sm-end pt-sm-0">Client Type</label>
+                                                        <div class="col-sm-10">
+                                                            <label class="form-check">
+                                                                <input name="radio_typeclient" type="radio"
+                                                                    class="form-check-input" value="Headline">
+                                                                <span class="form-check-label">Headline</span>
+                                                            </label>
+                                                            <label class="form-check">
+                                                                <input name="radio_typeclient" type="radio"
+                                                                    class="form-check-input" value="Co-borrower">
+                                                                <span class="form-check-label">Co-borrower</span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -231,10 +246,8 @@
                                                 <div class="col-12 col-xl-12">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                            <h5 class="card-title">Basic Table</h5>
-                                                            <h6 class="card-subtitle text-muted">Using the most basic
-                                                                table markup, here’s how .table-based tables look in
-                                                                Bootstrap.
+                                                            <h5 class="card-title">Customer Table</h5>
+                                                            <h6 class="card-subtitle text-muted">
                                                             </h6>
                                                         </div>
                                                         <table class="table table-striped table-sm" id="tblcliente">
