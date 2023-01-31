@@ -291,7 +291,11 @@ function pendientestbl(){
 				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesitem' id='itemuno' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem'  id='itemdos' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemtres' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcuatro' href='#'><input type='hidden' class='data' value="+data+" ><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcinco' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-paper-plane'  data-feather='send'></i> Send to opening</a></div></div>");
 			},
 		    },
-		]
+		],
+        createdRow: (row, data, dataIndex, cells) => {
+            if (data.id_estado == 4){
+                $(row).addClass(' table-danger'); }
+        }
 	});
 }
 
@@ -377,9 +381,43 @@ $(document).on('click', '.opcionesitem',function() {
 	  $('#id_registro').val(idregistro)
 	  $('#modacancel').modal('show');
 	}else if(this.id == 'itemcuatro'){
+		
+		Swal.fire({
+			title: "Change state",
+			text: "Change to damaged registry?",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Continuer",
+			cancelButtonText: "Cancel",
+		}).then((result) => {
+			if (result.isConfirmed) {
+		
+				axios.post(principalUrl + "condiciones/cambioestado/4/"+idregistro)
+					.then((respuesta) => {
+						respuesta.data
+						Swal.fire({
+							position: "top-end",
+							icon: "success",
+							title: "record updated!",
+							showConfirmButton: false,
+							timer: 1000,
+						});
+						pendientestbl();
+						activostbl();
+						canceladotbl();
+					})
+					.catch((error) => {
+						if (error.response) {
+							console.log(error.response.data);
+						}
+					});
+			} else {
+			}
+		});
 
 	}else if(this.id == 'itemcinco'){
-
 		Swal.fire({
 			title: "Change state",
 			text: "Are you sure to change the status of this record?",
@@ -398,7 +436,7 @@ $(document).on('click', '.opcionesitem',function() {
 						Swal.fire({
 							position: "top-end",
 							icon: "success",
-							title: "registro actualizado!",
+							title: "record updated!",
 							showConfirmButton: false,
 							timer: 1000,
 						});

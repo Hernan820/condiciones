@@ -7,7 +7,7 @@ use App\Models\cuestionario_cliente;
 use App\Models\clientes_registro;
 use App\Models\registro;
 use Illuminate\Http\Request;
-
+use DB;
 class RegistroController extends Controller
 {
     /**
@@ -122,13 +122,17 @@ class RegistroController extends Controller
      */
     public function show($id)
     {
-        $registros = registro::join("clientes_registros","clientes_registros.id", "=", "clientes_registros.id_registro")
-        ->join("clientes","clientes.id", "=", "clientes_registros.id_cliente")
-        ->join("prestamos","prestamos.id", "=", "registros.id_prestamo")
-        ->select("prestamos.*","clientes.*","registros.*","registros.id as idregister")
-        ->where("registros.estado_registro","=",1)
-        ->where("registros.id_estado","=",$id)
-        ->get();
+        if($id == 1){
+            $id = '1,4';
+        }
+
+        $sql = "SELECT prestamos.*, clientes.*, registros.*, registros.id as idregister FROM `registros` 
+        INNER JOIN clientes_registros on clientes_registros.id_registro = registros.id
+        INNER JOIN clientes on clientes.id = clientes_registros.id_cliente
+        INNER JOIN prestamos on prestamos.id = registros.id_prestamo
+        WHERE registros.id_estado in($id)  AND clientes.tipe_client = 1;";
+
+        $registros = DB::select($sql);
 
         return response()->json($registros);        
     }
