@@ -188,5 +188,26 @@ class RegistroController extends Controller
 
     return 1 ;
 
+    } 
+    /**
+     * Remove the specified resource from sto
+     */
+    public function reporte($id){
+
+        $sql = "SELECT prestamos.*, clientes.*, registros.*, registros.id as idregister FROM `registros` 
+        INNER JOIN clientes_registros on clientes_registros.id_registro = registros.id
+        INNER JOIN clientes on clientes.id = clientes_registros.id_cliente
+        INNER JOIN prestamos on prestamos.id = registros.id_prestamo
+        WHERE registros.id in($id)  AND clientes.tipe_client = 1
+        LIMIT 1;";
+
+        $sql1="SELECT documentos.* FROM registros
+        INNER JOIN detalle_documentos on detalle_documentos.id_registro = registros.id
+        INNER JOIN documentos on documentos.id = detalle_documentos.id_documento
+        WHERE registros.id = $id AND documentos.estado_doc = 1;";
+
+        $registros = DB::select($sql);
+        $doc = DB::select($sql1);
+        return response()->json(['registros' => $registros, 'doc' => $doc],200);
     }
 }

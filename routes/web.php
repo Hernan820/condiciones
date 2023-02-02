@@ -57,4 +57,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('doc/elimina/{id}', [App\Http\Controllers\DocumentoController::class, 'destroy']);
 
+    #registros
+    Route::post('registro/reporte/{id}', [App\Http\Controllers\RegistroController::class, 'reporte']);
  });
