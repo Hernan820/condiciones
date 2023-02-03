@@ -29,6 +29,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('condicion/vistaregistros', [App\Http\Controllers\HomeController::class, 'vistaregistro']);
 
+    Route::get('registro/vistadetallefile', [App\Http\Controllers\HomeController::class, 'vistafile']);
+
     Route::post('condicion/compania', [App\Http\Controllers\CompaniaController::class, 'index']);
 
     Route::post('condicion/agregaregistro', [App\Http\Controllers\RegistroController::class, 'create']);

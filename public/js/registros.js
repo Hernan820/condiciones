@@ -388,7 +388,15 @@ $(document).on('click', '.opcionesitem',function() {
 	var idregistro = $(this).find(".data").val();
 
 	if(this.id == 'itemuno'){
+		$.ajax({
+			type:'GET',
+			url: principalUrl+'registro/vistadetallefile',
+			dataType:"html",
+		}).done(function(data) {
 
+			$('.contenido').html(data);   
+	  
+		  });
 	}else if(this.id == 'itemdos'){
 
 		axios.post(principalUrl + "registro/reporte/"+idregistro)
