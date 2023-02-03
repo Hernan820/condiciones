@@ -42,7 +42,8 @@ class RegistroController extends Controller
         $registro->telefono_precesador      = $request->realtorphone;
 
         //$registro->Appraisal       = $request->             #MAS ADELANTE SE LLENARAN
-        $registro->id_prestamo     = 1;    
+        $registro->id_etapa        = 1; 
+        $registro->id_prestamo     = 1;       
         $registro->id_banco        = 1;                     #MAS ADELANTE SE LLENARAN
         $registro->id_usuario      = auth()->user()->id; 
         $registro->id_estado       = 1;
@@ -122,15 +123,11 @@ class RegistroController extends Controller
      */
     public function show($id)
     {
-        if($id == 1){
-            $id = '1,4';
-        }
-
         $sql = "SELECT prestamos.*, clientes.*, registros.*, registros.id as idregister FROM `registros` 
         INNER JOIN clientes_registros on clientes_registros.id_registro = registros.id
         INNER JOIN clientes on clientes.id = clientes_registros.id_cliente
         INNER JOIN prestamos on prestamos.id = registros.id_prestamo
-        WHERE registros.id_estado in($id)  AND clientes.tipe_client = 1;";
+        WHERE registros.id_etapa  in($id)  AND clientes.tipe_client = 1  AND registros.id_estado != 3;";
 
         $registros = DB::select($sql);
 
@@ -169,21 +166,32 @@ class RegistroController extends Controller
     public function cancelado(request $request)
     {
         $registro= registro::find($request->id_registro);
-        $registro->id_estado = 2 ;
+        $registro->id_estado = 3 ;
         $registro->motivo = $request->motivo_cancel;
         $registro->save();
-
         return 1 ;
     }
+/**
+ * 
+ * cambia estado danado
+ * 
+ */
+    function danado($estado,$id){
 
+        $registro= registro::find($id);
+        $registro->id_estado = $estado;
+        $registro->save();
+        return 1 ;
+
+    }
     /**
      * Remove the specified resource from sto
      */
-    public function estado($estado,$id)
+    public function etapa($etapa,$id)
     {
 
     $registro= registro::find($id);
-    $registro->id_estado = $estado ;
+    $registro->id_etapa  = $etapa ;
     $registro->save();
 
     return 1 ;
@@ -209,5 +217,21 @@ class RegistroController extends Controller
         $registros = DB::select($sql);
         $doc = DB::select($sql1);
         return response()->json(['registros' => $registros, 'doc' => $doc],200);
+    }
+    /**
+     * 
+     * muestra registros con el estado cancelados
+     * 
+     */
+    public function cancel($id)
+    {
+        $sql = "SELECT prestamos.*, clientes.*, registros.*, registros.id as idregister FROM `registros` 
+        INNER JOIN clientes_registros on clientes_registros.id_registro = registros.id
+        INNER JOIN clientes on clientes.id = clientes_registros.id_cliente
+        INNER JOIN prestamos on prestamos.id = registros.id_prestamo
+        WHERE  clientes.tipe_client = 1  AND registros.id_estado = $id;";
+        $registros = DB::select($sql);
+
+        return response()->json($registros);        
     }
 }

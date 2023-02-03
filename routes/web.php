@@ -39,14 +39,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('condicion/prestamos', [App\Http\Controllers\PrestamoController::class, 'show']);
 
-    Route::get('condiciones/registro/{id}', [App\Http\Controllers\RegistroController::class, 'show']);
+    Route::get('registro/etapa/{id}', [App\Http\Controllers\RegistroController::class, 'show']);
+
+    Route::get('registros/cancelado/{estado}', [App\Http\Controllers\RegistroController::class, 'cancel']);
 
     #cambio de estados
+    Route::post('registro/cancelacion', [App\Http\Controllers\RegistroController::class, 'cancelado']);
 
-    Route::post('condiciones/cambioestado/{estado}/{id}', [App\Http\Controllers\RegistroController::class, 'estado']);
+    Route::post('registro/estado/{estado}/{id}', [App\Http\Controllers\RegistroController::class, 'danado']);
 
-    Route::post('condicion/cancelacion', [App\Http\Controllers\RegistroController::class, 'cancelado']);
-
+    #cambia estapa de registro
+    Route::post('registro/cambioetapa/{estado}/{id}', [App\Http\Controllers\RegistroController::class, 'etapa']);
+    
     #documentos
 
     Route::post('doc/edita/{id}', [App\Http\Controllers\DocumentoController::class, 'edit']);
