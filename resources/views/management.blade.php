@@ -76,6 +76,11 @@
                         <label class="form-label">Phone</label>
                         <input id="phoneuser" type="text" class="form-control  " name="phone"placeholder="(000) 000-0000">
                     </div>
+                    <div class="mb-3 col-md-12">
+                        <label for="typeRole">Roles</label>
+                        <select id="typeRole" name="typeRole" class="form-control">
+                        </select>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
                         <input id="passworduser" type="password" class="form-control"name="password" placeholder="Password">

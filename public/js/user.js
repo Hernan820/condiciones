@@ -16,6 +16,7 @@ function validaUser() {
     var name = $("#nameuser").val();
     var email = $("#emailuser").val();
     var phone = $("#phoneuser").val();
+    var typeRole = $("#typeRole").val();
     var password = $("#passworduser").val();
     var password2 = $("#passwordconfir").val();
 
@@ -34,6 +35,11 @@ function validaUser() {
     if (password == "") {
         Swal.fire("¡Add password!");
         $("#passworduser").focus();
+        return (valido = false);
+    }
+
+    if (typeRole == "") {
+        Swal.fire("¡Add Rol!");
         return (valido = false);
     }
 
@@ -84,6 +90,7 @@ function tblUsers() {
 
 $(document).ready(function () {
     tblUsers();
+    RolesUser();
     $("#phoneuser").mask("(000) 000-0000");
 });
 
@@ -159,6 +166,7 @@ $("#btnsave").on("click", function () {
     user.append("email", $("#emailuser").val());
     user.append("phone", $("#phoneuser").val());
     user.append("password", $("#password").val());
+    user.append("typeRole", $("#typeRole").val());
     user.append("password", $("#passwordconfir").val());
 
     if ($("#iduser").val() != "") {
@@ -215,5 +223,25 @@ $("#btnsave").on("click", function () {
             });
     }
 });
+
+function RolesUser(){
+    $("#typeRole").empty();
+    axios.post(principalUrl + "user/roles")
+    .then((respuesta) => {
+        respuesta.data
+        $("#typeRole").append("<option value='' selected>Choose...</option>"); 
+    
+        respuesta.data.forEach(function (element) {
+           $("#typeRole").append("<option value="+element.name+" >"+element.name+"</option>"); 
+        });
+    
+    })
+    .catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+        }
+    });
+
+}
 
 console.log("archivo de user.js");

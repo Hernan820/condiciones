@@ -8,6 +8,7 @@ use App\Models\clientes_registro;
 use App\Models\registro;
 use Illuminate\Http\Request;
 
+
 class RegistroController extends Controller
 {
     /**

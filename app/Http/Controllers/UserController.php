@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use DB;
 
 
           
@@ -26,6 +27,7 @@ class UserController extends Controller
         $User->password        = Hash::make($request->password);
         $User->estado_User = 1; 
         $User->save();
+        $User->assignRole($request->typeRole);
     }
        
     /**
@@ -38,12 +40,19 @@ class UserController extends Controller
     {
        
     }
+
+    public function roles(){
+        $sql = "SELECT * FROM `roles`" ;
+        $Sql = DB::select($sql);
+        return response()->json($Sql); 
+    }
+
     public function show()
     {
         $Users = User::select("users.*")
         ->where("users.estado_user","=","1")
         ->get();
-        return response()->json($Users);        
+        return response()->json($Users); 
     }
     /**
      * Show the form for editing the specified resource.

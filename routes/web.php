@@ -45,13 +45,15 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('condiciones/registro/{id}', [App\Http\Controllers\RegistroController::class, 'show']);
 
-    Route::get('condiciones/Users', [App\Http\Controllers\UserController::class, 'show']);
+  
 
 
     #rutas usuarios
     Route::post('condicion/agregaruser', [App\Http\Controllers\UserController::class, 'create']);
 
     Route::get('condiciones/Users', [App\Http\Controllers\UserController::class, 'show']);
+
+    Route::post('user/roles', [App\Http\Controllers\UserController::class, 'roles']);
 
     Route::post('user/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy']); 
 
