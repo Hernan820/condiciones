@@ -56,3 +56,20 @@ $('#vistaregistro').on('click', function() {
     });
 
 });
+
+$('#vistamanagement').on('click', function() {
+    event.preventDefault();
+ 
+    $.ajax({
+       type:'GET',
+       url: principalUrl+'user',
+       dataType:"html",
+   }).done(function(data) {
+     $(".sidebar-item").removeClass("active");
+     $("#itemManagement").addClass("active");
+ 
+       $('.contenido').html(data);   
+ 
+     });
+ 
+ });
