@@ -8,8 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use DB;
 
-
-          
+         
 class UserController extends Controller
 {
     /**
@@ -64,8 +63,14 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $User = User::find($id);
-        return response()->json($User);     
+        $Users = User::join("model_has_roles","users.id", "=", "model_has_roles.model_id")
+        ->join("roles","roles.id", "=", "model_has_roles.role_id")
+        ->select("users.*","roles.name as namerole")
+        ->where("users.estado_user","=","1")
+        ->where("users.id","=",$id)
+        ->get();
+        
+        return response()->json($Users);     
     }
 
     public function update(Request $request)
@@ -76,6 +81,8 @@ class UserController extends Controller
         $User->phone           = $request->phone;
         $User->password        = Hash::make($request->password);
         $User->save();
+        $User->roles()->detach();
+        $User->assignRole($request->typeRole);
         return 1 ;
     }
 

@@ -103,10 +103,11 @@ $(document).on("click", ".opcionesUser", function () {
             .post(principalUrl + "user/edita/" + idUser)
             .then((respuesta) => {
                 $(".modal-title").html("edit User");
-                $("#iduser").val(respuesta.data.id);
-                $("#nameuser").val(respuesta.data.name);
-                $("#emailuser").val(respuesta.data.email);
-                $("#phoneuser").val(respuesta.data.phone);
+                $("#iduser").val(respuesta.data[0].id);
+                $("#nameuser").val(respuesta.data[0].name);
+                $("#emailuser").val(respuesta.data[0].email);
+                $("#phoneuser").val(respuesta.data[0].phone);
+                $("#typeRole").val(respuesta.data[0].namerole);
                 $("#passworduser").val("********");
                 $("#passwordconfir").val("********");
                 $("#nameuser").focus();
@@ -186,6 +187,8 @@ $("#btnsave").on("click", function () {
                 $("#iduser").val("");
                 $("#nameuser").val("");
                 $("#emailuser").val("");
+                $("#phoneuser").val("");
+                $("#typeRole").val("");
                 $("#password").val("");
                 $("#passwordconfir").val("");
                 $("#nameuser").focus();
@@ -213,6 +216,7 @@ $("#btnsave").on("click", function () {
                 $("#nameuser").val("");
                 $("#emailuser").val("");
                 $("#phoneuser").val("");
+                $("#typeRole").val("");
                 $("#passworduser").val("");
                 $("#passwordconfir").val("");
                 $("#Modaluser").modal("hide");
