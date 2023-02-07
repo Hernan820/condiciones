@@ -16,7 +16,7 @@
     <!-- <link href="css/dark.css" rel="stylesheet"> -->
     <link href="css/light.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js"></script>
-
+    <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/v1.5.3/dist/clipboard.min.js"></script>
 
     <!-- BEGIN SETTINGS -->
     <!-- You can remove this after picking a style -->

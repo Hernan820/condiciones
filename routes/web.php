@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('condicion/vistaregistros', [App\Http\Controllers\HomeController::class, 'vistaregistro']);
 
+    Route::get('registro/vistadetallefile', [App\Http\Controllers\HomeController::class, 'vistafile']);
+
     Route::post('condicion/compania', [App\Http\Controllers\CompaniaController::class, 'index']);
 
     Route::post('condicion/agregaregistro', [App\Http\Controllers\RegistroController::class, 'create']);
@@ -43,7 +45,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('condicion/prestamos', [App\Http\Controllers\PrestamoController::class, 'show']);
 
-    Route::get('condiciones/registro/{id}', [App\Http\Controllers\RegistroController::class, 'show']);
+    Route::get('registro/etapa/{id}', [App\Http\Controllers\RegistroController::class, 'show']);
+
+    Route::get('registros/cancelado/{estado}', [App\Http\Controllers\RegistroController::class, 'cancel']);
 
   
 
@@ -62,11 +66,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('user/actualiza', [App\Http\Controllers\UserController::class, 'update']); 
 
     #cambio de estados
+    Route::post('registro/cancelacion', [App\Http\Controllers\RegistroController::class, 'cancelado']);
 
-    Route::post('condiciones/cambioestado/{estado}/{id}', [App\Http\Controllers\RegistroController::class, 'estado']);
+    Route::post('registro/estado/{estado}/{id}', [App\Http\Controllers\RegistroController::class, 'danado']);
 
-    Route::post('condicion/cancelacion', [App\Http\Controllers\RegistroController::class, 'cancelado']);
-
+    #cambia estapa de registro
+    Route::post('registro/cambioetapa/{estado}/{id}', [App\Http\Controllers\RegistroController::class, 'etapa']);
+    
     #documentos
 
     Route::post('doc/edita/{id}', [App\Http\Controllers\DocumentoController::class, 'edit']);
@@ -77,4 +83,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('doc/elimina/{id}', [App\Http\Controllers\DocumentoController::class, 'destroy']);
 
+    #registros
+    Route::post('registro/reporte/{id}', [App\Http\Controllers\RegistroController::class, 'reporte']);
  });

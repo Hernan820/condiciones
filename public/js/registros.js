@@ -1,3 +1,4 @@
+var clipboard = new Clipboard('#copiarinfo');
 
 $('#datetimepicker-minimum').datetimepicker({format: 'L'});
 $('#datetimepicker-minimum2').datetimepicker();
@@ -230,6 +231,15 @@ function validaform(){
 	checkdoc.each(function(i) { docs++;});
 	checkcuestionari.each(function(i) {cuest++;	});
 
+	const values = $('input[name="typeclient[]"]')
+	.map(function () { return this.value;}).get();
+
+	if (!values.includes('1')) {
+		Swal.fire("¡Add a headline customer!");
+		$("#iditemcliente").tab('show');
+		return valido = false;  
+	  }
+
 	if(fechacontrato == ""){
 		Swal.fire("¡Add contract date!");
 		$('#iditemprimero').tab('show');
@@ -268,7 +278,7 @@ function pendientestbl(){
     var registertbl	= $("#datatables-reponsive").DataTable({
 		responsive: true,
 		ajax: {
-            url: principalUrl + "condiciones/registro/1",
+            url: principalUrl + "registro/etapa/1",
             dataSrc: "",
         },
 		columns: [
@@ -288,10 +298,14 @@ function pendientestbl(){
 			}, },
 			{ data: "idregister",
 			render: function (data) {
-				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesitem' id='itemuno' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem'  id='itemdos' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemtres' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcuatro' href='#'><input type='hidden' class='data' value="+data+" ><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcinco' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-paper-plane'  data-feather='send'></i> Send to opening</a></div></div>");
+				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesitem' id='itemuno' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem'  id='itemdos' data-bs-toggle='modal' data-bs-target='' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemtres' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcuatro' href='#'><input type='hidden' class='data' value="+data+" ><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcinco' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-paper-plane'  data-feather='send'></i> Send to opening</a></div></div>");
 			},
 		    },
-		]
+		],
+        createdRow: (row, data, dataIndex, cells) => {
+            if (data.id_estado == 2){
+                $(row).addClass(' table-danger'); }
+        }
 	});
 }
 
@@ -303,7 +317,7 @@ function activostbl(){
     var registertbl	= $("#datatableactivos-reponsive").DataTable({
 		responsive: true,
 		ajax: {
-            url: principalUrl + "condiciones/registro/3",
+            url: principalUrl + "registro/etapa/2",
             dataSrc: "",
         },
 		columns: [
@@ -323,10 +337,14 @@ function activostbl(){
 			}, },
 			{ data: "idregister",
 			render: function (data) {
-				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesitem' id='itemuno' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem'  id='itemdos' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemtres' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcuatro' href='#'><input type='hidden' class='data' value="+data+" ><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcinco' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-paper-plane'  data-feather='send'></i> Send to opening</a></div></div>");
+				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesitem' id='itemuno' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem'  id='itemdos' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemtres' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcuatro' href='#'><input type='hidden' class='data' value="+data+" ><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div></div>");
 			},
 		    },
-		]
+		],
+		createdRow: (row, data, dataIndex, cells) => {
+            if (data.id_estado == 2){
+                $(row).addClass(' table-danger'); }
+        }
 	});
 }
 
@@ -338,7 +356,7 @@ function canceladotbl(){
     var registertbl	= $("#datatablecancel-reponsive").DataTable({
 		responsive: true,
 		ajax: {
-            url: principalUrl + "condiciones/registro/2",
+            url: principalUrl + "registros/cancelado/3",
             dataSrc: "",
         },
 		columns: [
@@ -358,7 +376,7 @@ function canceladotbl(){
 			}, },
 			{ data: "idregister",
 			render: function (data) {
-				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesitem' id='itemuno' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem'  id='itemdos' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemtres' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcuatro' href='#'><input type='hidden' class='data' value="+data+" ><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcinco' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-paper-plane'  data-feather='send'></i> Send to opening</a></div></div>");
+				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesitem' id='itemuno' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem'  id='itemdos' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcuatro' href='#'><input type='hidden' class='data' value="+data+" ><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcinco' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-paper-plane'  data-feather='send'></i> Send to opening</a></div></div>");
 			},
 		    },
 		]
@@ -370,19 +388,50 @@ $(document).on('click', '.opcionesitem',function() {
 	var idregistro = $(this).find(".data").val();
 
 	if(this.id == 'itemuno'){
+		$.ajax({
+			type:'GET',
+			url: principalUrl+'registro/vistadetallefile',
+			dataType:"html",
+		}).done(function(data) {
 
+			$('.contenido').html(data);   
+	  
+		  });
 	}else if(this.id == 'itemdos'){
+
+		axios.post(principalUrl + "registro/reporte/"+idregistro)
+		.then((respuesta) => {
+			 $('#reportregistro').text(' Name: '+respuesta.data.registros[0].nombre_cliente+"\n Phone: "+
+			 respuesta.data.registros[0].telefono+"\n Email: "+
+			 respuesta.data.registros[0].correo+"\n ADDRES: "+
+			 respuesta.data.registros[0].direccion+"\n PURCHASE PRICE: "+
+			 respuesta.data.registros[0].precio_casa+"\n DOWN PAYMENT: "+
+			 respuesta.data.registros[0].dowpayment+"\n LOAN TYPE: "+
+			 respuesta.data.registros[0].status+"\n FECHA DE INGRESO: "+
+			 respuesta.data.registros[0].fecha_firma+"\n \n "
+			 );
+
+			 respuesta.data.doc.forEach(function (element) {
+			  $('#reportregistro').html($('#reportregistro').html()+'✅'+element.nombre_doc+' \n ');
+			   })
+			 $('#modalreportclient').modal('show');
+		})
+		.catch((error) => {
+			if (error.response) {
+				console.log(error.response.data);
+			}
+		});
 
 	}else if(this.id == 'itemtres'){
 	  $('#id_registro').val(idregistro)
+	  $('#cancelacionmotivo').val('');
 	  $('#modacancel').modal('show');
+
 	}else if(this.id == 'itemcuatro'){
-
-	}else if(this.id == 'itemcinco'){
-
+		//cambiar a estado dañado
 		Swal.fire({
 			title: "Change state",
-			text: "Are you sure to change the status of this record?",
+			text: "Change to damaged registry?",
 			icon: "warning",
 			showCancelButton: true,
 			confirmButtonColor: "#3085d6",
@@ -392,13 +441,50 @@ $(document).on('click', '.opcionesitem',function() {
 		}).then((result) => {
 			if (result.isConfirmed) {
 		
-				axios.post(principalUrl + "condiciones/cambioestado/3/"+idregistro)
+				axios.post(principalUrl + "registro/estado/2/"+idregistro)
 					.then((respuesta) => {
 						respuesta.data
 						Swal.fire({
 							position: "top-end",
 							icon: "success",
-							title: "registro actualizado!",
+							title: "record updated!",
+							showConfirmButton: false,
+							timer: 1000,
+						});
+						pendientestbl();
+						activostbl();
+						canceladotbl();
+					})
+					.catch((error) => {
+						if (error.response) {
+							console.log(error.response.data);
+						}
+					});
+			} else {
+			}
+		});
+
+	}else if(this.id == 'itemcinco'){
+		//opcion sen ti opening. cambia estapa to opnenig 
+		Swal.fire({
+			title: "Change state",
+			text: "Are you sure to change the registration stage?",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Continuer",
+			cancelButtonText: "Cancel",
+		}).then((result) => {
+			if (result.isConfirmed) {
+		
+				axios.post(principalUrl + "registro/cambioetapa/2/"+idregistro)
+					.then((respuesta) => {
+						respuesta.data
+						Swal.fire({
+							position: "top-end",
+							icon: "success",
+							title: "record updated!",
 							showConfirmButton: false,
 							timer: 1000,
 						});
@@ -425,7 +511,7 @@ $('#btncancelacion').on('click', function() {
 	    datos.append("motivo_cancel",$('#cancelacionmotivo').val());
 		datos.append("id_registro",$('#id_registro').val());
 
-    axios.post(principalUrl+"condicion/cancelacion",datos)
+    axios.post(principalUrl+"registro/cancelacion",datos)
     .then((respuesta) => {
 		Swal.fire({
 			position: "top-end",
@@ -612,6 +698,18 @@ function validaclient(){
     var estatus = $("input[name=radio_status]:radio").is(':checked');
 	var cliente_tipo = $("input[name=radio_typeclient]:radio").is(':checked');
     var emailcliente = $("#emailclient").val();
+
+	const values = $('input[name="typeclient[]"]')
+        .map(function () { return this.value;}).get();
+    
+		var radiotipocliente = $("input[name=radio_typeclient]:checked").val();
+
+		if(radiotipocliente == "1"){
+			if (values.includes(radiotipocliente)) {
+				Swal.fire("¡There is already a headline!");
+				return valido = false;  
+			  }
+		}
 
 	if(name == ""){
 		Swal.fire("¡Add customer name!");

@@ -37,6 +37,8 @@ return new class extends Migration
             $table->foreign('id_compania')->references('id')->on('companias');
             $table->unsignedBigInteger('id_estado');
             $table->foreign('id_estado')->references('id')->on('estados');
+            $table->unsignedBigInteger('id_etapa');
+            $table->foreign('id_etapa')->references('id')->on('etapas');
             $table->text('estado_registro')->nullable();
             $table->timestamps();
         });

@@ -40,8 +40,16 @@ class HomeController extends Controller
        // return view('registros')->render();
     }
 
+
     public function vistamanagement() {
       return View::make('management')->render();
     }
 
+    /**
+     * vista de detalles de file
+     * 
+     */
+    public function vistafile(){
+        return View::make('Files.detail_files')->render();
+    }
 }

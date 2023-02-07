@@ -490,6 +490,32 @@
 </div>
 <!-- -->
 
+<!-- report client modal -->
+
+<div class="modal fade" id="modalreportclient" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Information</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body m-3">
+
+                <div class="mb-3">
+                    <label class="form-label">Customer Info</label>
+                    <textarea class="form-control" id="reportregistro" name="reportregistro"
+                        placeholder="Write a reason" rows="10"></textarea>
+                </div><br>
+                <button type="button" class="btn btn-success" id="copiarinfo" 
+                   data-clipboard-target="#reportregistro">Copiar Nota</button>
+			</div>
+			<div class="modal-footer">
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END primary modal -->
 <script>
 $.getScript("{{ asset('js/registros.js') }}");
 </script>
