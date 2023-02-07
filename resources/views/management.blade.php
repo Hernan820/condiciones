@@ -35,6 +35,7 @@
                                     <th>NAME</th>
                                     <th>EMAIL</th>
                                     <th>PHONE</th>
+                                    <th>ROLES</th>
                                     <th>OPCION</th>
                                     
                                 </tr>

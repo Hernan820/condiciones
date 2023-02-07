@@ -72,6 +72,7 @@ function tblUsers() {
             { data: "name" },
             { data: "email" },
             { data: "phone" },
+            { data: "namerole"},
             {
                 data: "id",
                 render: function (data) {

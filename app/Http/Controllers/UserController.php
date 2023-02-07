@@ -47,12 +47,14 @@ class UserController extends Controller
         return response()->json($Sql); 
     }
 
-    public function show()
-    {
-        $Users = User::select("users.*")
+    
+    public function show(){
+        $Users = User::join("model_has_roles","users.id", "=", "model_has_roles.model_id")
+        ->join("roles","roles.id", "=", "model_has_roles.role_id")
+        ->select("users.*","roles.name as namerole")
         ->where("users.estado_user","=","1")
         ->get();
-        return response()->json($Users); 
+        return response()->json($Users);
     }
     /**
      * Show the form for editing the specified resource.
