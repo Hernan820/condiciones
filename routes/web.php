@@ -23,6 +23,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('user', [App\Http\Controllers\HomeController::class,'vistamanagement']);
+
     Route::post('condicion/bancosagrega', [App\Http\Controllers\BancoController::class, 'create']);
 
     Route::get('condicion/vistaprueba', [App\Http\Controllers\HomeController::class, 'vistacondiciones']);
@@ -35,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('condicion/agregaregistro', [App\Http\Controllers\RegistroController::class, 'create']);
 
+    
+
     Route::post('condicion/documentos', [App\Http\Controllers\DocumentoController::class, 'show']);
 
     Route::post('condicion/cuestionario', [App\Http\Controllers\CuestionarioController::class, 'show']);
@@ -44,6 +48,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('registro/etapa/{id}', [App\Http\Controllers\RegistroController::class, 'show']);
 
     Route::get('registros/cancelado/{estado}', [App\Http\Controllers\RegistroController::class, 'cancel']);
+
+  
+
+
+    #rutas usuarios
+    Route::post('condicion/agregaruser', [App\Http\Controllers\UserController::class, 'create']);
+
+    Route::get('condiciones/Users', [App\Http\Controllers\UserController::class, 'show']);
+
+    Route::post('user/roles', [App\Http\Controllers\UserController::class, 'roles']);
+
+    Route::post('user/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy']); 
+
+    Route::post('user/edita/{id}', [App\Http\Controllers\UserController::class, 'edit']); 
+    
+    Route::post('user/actualiza', [App\Http\Controllers\UserController::class, 'update']); 
 
     #cambio de estados
     Route::post('registro/cancelacion', [App\Http\Controllers\RegistroController::class, 'cancelado']);
