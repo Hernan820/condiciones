@@ -30,16 +30,16 @@ class RegistroController extends Controller
 
         $registro = new registro;
         $registro->fecha_recepcion = $request->datereceipt;
-        $registro->fecha_firma     = $request->datecontrac;
-        $registro->dowpayment      = $request->dowpayment;
-        $registro->precio_casa     = $request->purchaceprice ;    #tamnien   ES EL PRUCHARSE 
+        $registro->fecha_firma     = $request->datecontrac;                                                                                                                
+        $registro->dowpayment      = $request->dowpayment ?? '';
+        $registro->precio_casa     = $request->purchaceprice ?? '';    #tamnien   ES EL PRUCHARSE 
         $registro->estado          = $request->estadocasa;
-        $registro->drive           = $request->drive;
+        $registro->drive           = $request->drive ?? '';
        // $registro->num_prestamo    = $request->              #MAS ADELANTE SE LLENARAN
-        $registro->direccion_casa  = $request->property_address;
-        $registro->notas           = $request->notes;
-        $registro->procesador      = $request->realtorname;
-        $registro->telefono_precesador      = $request->realtorphone;
+        $registro->direccion_casa  = $request->property_address ?? '';
+        $registro->notas           = $request->notes ?? '';
+        $registro->procesador      = $request->realtorname ?? '';
+        $registro->telefono_precesador      = $request->realtorphone ?? '';
 
         //$registro->Appraisal       = $request->             #MAS ADELANTE SE LLENARAN
         $registro->id_etapa        = 1; 
@@ -58,11 +58,11 @@ class RegistroController extends Controller
             $cliente = new cliente;
             $cliente->nombre_cliente       = $name;
             $cliente->telefono             = $request->tel[$index];
-            $cliente->correo               = $request->email[$index];
-            $cliente->direccion            = $request->direccion[$index];
-            $cliente->direcionalternativa  = $request->direccion2[$index];
+            $cliente->correo               = $request->email[$index] ?? '';  
+            $cliente->direccion            = $request->direccion[$index] ?? '';
+            $cliente->direcionalternativa  = $request->direccion2[$index] ?? '';
             $cliente->status               = $request->status[$index];
-            $cliente->socials_number       = $request->securityn[$index];
+            $cliente->socials_number       = $request->securityn[$index] ?? '';
             $cliente->tipe_client          = $request->typeclient[$index];
             $cliente->save();
 
@@ -74,6 +74,20 @@ class RegistroController extends Controller
            $detallecliente->save() ;
             $index++;
 
+           // if($cliente->tipe_client == 1){
+                foreach ($request->checkcuestionario as $cuestionario) {
+                    $cuestionario_client = new cuestionario_cliente;
+                    
+                    $cuestionario_client->id_cliente       = $cliente->id;
+                    $cuestionario_client->id_cuestionario  = $cuestionario;
+                    if($cuestionario != ""){
+                        $cuestionario_client->checkcuestionario  = 1;
+                    }else{
+                        $cuestionario_client->checkcuestionario  = 0;
+                    }
+                    $cuestionario_client->save();
+               };
+            //}
         }
 
         foreach ($request->chekcdocument as $docs) {
@@ -88,19 +102,9 @@ class RegistroController extends Controller
             $documentos_client->save();
         };
          
-        foreach ($request->checkcuestionario as $cuestionario) {
-            $cuestionario_client = new cuestionario_cliente;
-            $cuestionario_client->id_cliente       = $cliente->id;
-            $cuestionario_client->id_cuestionario  = $cuestionario;
-            if($cuestionario != ""){
-                $cuestionario_client->checkcuestionario  = 1;
-            }else{
-                $cuestionario_client->checkcuestionario  = 0;
-            }
-            $cuestionario_client->save();
-       };
+
       
-      return $request->email ;
+      return $request->estadocasa;
         
     }
 

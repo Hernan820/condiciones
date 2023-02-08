@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('condicion/vistaregistros', [App\Http\Controllers\HomeController::class, 'vistaregistro']);
 
-    Route::get('registro/vistadetallefile', [App\Http\Controllers\HomeController::class, 'vistafile']);
+    Route::get('registro/vistadetallefile/{id}', [App\Http\Controllers\HomeController::class, 'vistafile']);
 
     Route::post('condicion/compania', [App\Http\Controllers\CompaniaController::class, 'index']);
 
@@ -65,4 +65,7 @@ Route::middleware(['auth'])->group(function () {
 
     #registros
     Route::post('registro/reporte/{id}', [App\Http\Controllers\RegistroController::class, 'reporte']);
+
+    # VISTA DE DETALLE
+    Route::post('registro/clientes/{id}', [App\Http\Controllers\ClienteController::class, 'show']);
  });

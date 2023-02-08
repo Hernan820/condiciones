@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\cliente;
 use Illuminate\Http\Request;
+use App\Models\registro;
+use App\Models\detalle_documento;
+use DB;
 
 class ClienteController extends Controller
 {
@@ -44,9 +47,37 @@ class ClienteController extends Controller
      * @param  \App\Models\cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function show(cliente $cliente)
+    public function show($id)
     {
-        //
+        $clientes = cliente::join("clientes_registros","clientes_registros.id_cliente", "=", "clientes.id")
+        ->select('clientes.*')
+        ->where('clientes_registros.id_registro','=',$id)
+        ->orderBy('clientes.tipe_client', 'desc')
+        ->get();
+
+        $registro = registro::join("users","users.id", "=", "registros.id_usuario")
+        ->join("prestamos","prestamos.id", "=", "registros.id_prestamo")
+        ->join("etapas","etapas.id", "=", "registros.id_etapa")
+        ->select('registros.*','users.*','prestamos.*','etapas.*')
+        ->where('registros.id','=',$id)
+        ->get();
+
+        $docs = detalle_documento::join("documentos","documentos.id", "=", "detalle_documentos.id_documento")
+        ->select('documentos.nombre_doc','detalle_documentos.*')
+        ->where("documentos.estado_doc","=",1)
+        ->where("detalle_documentos.id_registro","=",$id)
+        ->get();
+
+        $tipopreguntas = DB::select("SELECT preguntas.id, preguntas.titulo_pregunta, cuestionarios.nombre FROM registros
+        INNER JOIN clientes_registros on clientes_registros.id_registro = registros.id
+        INNER JOIN clientes on clientes.id = clientes_registros.id_cliente
+        INNER JOIN cuestionario_clientes on cuestionario_clientes.id_cliente = clientes.id
+        INNER JOIN cuestionarios on cuestionarios.id = cuestionario_clientes.id_cuestionario
+        INNER JOIN preguntas on preguntas.id_cuestionario = cuestionarios.id
+        WHERE registros.id = $id
+        GROUP BY preguntas.id;");
+
+       return response()->json(['clientes' => $clientes, 'registro' => $registro, 'docs' => $docs, 'tipopreguntas' => $tipopreguntas],200);
     }
 
     /**

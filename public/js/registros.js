@@ -132,7 +132,7 @@ var availableTags = [
 		$("#estadoscasa").append("<option value='' readonly >countries</option>"); 
 
 		availableTags.forEach(function (element) {
-			$("#estadoscasa").append("<option value="+element+">"+element+"</option>"); 
+			$("#estadoscasa").append("<option value='"+element+"'>"+element+"</option>"); 
 		});
 
 // TIPOS DE PRESTAMO
@@ -290,7 +290,7 @@ function pendientestbl(){
             { data: "direccion_casa" },
             { data: "drive",
 			render: function (data) {
-				if(data != null){
+				if(data != ''){
 					return ("<a href="+data+"><i class='align-middle me-2 fas fa-fw fa-external-link-alt' data-feather='external-link'></i></a>");
 				}else{
 					return ("");
@@ -329,7 +329,7 @@ function activostbl(){
             { data: "direccion_casa" },
             { data: "drive",
 			render: function (data) {
-				if(data != null){
+				if(data != ''){
 					return ("<a href="+data+"><i class='align-middle me-2 fas fa-fw fa-external-link-alt' data-feather='external-link'></i></a>");
 				}else{
 					return ("");
@@ -368,7 +368,7 @@ function canceladotbl(){
             { data: "direccion_casa" },
             { data: "drive",
 			render: function (data) {
-				if(data != null){
+				if(data != ''){
 					return ("<a href="+data+"><i class='align-middle me-2 fas fa-fw fa-external-link-alt' data-feather='external-link'></i></a>");
 				}else{
 					return ("");
@@ -390,7 +390,7 @@ $(document).on('click', '.opcionesitem',function() {
 	if(this.id == 'itemuno'){
 		$.ajax({
 			type:'GET',
-			url: principalUrl+'registro/vistadetallefile',
+			url: principalUrl+'registro/vistadetallefile/'+idregistro,
 			dataType:"html",
 		}).done(function(data) {
 
