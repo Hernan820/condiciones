@@ -5,7 +5,7 @@ $("#datatables-clients").DataTable({
     ]
 });
 
-var availableTags = [
+const availableTags = [
 	"Alaska",
 	"Arizona",
 	"Arkansas",
@@ -68,8 +68,28 @@ $(document).ready(function () {
         $('#nameclient').html(respuesta.data.clientes[0].nombre_cliente);
 		$('#nameuser').html(respuesta.data.registro[0].name);
 
-		respuesta.data.clientes.forEach(function (element , i) {
+		tbldetalleclientes(respuesta.data.clientes,respuesta.data.registro[0].nombre_etapa);
+		tbldetalleregistro(respuesta.data.registro);
+		tbldocs(respuesta.data.docs);
+		tblquestionario(respuesta.data.tipopreguntas , respuesta.data.clientes);
+		notasregistro(respuesta.data.notas)
+	})
+	.catch((error) => {
+		if (error.response) {
+			console.log(error.response.data);
+		}
+	});
+ });
 
+
+ function tbldetalleclientes(clientesregistro,etaparegistro) {
+	$("#filaclient").html('');
+
+
+		$('#nameclient').html(clientesregistro[0].nombre_cliente);
+
+		clientesregistro.forEach(function (element , i) {
+	
 			if(element.status == "social"){
 				var status = "<div class='col-sm-10'>"+
 				"<label class='form-check'>"+
@@ -79,7 +99,7 @@ $(document).ready(function () {
 					"<input name='radio-status"+i+"' type='radio' class='form-check-input' value='Tax ID'>"+
 					"<span class='form-check-label'>TAX ID</span>"+
 				"</label></div>"+
-			    "</div>";
+				"</div>";
 			}else{		
 				var status = "<div class='col-sm-10'>"+
 				"<label class='form-check'>"+
@@ -89,12 +109,12 @@ $(document).ready(function () {
 					"<input name='radio-status"+i+"' type='radio' class='form-check-input' value='Tax ID' checked>"+
 					"<span class='form-check-label'>TAX ID</span>"+
 				"</label></div>"+
-			    "</div>";			}
-
+				"</div>";			}
+	
 				if(i > 0){$("#filaclient").append("<tr><td colspan='2'><br></td></tr>")}
-				if(i == 0){$("#filaclient").append("<tr><th>Status</th><td><span class='badge bg-success' style='padding-bottom: 5px;'>"+respuesta.data.registro[0].nombre_etapa+"</span></td></tr>")}
+				if(i == 0){$("#filaclient").append("<tr><th>Status</th><td><span class='badge bg-success' style='padding-bottom: 5px;'>"+etaparegistro+"</span></td></tr>")}
 				if(i == 0){$("#filaclient").append("<tr><th>Borrower</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.nombre_cliente+"' class='form-control' style='border: 0px;'></div></div></td></tr>")}else{$("#filaclient").append("<tr class='table-primary'><th>Co borrower</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.nombre_cliente+"' class='form-control' style='border: 0px;'></div></div></td></tr>")}
-
+	
 		   $("#filaclient").append("<tr>"+
 			   "<th>Telephone</th>"+
 			  " <td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.telefono+"' class='form-control' style='border: 0px;'></div></div></td>"+
@@ -114,41 +134,35 @@ $(document).ready(function () {
 		   "</tr><tr>"+
 			   "<th>Former address</th>"+
 			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.direcionalternativa+"' class='form-control' style='border: 0px;'></div></div></td></tr>"); 
-	    });
+		});	
+}
 
-		respuesta.data.registro.forEach(function (element) { 
-			$("#registrocliente").append("<tr><th>Contract date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.fecha_firma+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
-			"<tr><th>Contract receipt date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.fecha_recepcion+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
-			"<tr><th>State</th><!-- Select --><td><div class='col-md-12'><div class='col-sm-12'>  <select id='estadocliente' name='estadocliente' class='form-control'></select></div></div></td></tr>"+
-			"<tr><th>Property adress</th><td> <div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.direccion_casa+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
-			"<tr><th>Purchace Price</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.precio_casa+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
-			"<tr><th>Down payment</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.dowpayment+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
-			"<tr><th>Type of loan</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.nombre_prestamo +"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
-			"<tr><th>Drive</th><td></td></tr>"+
-			"<tr><td colspan='2'><a target='_blank' href='"+element.drive+"'>"+element.drive+"</a></td></tr>"+
-			"<tr><th>Realtor name</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.procesador+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
-			"<tr><th>Telephone</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='"+element.telefono_precesador+"' value='' class='form-control' style='border: 0px;'></div></div></td></tr>");
-		});
+function tbldetalleregistro(detalleregistro) {
+  
+	$('#nameuser').html(detalleregistro[0].name);
 
-		availableTags.forEach(function (element) { 
-			if(respuesta.data.registro[0].estado === element){
-				$("#estadocliente").append("<option value="+element+" selected>"+element+"</option>"); 
-			}else{
-				$("#estadocliente").append("<option value="+element+">"+element+"</option>"); 
-			}
-		});
+	detalleregistro.forEach(function (element) { 
+		$("#registrocliente").append("<tr><th>Contract date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.fecha_firma+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Contract receipt date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.fecha_recepcion+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>State</th><!-- Select --><td><div class='col-md-12'><div class='col-sm-12'>  <select id='estadocliente' name='estadocliente' class='form-control'></select></div></div></td></tr>"+
+		"<tr><th>Property adress</th><td> <div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.direccion_casa+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Purchace Price</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.precio_casa+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Down payment</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.dowpayment+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Type of loan</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.nombre_prestamo +"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Drive</th><td></td></tr>"+
+		"<tr><td colspan='2'><a target='_blank' href='"+element.drive+"'>"+element.drive+"</a></td></tr>"+
+		"<tr><th>Realtor name</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.procesador+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Telephone</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='"+element.telefono_precesador+"' value='' class='form-control' style='border: 0px;'></div></div></td></tr>");
+	});	
 
-		tbldocs(respuesta.data.docs);
-		tblquestionario(respuesta.data.tipopreguntas , respuesta.data.clientes);
-		notasregistro(respuesta.data.notas)
-	})
-	.catch((error) => {
-		if (error.response) {
-			console.log(error.response.data);
+	availableTags.forEach(function (element) { 
+		if(detalleregistro[0].estado === element){
+			$("#estadocliente").append("<option value="+element+" selected>"+element+"</option>"); 
+		}else{
+			$("#estadocliente").append("<option value="+element+">"+element+"</option>"); 
 		}
 	});
- });
-
+}
 
  function tbldocs(datos){
 	var registertbl	= $("#datatables-document").DataTable();
@@ -179,7 +193,6 @@ $(document).ready(function () {
 		],
 	});
 }
-
 
 function tblquestionario(tipopreguntas,clientes){
 	$("#pestanascuestion").html('');
@@ -254,6 +267,7 @@ function notasregistro(notas){
 	});
 
 }
+
 
 $('#btnseguimiento').on('click', function() { 
 	$('#modalnota_seguimiento').modal('show');
