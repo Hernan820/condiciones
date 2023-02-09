@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\nota_registro;
 use Illuminate\Http\Request;
+//date_default_timezone_set("America/New_York");
+date_default_timezone_set("America/El_Salvador");
 
 class NotaRegistroController extends Controller
 {
@@ -22,9 +24,15 @@ class NotaRegistroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $nota = new nota_registro;
+        $nota->nota_registro    =  $request->nota_seguimiento;
+        $nota->nombre_usuario   =  auth()->user()->name;
+        $nota->fecha            =  date('Y-m-d');
+        $nota->hora             =  date('H:i:s'); 
+        $nota->id_registro      =  $request->id_registro;
+        $nota->save();
     }
 
     /**

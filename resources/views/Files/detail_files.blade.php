@@ -127,8 +127,8 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="tab-3" role="tabpanel">
-                        <button class="btn mb-1 btn-primary" data-bs-toggle="modal" data-bs-target="#sizedModalLg"><i
-                                class="far fa-plus"></i> Add follow up</button>
+                        <button class="btn mb-1 btn-primary" id="btnseguimiento" data-bs-toggle="modal" ><i
+                         class="far fa-plus"></i> Add follow up</button>
 
                         <div class="row">
                             <div class="col-md-12" style="margin-top: 40px;">
@@ -217,6 +217,31 @@
     </div>
 
 </div>
+
+<!-- MODAL AGREGA NOTA DE SEGUIMIENTO -->
+<div class="modal fade" id="modalnota_seguimiento" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Note </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body m-3">
+                <div class="mb-3">
+                    <label class="form-label">follow up note</label>
+                    <textarea class="form-control" id="notaseguimiento" name="notaseguimiento"
+                        placeholder="Write a note" rows="3"></textarea>
+                </div>
+                <input type="hidden" name="id_registro" id="id_registro" value="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnnotaseguimiento">Save note</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -->
 
 <script>
 $.getScript("{{ asset('js/detallefile.js') }}");

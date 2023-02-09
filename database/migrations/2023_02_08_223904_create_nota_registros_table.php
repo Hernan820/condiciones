@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('nota_registros', function (Blueprint $table) {
             $table->id();
             $table->text('nota_registro')->nullable(); 
+            $table->text('nombre_usuario')->nullable(); 
+            $table->text('fecha')->nullable(); 
+            $table->text('hora')->nullable(); 
             $table->unsignedBigInteger('id_registro');
             $table->foreign('id_registro')->references('id')->on('registros');
             $table->timestamps();

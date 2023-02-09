@@ -49,9 +49,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('registros/cancelado/{estado}', [App\Http\Controllers\RegistroController::class, 'cancel']);
 
-  
-
-
     #rutas usuarios
     Route::post('condicion/agregaruser', [App\Http\Controllers\UserController::class, 'create']);
 
@@ -88,4 +85,7 @@ Route::middleware(['auth'])->group(function () {
 
     # VISTA DE DETALLE
     Route::post('registro/clientes/{id}', [App\Http\Controllers\ClienteController::class, 'show']);
+
+    Route::post('registro/notaseguimiento', [App\Http\Controllers\NotaRegistroController::class, 'create']);
+
  });

@@ -233,5 +233,33 @@ function tblquiestionarios(tipopreguntas,nombrequestion,clientes){
 	   }); 
 }
 
+$('#btnseguimiento').on('click', function() { 
+	$('#modalnota_seguimiento').modal('show');
+});
+
+$('#btnnotaseguimiento').on('click', function() { 
+	if($('#notaseguimiento').val() ==""){Swal.fire("¡Add a follow up note!");return;}
+
+	var datosnotas = new FormData();
+	datosnotas.append("nota_seguimiento",$('#notaseguimiento').val());
+	datosnotas.append("id_registro",$('#idregistro').val());
+
+	axios.post(principalUrl+"registro/notaseguimiento",datosnotas)
+    .then((respuesta) => {
+		Swal.fire({
+			position: "top-end",
+			icon: "success",
+			title: "Added follow up note!",
+			showConfirmButton: false,
+			timer: 1200,
+		});
+		$('#modalnota_seguimiento').modal('hide');
+    })
+    .catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+        }
+    });
+});
 
 console.log('muestra el archivo detalle js');
