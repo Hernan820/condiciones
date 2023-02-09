@@ -140,6 +140,7 @@ $(document).ready(function () {
 
 		tbldocs(respuesta.data.docs);
 		tblquestionario(respuesta.data.tipopreguntas , respuesta.data.clientes);
+		notasregistro(respuesta.data.notas)
 	})
 	.catch((error) => {
 		if (error.response) {
@@ -230,7 +231,28 @@ function tblquiestionarios(tipopreguntas,nombrequestion,clientes){
 			});
 			tr.append("</tr>");
 		}
-	   }); 
+	}); 
+}
+
+function notasregistro(notas){
+	$("#id_notasseguimiento").html('');
+	notas.forEach(function (element,i) {
+
+		if(i == 0){
+			$("#id_notasseguimiento").append('<div class="accordion-item"><h2 class="accordion-header" id="titulonota'+i+'">'+
+				'<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#notaregistro'+i+'" aria-expanded="true" aria-controls="notaregistro'+i+'">'+
+				'Seguimiento recepcion documentos '+element.fecha+' '+element.hora+' </button> </h2>'+
+			'<div id="notaregistro'+i+'" class="accordion-collapse collapse show" aria-labelledby="titulonota'+i+'">'+
+				'<div class="accordion-body">'+element.nota_registro+'</div></div></div>');
+		}else{
+			$("#id_notasseguimiento").append('<div class="accordion-item"><h2 class="accordion-header" id="titulonota'+i+'">'+
+				'<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#notaregistro'+i+'" aria-expanded="false" aria-controls="notaregistro'+i+'">'+
+				  'Seguimiento recepcion documentos '+element.fecha+' '+element.hora+'</button></h2>'+
+			 ' <div id="notaregistro'+i+'" class="accordion-collapse collapse" aria-labelledby="titulonota'+i+'">'+
+				'<div class="accordion-body">'+element.nota_registro+'</div></div></div>');
+		}
+	});
+
 }
 
 $('#btnseguimiento').on('click', function() { 
