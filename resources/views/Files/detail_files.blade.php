@@ -43,8 +43,8 @@
                     <div class="col-sm-9 col-xl-12 col-xxl-8">
                         <strong>Notes</strong>
                         <p>
-                            <textarea rows="6" class="form-control" name="notes"
-                                style="border:0px">This client is waiting for the w2 - 2022</textarea>
+                            <textarea rows="6" class="form-control" name="notes" id="notes"
+                                style="border:0px">----</textarea>
                         </p>
                     </div>
                 </div>

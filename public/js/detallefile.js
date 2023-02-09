@@ -140,6 +140,7 @@ $(document).ready(function () {
 function tbldetalleregistro(detalleregistro) {
   
 	$('#nameuser').html(detalleregistro[0].name);
+	$('#notes').text(detalleregistro[0].notas);
 
 	detalleregistro.forEach(function (element) { 
 		$("#registrocliente").append("<tr><th>Contract date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.fecha_firma+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
