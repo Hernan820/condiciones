@@ -100,9 +100,29 @@ class ClienteController extends Controller
      * @param  \App\Models\cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, cliente $cliente)
+    public function update(Request $request)
     {
-        //
+        $cliente = cliente::find($request->idcliente);
+        if($request->nombre != ""){
+            $cliente->nombre_cliente      = $request->nombre ?? '';  
+        }
+        if($request->telefono != ""){
+            $cliente->telefono            = $request->telefono ?? '';
+        }
+        $cliente->correo              = $request->email ?? '';
+        $cliente->direccion           = $request->direccion ?? '';
+        $cliente->direcionalternativa = $request->direccion2 ?? '';
+        $cliente->status              = $request->status ?? '';
+        $cliente->socials_number      = $request->ssnumber ?? '';
+        $cliente->save();
+        
+        $clientes = cliente::join("clientes_registros","clientes_registros.id_cliente", "=", "clientes.id")
+        ->select('clientes.*')
+        ->where('clientes_registros.id_registro','=',$request->idregistro)
+        ->orderBy('clientes.tipe_client', 'desc')
+        ->get(); 
+
+        return response()->json($clientes);        
     }
 
     /**

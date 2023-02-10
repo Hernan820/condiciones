@@ -88,4 +88,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('registro/notaseguimiento', [App\Http\Controllers\NotaRegistroController::class, 'create']);
 
+    Route::post('cliente/actualiza', [App\Http\Controllers\ClienteController::class, 'update']);
+
  });
