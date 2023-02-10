@@ -35,6 +35,7 @@
                                     <th>NAME</th>
                                     <th>EMAIL</th>
                                     <th>PHONE</th>
+                                    <th>PHONE 2</th>
                                     <th>ROLES</th>
                                     <th>OPCION</th>
                                     
@@ -54,7 +55,7 @@
       
 
 
-
+<!-- Modal New User-->
 <div class="modal fade" id="Modaluser" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -63,7 +64,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body m-3">
-                <form id="formuser">
+                <form  class=""id="formuser">
                     <input id="iduser" type="hidden" name="id" value="">
                     <div class="mb-3">
                         <label class="form-label">Name</label>
@@ -73,14 +74,26 @@
                         <label class="form-label">Email</label>
                         <input id="emailuser"  id="" type="email" class="form-control"name="email" placeholder="Email">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Phone</label>
-                        <input id="phoneuser" type="text" class="form-control  " name="phone"placeholder="(000) 000-0000">
+                    <div class="mb-3 col-md-6">
+                            <label class="form-label">Local Phone</label>
+                            <input id="phoneuser" type="text" class="form-control  " name="phone"placeholder="(000) 000-0000">
                     </div>
-                    <div class="mb-3 col-md-12">
+                    <div class="mb-3 col-md-6">
+                            <label class="form-label">foreign phone</label>
+                            <input id="phoneuser2" type="text" class="form-control  " name="phone2"placeholder="(503) 0000-0000">
+                    </div>
+                   <div class="mb-3 col-md-12">
                         <label for="typeRole">Roles</label>
                         <select id="typeRole" name="typeRole" class="form-control">
                         </select>
+                    </div>
+                    <div id="chec">
+                        <label class="form-check">
+                            <input id="cambiocontra"class="form-check-input" name ="cambiocontra" type="checkbox" value="">
+                            <span class="form-check-label">
+                               change password 
+                            </span>
+                        </label>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>

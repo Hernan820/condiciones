@@ -3,6 +3,10 @@ $("#btnnewuser").on("click", function () {
     $("#formuser")[0].reset();
     document.getElementById("btnsave").innerText = "save changes";
     $("#Modaluser").modal("show");
+    $("#chec").hide();
+    document.getElementById("passworduser").disabled = false;
+    document.getElementById("passwordconfir").disabled = false;
+    $("#iduser").val("");
 });
 
 const validateEmailUser = (email) => {
@@ -16,10 +20,11 @@ function validaUser() {
     var name = $("#nameuser").val();
     var email = $("#emailuser").val();
     var phone = $("#phoneuser").val();
+    var phone2 = $("#phoneuser2").val();
     var typeRole = $("#typeRole").val();
     var password = $("#passworduser").val();
     var password2 = $("#passwordconfir").val();
-
+    
     if (name == "") {
         Swal.fire("¡Add User name!");
         $("#nameuser").focus();
@@ -32,19 +37,25 @@ function validaUser() {
         return (valido = false);
     }
 
+    if (phone2 == "") {
+        Swal.fire("¡Add foreign phone!");
+        $("#Phone").focus();
+        return (valido = false);
+    }
+
     if (password == "") {
         Swal.fire("¡Add password!");
         $("#passworduser").focus();
         return (valido = false);
     }
 
-    if (typeRole == "") {
-        Swal.fire("¡Add Rol!");
+    if (password != password2) {
+        Swal.fire("¡password do not match!");
         return (valido = false);
     }
 
-    if (password != password2) {
-        Swal.fire("¡password do not match!");
+    if (typeRole == "") {
+        Swal.fire("¡Add Rol!");
         return (valido = false);
     }
 
@@ -72,6 +83,7 @@ function tblUsers() {
             { data: "name" },
             { data: "email" },
             { data: "phone" },
+            { data:"phone2"},
             { data: "namerole"},
             {
                 data: "id",
@@ -93,7 +105,26 @@ $(document).ready(function () {
     tblUsers();
     RolesUser();
     $("#phoneuser").mask("(000) 000-0000");
-});
+    $("#phoneuser2").mask("(503) 0000-0000");
+
+    $("#cambiocontra").click(function(){
+        var passwordInput1 = document.getElementById('passworduser');
+        var passwordInput2 = document.getElementById('passwordconfir');
+        if ($("#cambiocontra").is(":checked")) {
+            $("#passworduser").val("");
+            $("#passwordconfir").val("")
+            passwordInput1.disabled = false;
+            passwordInput2.disabled = false;
+        } else {
+            $("#passworduser").val("********");
+            $("#passwordconfir").val("********");
+            passwordInput1.disabled = true;
+            passwordInput2.disabled = true;
+        }
+      });
+   
+
+    });
 
 $(document).on("click", ".opcionesUser", function () {
     var idUser = $(this).find(".data").val();
@@ -107,14 +138,19 @@ $(document).on("click", ".opcionesUser", function () {
                 $("#nameuser").val(respuesta.data[0].name);
                 $("#emailuser").val(respuesta.data[0].email);
                 $("#phoneuser").val(respuesta.data[0].phone);
+                $("#phoneuser2").val(respuesta.data[0].phone2);
                 $("#typeRole").val(respuesta.data[0].namerole);
+                $("#cambiocontra").prop("checked",false);
                 $("#passworduser").val("********");
                 $("#passwordconfir").val("********");
+                $("#chec").show();
+                document.getElementById("passworduser").disabled = true;
+                document.getElementById("passwordconfir").disabled = true;
                 $("#nameuser").focus();
                 document.getElementById("btnsave").innerText = "Update";
                 $("#Modaluser").modal("show");
 
-                console.log(respuesta.data);
+            console.log(respuesta.data);
             })
             .catch((error) => {
                 if (error.response) {
@@ -167,14 +203,22 @@ $("#btnsave").on("click", function () {
     user.append("name", $("#nameuser").val());
     user.append("email", $("#emailuser").val());
     user.append("phone", $("#phoneuser").val());
-    user.append("password", $("#password").val());
+    user.append("phone2",$('#phoneuser2').val());
+    user.append("password", $("#passworduser").val());
+
     user.append("typeRole", $("#typeRole").val());
     user.append("password", $("#passwordconfir").val());
+    if( $('#cambiocontra').is(':checked') ) {
+        user.append("cambiocontra", 1);
+    }else {
+        user.append("cambiocontra", 0);
+    }
 
     if ($("#iduser").val() != "") {
         axios
             .post(principalUrl + "user/actualiza", user)
             .then((respuesta) => {
+                console.log(respuesta.data)
                 $("#btnsave").text("Save changes");
                 Swal.fire({
                     position: "top-end",
@@ -188,8 +232,9 @@ $("#btnsave").on("click", function () {
                 $("#nameuser").val("");
                 $("#emailuser").val("");
                 $("#phoneuser").val("");
+                $("#phoneuser2").val("");
                 $("#typeRole").val("");
-                $("#password").val("");
+                $("#passworduser").val("");
                 $("#passwordconfir").val("");
                 $("#nameuser").focus();
                 $("#Modaluser").modal("hide");
@@ -216,6 +261,7 @@ $("#btnsave").on("click", function () {
                 $("#nameuser").val("");
                 $("#emailuser").val("");
                 $("#phoneuser").val("");
+                $("#phoneuser2").val("");
                 $("#typeRole").val("");
                 $("#passworduser").val("");
                 $("#passwordconfir").val("");
