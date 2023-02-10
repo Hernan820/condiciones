@@ -57,16 +57,18 @@
                     <li class="sidebar-header">
                         Main
                     </li>
-                    <li class="sidebar-item " id="itemregistro">
+                   <li class="sidebar-item " id="itemregistro">
                         <a class="sidebar-link" href="" id="vistaregistro" >
                         <i class="align-middle me-2 fas fa-fw fa-file-text"></i> <span class="align-middle">Files in process</span>
                         </a>
                     </li> 
+                  @if(@Auth::user()->hasRole('Admin'))
                     <li class="sidebar-item " id="itemManagement">
                         <a class="sidebar-link" href="" id="vistamanagement" >
                         <i class="align-middle me-2 fas fa-fw fa-file-text"></i> <span class="align-middle">Management</span>
                         </a>
-                    </li>    
+                    </li>   
+                    @endif
                     
 <!-- END  
                 <--<li class="sidebar-item" id="opcioncondiciones">
