@@ -65,7 +65,7 @@
                   @if(@Auth::user()->hasRole('Admin'))
                     <li class="sidebar-item " id="itemManagement">
                         <a class="sidebar-link" href="" id="vistamanagement" >
-                        <i class="align-middle me-2 fas fa-fw fa-file-text"></i> <span class="align-middle">Management</span>
+                            <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">Users Management</span>
                         </a>
                     </li>   
                     @endif
