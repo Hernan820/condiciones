@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
             
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use DB;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
          
 class UserController extends Controller
@@ -23,8 +25,9 @@ class UserController extends Controller
         $User->name            = $request->name;
         $User->email           = $request->email;
         $User->phone           = $request->phone;
+        $User->phone2           = $request->phone2;
         $User->password        = Hash::make($request->password);
-        $User->estado_User = 1; 
+        $User->estado_user = 1; 
         $User->save();
         $User->assignRole($request->typeRole);
     }
@@ -75,16 +78,23 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $User = User::find($request->id);
+        $User = User::findOrFail($request->id);
+        
         $User->name            = $request->name;
         $User->email           = $request->email;
         $User->phone           = $request->phone;
-        $User->password        = Hash::make($request->password);
+        $User->phone2           = $request->phone2;
+        if ($request->cambiocontra == 1) {
+            $User->password        = Hash::make($request->password);
+        }
+        
         $User->save();
         $User->roles()->detach();
         $User->assignRole($request->typeRole);
-        return 1 ;
+
+        return 1;
     }
+
 
     public function estado($estado,$id)
     {
