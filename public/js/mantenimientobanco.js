@@ -73,3 +73,20 @@ $('#vistamanagement').on('click', function() {
      });
  
  });
+
+ $('#vistaCompania').on('click', function() {
+  event.preventDefault();
+
+  $.ajax({
+     type:'GET',
+     url: principalUrl+'compania',
+     dataType:"html",
+ }).done(function(data) {
+   $(".sidebar-item").removeClass("active");
+   $("#itemCompania").addClass("active");
+
+     $('.contenido').html(data);   
+
+   });
+
+});

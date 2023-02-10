@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\compania;
 use Illuminate\Http\Request;
+use View;
 
 class CompaniaController extends Controller
 {
@@ -17,6 +18,11 @@ class CompaniaController extends Controller
         $compania = compania::find($request->vista);
 
         return $compania;
+    }
+
+    Public function vista_compania(){
+      return View::make('compania')->render();
+
     }
 
     /**
