@@ -185,7 +185,14 @@ function documentos(){
 $('#guardaregistro').on('click', function() { 
 
 	if (validaform() == false) {return;}
-
+	$("input[name='chekcdocument[]']").each(function(indice, inputDatos){
+		if ($(inputDatos).is(":checked") === false){
+			var valor =$(this).val();
+			$(this).val($(this).val()+'_false');
+			$(this).prop('checked',true);
+		}
+	})
+	
 	var datos = new FormData(document.getElementById("formregistro"));
 	     datos.append("estadocasa",$('#estadoscasa').val());
 

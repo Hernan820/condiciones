@@ -92,20 +92,25 @@ class RegistroController extends Controller
         }
 
         foreach ($request->chekcdocument as $docs) {
-            $documentos_client = new detalle_documento;
-            $documentos_client->id_registro  = $registro->id;
-            $documentos_client->id_documento = $docs;
-            if($docs != ""){
-                $documentos_client->chekc_documento  = 1;
-            }else{
-                $documentos_client->chekc_documento  = 0;
-            }
-            $documentos_client->save();
+            $id_doc = explode("_", $docs);
+                if(count($id_doc) == 1){
+                    $documentos_client = new detalle_documento;
+                    $documentos_client->id_registro  = $registro->id;
+                    $documentos_client->id_documento = $id_doc[0];
+                    $documentos_client->chekc_documento  = 1;
+                    $documentos_client->save();
+                }else{
+                    $documentos_client = new detalle_documento;
+                    $documentos_client->id_registro  = $registro->id;
+                    $documentos_client->id_documento = $id_doc[0];
+                    $documentos_client->chekc_documento  = 0;
+                    $documentos_client->save();   
+                }
         };
          
 
       
-      return $request->estadocasa;
+      return 1;
         
     }
 
