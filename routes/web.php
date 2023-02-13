@@ -83,6 +83,11 @@ Route::middleware(['auth'])->group(function () {
     #registros
     Route::post('registro/reporte/{id}', [App\Http\Controllers\RegistroController::class, 'reporte']);
 
+    #RUTAS DE LA VISTA DE EMPRESAS.
+  
+    Route::get('compania', [App\Http\Controllers\CompaniaController::class, 'vista_compania']);
+    Route::post('compania/add', [App\Http\Controllers\CompaniaController::class, 'create']);
+
     # VISTA DE DETALLE
     Route::post('registro/clientes/{id}', [App\Http\Controllers\ClienteController::class, 'show']);
 
