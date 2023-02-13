@@ -8,6 +8,7 @@ use App\Models\clientes_registro;
 use App\Models\registro;
 use Illuminate\Http\Request;
 use DB;
+use App\Models\prestamo;
 
 class RegistroController extends Controller
 {
@@ -31,16 +32,16 @@ class RegistroController extends Controller
 
         $registro = new registro;
         $registro->fecha_recepcion = $request->datereceipt;
-        $registro->fecha_firma     = $request->datecontrac;
-        $registro->dowpayment      = $request->dowpayment;
-        $registro->precio_casa     = $request->purchaceprice ;    #tamnien   ES EL PRUCHARSE 
+        $registro->fecha_firma     = $request->datecontrac;                                                                                                                
+        $registro->dowpayment      = $request->dowpayment ?? '';
+        $registro->precio_casa     = $request->purchaceprice ?? '';    #tamnien   ES EL PRUCHARSE 
         $registro->estado          = $request->estadocasa;
-        $registro->drive           = $request->drive;
+        $registro->drive           = $request->drive ?? '';
        // $registro->num_prestamo    = $request->              #MAS ADELANTE SE LLENARAN
-        $registro->direccion_casa  = $request->property_address;
-        $registro->notas           = $request->notes;
-        $registro->procesador      = $request->realtorname;
-        $registro->telefono_precesador      = $request->realtorphone;
+        $registro->direccion_casa  = $request->property_address ?? '';
+        $registro->notas           = $request->notes ?? '';
+        $registro->procesador      = $request->realtorname ?? '';
+        $registro->telefono_precesador      = $request->realtorphone ?? '';
 
         //$registro->Appraisal       = $request->             #MAS ADELANTE SE LLENARAN
         $registro->id_etapa        = 1; 
@@ -59,11 +60,11 @@ class RegistroController extends Controller
             $cliente = new cliente;
             $cliente->nombre_cliente       = $name;
             $cliente->telefono             = $request->tel[$index];
-            $cliente->correo               = $request->email[$index];
-            $cliente->direccion            = $request->direccion[$index];
-            $cliente->direcionalternativa  = $request->direccion2[$index];
+            $cliente->correo               = $request->email[$index] ?? '';  
+            $cliente->direccion            = $request->direccion[$index] ?? '';
+            $cliente->direcionalternativa  = $request->direccion2[$index] ?? '';
             $cliente->status               = $request->status[$index];
-            $cliente->socials_number       = $request->securityn[$index];
+            $cliente->socials_number       = $request->securityn[$index] ?? '';
             $cliente->tipe_client          = $request->typeclient[$index];
             $cliente->save();
 
@@ -75,33 +76,42 @@ class RegistroController extends Controller
            $detallecliente->save() ;
             $index++;
 
+           // if($cliente->tipe_client == 1){
+                foreach ($request->checkcuestionario as $cuestionario) {
+                    $cuestionario_client = new cuestionario_cliente;
+                    
+                    $cuestionario_client->id_cliente       = $cliente->id;
+                    $cuestionario_client->id_cuestionario  = $cuestionario;
+                    if($cuestionario != ""){
+                        $cuestionario_client->checkcuestionario  = 1;
+                    }else{
+                        $cuestionario_client->checkcuestionario  = 0;
+                    }
+                    $cuestionario_client->save();
+               };
+            //}
         }
 
         foreach ($request->chekcdocument as $docs) {
-            $documentos_client = new detalle_documento;
-            $documentos_client->id_registro  = $registro->id;
-            $documentos_client->id_documento = $docs;
-            if($docs != ""){
-                $documentos_client->chekc_documento  = 1;
-            }else{
-                $documentos_client->chekc_documento  = 0;
-            }
-            $documentos_client->save();
+            $id_doc = explode("_", $docs);
+                if(count($id_doc) == 1){
+                    $documentos_client = new detalle_documento;
+                    $documentos_client->id_registro  = $registro->id;
+                    $documentos_client->id_documento = $id_doc[0];
+                    $documentos_client->chekc_documento  = 1;
+                    $documentos_client->save();
+                }else{
+                    $documentos_client = new detalle_documento;
+                    $documentos_client->id_registro  = $registro->id;
+                    $documentos_client->id_documento = $id_doc[0];
+                    $documentos_client->chekc_documento  = 0;
+                    $documentos_client->save();   
+                }
         };
          
-        foreach ($request->checkcuestionario as $cuestionario) {
-            $cuestionario_client = new cuestionario_cliente;
-            $cuestionario_client->id_cliente       = $cliente->id;
-            $cuestionario_client->id_cuestionario  = $cuestionario;
-            if($cuestionario != ""){
-                $cuestionario_client->checkcuestionario  = 1;
-            }else{
-                $cuestionario_client->checkcuestionario  = 0;
-            }
-            $cuestionario_client->save();
-       };
+
       
-      return $request->email ;
+      return 1;
         
     }
 
@@ -153,9 +163,39 @@ class RegistroController extends Controller
      * @param  \App\Models\registro  $registro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, registro $registro)
+    public function update(Request $request)
     {
-        //
+        $registro =  registro::find($request->idregistro);
+
+        if($request->fecharecep != '' && $request->fechafirma != ''){
+            $registro->fecha_recepcion = $request->fecharecep;
+            $registro->fecha_firma     = $request->fechafirma;
+        }
+        $registro->estado          = $request->estadocasa ?? '';
+        $registro->direccion_casa  = $request->direccionregistro ?? '';
+        $registro->precio_casa     = $request->preciocasa ?? '';    #tamnien   ES EL PRUCHARSE 
+        $registro->dowpayment      = $request->dowpayment ?? '';
+        $registro->procesador      = $request->procesadorname ?? '';
+        $registro->telefono_precesador      = $request->telefonoprecesor ?? '';
+        $registro->drive      = $request->drive ?? '';
+        $registro->id_prestamo     = $request->id_prestamo ;       
+
+        //$registro->num_prestamo    = $request->              #MAS ADELANTE SE LLENARAN
+        //$registro->drive           = $request->drive ?? '';
+       // $registro->notas           = $request->notes ?? '';
+       // $registro->Appraisal       = $request->             #MAS ADELANTE SE LLENARAN
+        $registro->save(); 
+
+       $detalleresgitro = registro::join("users","users.id", "=", "registros.id_usuario")
+       ->join("prestamos","prestamos.id", "=", "registros.id_prestamo")
+       ->join("etapas","etapas.id", "=", "registros.id_etapa")
+       ->select('registros.*','users.*','prestamos.*','etapas.*')
+       ->where('registros.id','=',$request->idregistro)
+       ->get();
+
+        $prestamos =prestamo::all();
+              
+        return response()->json(['detalleresgitro' => $detalleresgitro, 'prestamos' => $prestamos],200);
     }
 
     /**
