@@ -72,12 +72,12 @@
 
                     <li class="sidebar-item " id="itemCompania">
                         <a class="sidebar-link" href="" id="vistaCompania" >
-                            <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">Companies</span>
+                        	<i class="align-middle me-2 fas fa-fw fa-briefcase"></i> <span class="align-middle">Companies</span>
                         </a>
                     </li>   
                     
 <!-- END  
-                <--<li class="sidebar-item" id="opcioncondiciones">
+                     <--<li class="sidebar-item" id="opcioncondiciones">
                         <a class="sidebar-link" id="vistabancos" href="">
                             <i class="align-middle me-2 fas fa-fw fa-home"></i> <span class="align-middle">CONDICIONES</span>
                         </a>

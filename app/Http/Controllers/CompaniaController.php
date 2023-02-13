@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use View;
 use App\Models\compania;
 use Illuminate\Http\Request;
-use View;
 
 class CompaniaController extends Controller
 {
@@ -30,9 +31,15 @@ class CompaniaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+       
+        $compania = new Compania;
+        $compania->nombre           = $request->nombre;
+        $compania->telefono         = $request->telefono;
+        $compania->webSite          = $request->webSite;
+        $compania->logo             = $request->logo->store('public');
+        $compania->save();
     }
 
     /**

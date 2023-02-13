@@ -30,11 +30,11 @@
                         company table
                     </h4>
                     <br>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#defaultModalPrimary">
+                    <button id="btn-addcompany" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal-compania">
                         Add New Company
                     </button>
                     <div class="card-body">
-                        <table id="datatables-reponsive" class="table table-striped" style="width:100%">
+                        <table id="tabla-compania" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>NAME</th>
@@ -58,39 +58,45 @@
 <!--Modal companies-->
 
 
-<div class="modal fade" id="defaultModalPrimary" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="Modal-compania" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Create new Company</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body m-3">
-                <form>
+            
+            <form id="formCompany">
+                 <div class="modal-body m-3">
+                    @csrf
                     <div class="mb-3">
                         <label class="form-label">Name of Company</label>
-                        <input type="text" class="form-control" placeholder="Name of Company">
+                        <input id="nombre" type="text" class="form-control"name="nombre" placeholder="Name of Company">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Phone</label>
-                        <input type="text" class="form-control" placeholder="Phone">
+                        <input id="telefono" type="text" class="form-control"name="telefono" placeholder="Phone">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Web site</label>
-                        <input type="text" class="form-control" placeholder="Web site">
+                        <input id="webSite" type="text" class="form-control"name="webSite" placeholder="Web site">
                     </div>
                     <div class="mb-3">
                         <label class="form-label w-100">Add Logo</label>
-                        <input type="file">
+                        <input id="logo"  name="logo" type="file" class="hidden">
                     </div>
-                </form>
-               
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button  id="guardar-compania" type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>   
+                
+            </form>
         </div>
     </div>
 </div>
 <!-- END companies modal -->
+<script>
+    $.getScript("{{ asset('js/compania.js') }}");
+</script>
