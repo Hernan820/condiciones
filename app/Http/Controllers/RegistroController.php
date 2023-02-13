@@ -8,6 +8,7 @@ use App\Models\clientes_registro;
 use App\Models\registro;
 use Illuminate\Http\Request;
 use DB;
+use App\Models\prestamo;
 
 class RegistroController extends Controller
 {
@@ -162,9 +163,39 @@ class RegistroController extends Controller
      * @param  \App\Models\registro  $registro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, registro $registro)
+    public function update(Request $request)
     {
-        //
+        $registro =  registro::find($request->idregistro);
+
+        if($request->fecharecep != '' && $request->fechafirma != ''){
+            $registro->fecha_recepcion = $request->fecharecep;
+            $registro->fecha_firma     = $request->fechafirma;
+        }
+        $registro->estado          = $request->estadocasa ?? '';
+        $registro->direccion_casa  = $request->direccionregistro ?? '';
+        $registro->precio_casa     = $request->preciocasa ?? '';    #tamnien   ES EL PRUCHARSE 
+        $registro->dowpayment      = $request->dowpayment ?? '';
+        $registro->procesador      = $request->procesadorname ?? '';
+        $registro->telefono_precesador      = $request->telefonoprecesor ?? '';
+        $registro->drive      = $request->drive ?? '';
+        $registro->id_prestamo     = $request->id_prestamo ;       
+
+        //$registro->num_prestamo    = $request->              #MAS ADELANTE SE LLENARAN
+        //$registro->drive           = $request->drive ?? '';
+       // $registro->notas           = $request->notes ?? '';
+       // $registro->Appraisal       = $request->             #MAS ADELANTE SE LLENARAN
+        $registro->save(); 
+
+       $detalleresgitro = registro::join("users","users.id", "=", "registros.id_usuario")
+       ->join("prestamos","prestamos.id", "=", "registros.id_prestamo")
+       ->join("etapas","etapas.id", "=", "registros.id_etapa")
+       ->select('registros.*','users.*','prestamos.*','etapas.*')
+       ->where('registros.id','=',$request->idregistro)
+       ->get();
+
+        $prestamos =prestamo::all();
+              
+        return response()->json(['detalleresgitro' => $detalleresgitro, 'prestamos' => $prestamos],200);
     }
 
     /**

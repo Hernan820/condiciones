@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\prestamo;
 
 use App\Models\cliente;
 use Illuminate\Http\Request;
@@ -79,7 +80,9 @@ class ClienteController extends Controller
 
        $notas = DB::select("SELECT * FROM `nota_registros` WHERE nota_registros.id_registro = $id;");
 
-       return response()->json(['clientes' => $clientes, 'registro' => $registro, 'docs' => $docs, 'tipopreguntas' => $tipopreguntas, 'notas' => $notas],200);
+       $tipoprestamos = prestamo::all();
+
+       return response()->json(['clientes' => $clientes, 'registro' => $registro, 'docs' => $docs, 'tipopreguntas' => $tipopreguntas, 'notas' => $notas, 'tipoprestamos' => $tipoprestamos],200);
     }
 
     /**

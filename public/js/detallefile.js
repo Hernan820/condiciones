@@ -1,9 +1,3 @@
-$("#datatables-clients").DataTable({
-    responsive: true,
-    order: [
-        [1, "asc"]
-    ]
-});
 
 const availableTags = [
 	"Alaska",
@@ -56,8 +50,13 @@ const availableTags = [
 	"Wisconsin",
 	"Wyoming",
 		];
-
 $(document).ready(function () {
+	$("#datatables-clients").DataTable({
+		responsive: true,
+		order: [
+			[1, "asc"]
+		]
+	});
 
     var id_registro = $('#idregistro').val();
 	$("#filaclient").html('');
@@ -69,7 +68,7 @@ $(document).ready(function () {
 		$('#nameuser').html(respuesta.data.registro[0].name);
 
 		tbldetalleclientes(respuesta.data.clientes,respuesta.data.registro[0].nombre_etapa);
-		tbldetalleregistro(respuesta.data.registro);
+		tbldetalleregistro(respuesta.data.registro, respuesta.data.tipoprestamos);
 		tbldocs(respuesta.data.docs);
 		tblquestionario(respuesta.data.tipopreguntas , respuesta.data.clientes);
 		notasregistro(respuesta.data.notas)
@@ -139,30 +138,42 @@ $(document).ready(function () {
 		});
 }
 
-function tbldetalleregistro(detalleregistro) {
-  
-	$('#nameuser').html(detalleregistro[0].name);
+function tbldetalleregistro(detalleregistro,tiposprestamos) {
+	$("#registrocliente").html('');
+	$("#estadocasa").html('');
+
+	//$('#nameuser').html(detalleregistro[0].name);
 	$('#notes').text(detalleregistro[0].notas);
 
 	detalleregistro.forEach(function (element) { 
-		$("#registrocliente").append("<tr><th>Contract date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.fecha_firma+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Contract receipt date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.fecha_recepcion+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>State</th><!-- Select --><td><div class='col-md-12'><div class='col-sm-12'>  <select id='estadocliente' name='estadocliente' class='form-control'></select></div></div></td></tr>"+
-		"<tr><th>Property adress</th><td> <div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.direccion_casa+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Purchace Price</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.precio_casa+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Down payment</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.dowpayment+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Type of loan</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.nombre_prestamo +"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
+		$("#registrocliente").append("<tr><th>Contract date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='fechafirma"+element.id+"' id='fechafirma"+element.id+"' value='"+element.fecha_firma+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Contract receipt date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='fecharecep"+element.id+"' id='fecharecep"+element.id+"' value='"+element.fecha_recepcion+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>State</th><!-- Select --><td><div class='col-md-12'><div class='col-sm-12'>  <select id='estadocasa' name='estadocasa"+element.id+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></select></div></div></td></tr>"+
+		"<tr><th>Property adress</th><td> <div class='col-md-12'><div class='col-sm-12'><input type='text' name='direccionregistro"+element.id+"' id='direccionregistro"+element.id+"'  value='"+element.direccion_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Purchace Price</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='preciocasa"+element.id+"' id='preciocasa"+element.id+"' value='"+element.precio_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Down payment</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='dowpayment"+element.id+"' id='dowpayment"+element.id+"' value='"+element.dowpayment+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Type of loan</th><td><div class='col-md-12'><div class='col-sm-12'><select id='prestamonombre' name='prestamonombre"+element.id+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></select></div></div></td></tr>"+
 		"<tr><th>Drive</th><td></td></tr>"+
-		"<tr><td colspan='2'><a target='_blank' href='"+element.drive+"'>"+element.drive+"</a></td></tr>"+
-		"<tr><th>Realtor name</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='' value='"+element.procesador+"' class='form-control' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Telephone</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='"+element.telefono_precesador+"' value='' class='form-control' style='border: 0px;'></div></div></td></tr>");
+		"<tr><td colspan='2'><input type='text' name='drive"+element.id+"' id='drive"+element.id+"' value='"+element.drive+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'>    </td></tr>"+
+		"<tr><th>Realtor name</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='procesadorname"+element.id+"' id='procesadorname"+element.id+"' value='"+element.procesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Telephone</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='telefonoprecesor"+element.id+"' id='telefonoprecesor"+element.id+"' value='"+element.telefono_precesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>");
+		$('#telefonoprecesor'+element.id).mask('(000) 000-0000');
+		$('#dowpayment'+element.id).mask('00%');
 	});	
 
 	availableTags.forEach(function (element) { 
 		if(detalleregistro[0].estado === element){
-			$("#estadocliente").append("<option value="+element+" selected>"+element+"</option>"); 
+			$("#estadocasa").append("<option value='"+element+"' selected>"+element+"</option>"); 
 		}else{
-			$("#estadocliente").append("<option value="+element+">"+element+"</option>"); 
+			$("#estadocasa").append("<option value='"+element+"'>"+element+"</option>"); 
+		}
+	});
+
+	tiposprestamos.forEach(function (element) { 
+		if(detalleregistro[0].nombre_prestamo === element.nombre_prestamo){
+			$("#prestamonombre").append("<option value='"+element.id+"' selected>"+element.nombre_prestamo+"</option>"); 
+		}else{
+			$("#prestamonombre").append("<option value='"+element.id+"'>"+element.nombre_prestamo+"</option>"); 
 		}
 	});
 }
@@ -334,6 +345,42 @@ $(document).on('change', '.cliente',function() {
         }
     });
   
+ });
+
+$(document).on('change', '.detalleregistro',function() { 
+	var nameinput = $(this).attr("name");
+	var idregistro =nameinput.slice(-1);
+
+	var datosregistro = new FormData();
+	datosregistro.append("fechafirma",$('#fechafirma'+idregistro).val());
+	datosregistro.append("fecharecep",$('#fecharecep'+idregistro).val());
+	datosregistro.append("estadocasa",$('#estadocasa').val());
+	datosregistro.append("direccionregistro",$('#direccionregistro'+idregistro).val());
+	datosregistro.append("preciocasa",$('#preciocasa'+idregistro).val());
+	datosregistro.append("dowpayment",$('#dowpayment'+idregistro).val());
+	datosregistro.append("id_prestamo",$('#prestamonombre').val());
+	datosregistro.append("procesadorname",$('#procesadorname'+idregistro).val());
+	datosregistro.append("telefonoprecesor",$('#telefonoprecesor'+idregistro).val());
+	datosregistro.append("drive",$('#drive'+idregistro).val());
+	datosregistro.append("idregistro",$('#idregistro').val());
+
+	axios.post(principalUrl+"registro/actualiza",datosregistro)
+    .then((respuesta) => {
+		tbldetalleregistro(respuesta.data.detalleresgitro,respuesta.data.prestamos);
+		respuesta.data
+		Swal.fire({
+			position: "top-end",
+			icon: "success",
+			title: "Record updated!",
+			showConfirmButton: false,
+			timer: 1200,
+		});
+	})
+    .catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+        }
+    });
  });
 
 console.log('muestra el archivo detalle js');
