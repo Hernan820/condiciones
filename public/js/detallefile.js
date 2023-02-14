@@ -191,16 +191,17 @@ function tbldetalleregistro(detalleregistro,tiposprestamos) {
 				if(data == 1){
 					return ("<span class='badge bg-success'>Complete</span>");
 				}else{
-					return ("<span class='badge bg-danger'>Complete</span>");
+					return ("<span class='badge bg-danger'>Incomplete</span>");
 				}
 			},
 		    },
             { data: "chekc_documento",
-			render: function (data) {
+			render: function (data, type, row) {
+							var iddetaledoc = row["id"];
 				if(data == 1){
-					return ("<input type='checkbox' checked class='form-check-input'>");
+					return ("<input type='checkbox' name='docsdetalle_"+iddetaledoc+"'  checked class='form-check-input documentoscheck'>");
 				}else{
-					return ("<input type='checkbox'  class='form-check-input'>");
+					return ("<input type='checkbox' name='docsdetalle_"+iddetaledoc+"' class='form-check-input documentoscheck'>");
 				}
 			},
 		    },
@@ -383,4 +384,36 @@ $(document).on('change', '.detalleregistro',function() {
     });
  });
 
+
+$(document).on('change', '.documentoscheck',function() { 
+	var nameinput = $(this).attr("name");
+	var id_doc =nameinput.split('_')[1];
+
+	var datosdocs = new FormData();
+	datosdocs.append("id_doc",id_doc );
+	datosdocs.append("idregistro",$('#idregistro').val());
+    if( $(this).is(':checked') ) {
+        datosdocs.append("documento", 1);
+    }else {
+        datosdocs.append("documento", 0);
+    }
+
+	axios.post(principalUrl+"docs/actualiza",datosdocs)
+    .then((respuesta) => {
+		Swal.fire({
+			position: "top-end",
+			icon: "success",
+			title: "Updated client!",
+			showConfirmButton: false,
+			timer: 1200,
+		});
+		tbldocs(respuesta.data);
+	})
+    .catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+        }
+    });
+
+});
 console.log('muestra el archivo detalle js');

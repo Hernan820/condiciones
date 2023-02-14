@@ -67,9 +67,19 @@ class DetalleDocumentoController extends Controller
      * @param  \App\Models\detalle_documento  $detalle_documento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, detalle_documento $detalle_documento)
+    public function update(Request $request)
     {
-        //
+        $detalledocs = detalle_documento::find($request->id_doc);
+        $detalledocs->chekc_documento = $request->documento ?? '';
+        $detalledocs->save();
+        
+        $docs = detalle_documento::join("documentos","documentos.id", "=", "detalle_documentos.id_documento")
+        ->select('documentos.nombre_doc','detalle_documentos.*')
+        ->where("documentos.estado_doc","=",1)
+        ->where("detalle_documentos.id_registro","=",$request->idregistro)
+        ->get();
+
+        return $docs;
     }
 
     /**
