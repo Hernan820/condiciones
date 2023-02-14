@@ -92,48 +92,48 @@ $(document).ready(function () {
 			if(element.status == "social"){
 				var status = "<div class='col-sm-10'>"+
 				"<label class='form-check'>"+
-					"<input name='radio-status"+element.id+"' id='radio-status"+element.id+"' type='radio' class='form-check-input cliente' value='social' checked>"+
+					"<input name='radio-status_"+element.id+"' id='radio-status_"+element.id+"' type='radio' class='form-check-input cliente' value='social' checked>"+
 					"<span class='form-check-label'>Social</span></label>"+
 				"<label class='form-check'>"+
-					"<input name='radio-status"+element.id+"' id='radio-status"+element.id+"' type='radio' class='form-check-input cliente' value='Tax ID'>"+
+					"<input name='radio-status_"+element.id+"' id='radio-status_"+element.id+"' type='radio' class='form-check-input cliente' value='Tax ID'>"+
 					"<span class='form-check-label'>TAX ID</span>"+
 				"</label></div>"+
 				"</div>";
 			}else{		
 				var status = "<div class='col-sm-10'>"+
 				"<label class='form-check'>"+
-					"<input name='radio-status"+element.id+"' id='radio-status"+element.id+"' type='radio' class='form-check-input cliente'value='social' >"+
+					"<input name='radio-status_"+element.id+"' id='radio-status_"+element.id+"' type='radio' class='form-check-input cliente'value='social' >"+
 					"<span class='form-check-label'>Social</span></label>"+
 				"<label class='form-check'>"+
-					"<input name='radio-status"+element.id+"' id='radio-status"+element.id+"' type='radio' class='form-check-input cliente' value='Tax ID' checked>"+
+					"<input name='radio-status_"+element.id+"' id='radio-status_"+element.id+"' type='radio' class='form-check-input cliente' value='Tax ID' checked>"+
 					"<span class='form-check-label'>TAX ID</span>"+
 				"</label></div>"+
 				"</div>";			}
 	
 				if(i > 0){$("#filaclient").append("<tr><td colspan='2'><br></td></tr>")}
 				if(i == 0){$("#filaclient").append("<tr><th>Status</th><td><span class='badge bg-success' id='nombreetapa' style='padding-bottom: 5px;'>"+etaparegistro+"</span></td></tr>")}
-				if(i == 0){$("#filaclient").append("<tr><th>Borrower</th><td><div class='col-md-12 '><div class='col-sm-12'><input type='text' name='nombre"+element.id+"' id='nombre"+element.id+"' value='"+element.nombre_cliente+"' class='form-control cliente' style='border: 0px;'></div></div></td></tr>")}else{$("#filaclient").append("<tr class='table-primary'><th>Co borrower</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='nombre"+element.id+"' id='nombre"+element.id+"' value='"+element.nombre_cliente+"' class='form-control cliente' style='border: 0px;'></div></div></td></tr>")}
+				if(i == 0){$("#filaclient").append("<tr><th>Borrower</th><td><div class='col-md-12 '><div class='col-sm-12'><input type='text' name='nombre_"+element.id+"' id='nombre_"+element.id+"' value='"+element.nombre_cliente+"' class='form-control cliente' style='border: 0px;'></div></div></td></tr>")}else{$("#filaclient").append("<tr class='table-primary'><th>Co borrower</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='nombre_"+element.id+"' id='nombre_"+element.id+"' value='"+element.nombre_cliente+"' class='form-control cliente' style='border: 0px;'></div></div></td></tr>")}
 	
 		   $("#filaclient").append("<tr>"+
 			   "<th>Telephone</th>"+
-			  " <td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='telefono"+element.id+"' id='telefono"+element.id+"'  value='"+element.telefono+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
+			  " <td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='telefono_"+element.id+"' id='telefono_"+element.id+"'  value='"+element.telefono+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
 		  " </tr><tr>"+
 			   "<th>Legal Status</th>"+
 			   "<td><div class='col-md-12'>"+status+
 					  "</td>"+
 		   "</tr><tr>"+
 			   "<th>SSN</th>"+
-			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='ssn"+element.id+"' id='ssn"+element.id+"' value='"+element.socials_number+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
+			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='ssn_"+element.id+"' id='ssn_"+element.id+"' value='"+element.socials_number+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
 		   "</tr><tr>"+
 			   "<th>Email</th>"+
-			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='correo"+element.id+"' id='correo"+element.id+"' value='"+element.correo+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
+			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='correo_"+element.id+"' id='correo_"+element.id+"' value='"+element.correo+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
 		   "</tr><tr>"+
 			   "<th>Current address</th>"+
-			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='direccion"+element.id+"' id='direccion"+element.id+"' value='"+element.direccion+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
+			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='direccion_"+element.id+"' id='direccion_"+element.id+"' value='"+element.direccion+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
 		   "</tr><tr>"+
 			   "<th>Former address</th>"+
-			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='segundadireccion"+element.id+"' id='segundadireccion"+element.id+"' value='"+element.direcionalternativa+"' class='form-control cliente' style='border: 0px;'></div></div></td></tr>"); 
-			   $('#telefono'+element.id).mask('(000) 000-0000');
+			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='segundadireccion_"+element.id+"' id='segundadireccion_"+element.id+"' value='"+element.direcionalternativa+"' class='form-control cliente' style='border: 0px;'></div></div></td></tr>"); 
+			   $('#telefono_'+element.id).mask('(000) 000-0000');
 
 		});
 }
@@ -145,20 +145,20 @@ function tbldetalleregistro(detalleregistro,tiposprestamos) {
 	//$('#nameuser').html(detalleregistro[0].name);
 
 	detalleregistro.forEach(function (element) { 
-		$("#registrocliente").append("<tr><th>Contract date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='fechafirma"+element.id+"' id='fechafirma"+element.id+"' value='"+element.fecha_firma+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Contract receipt date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='fecharecep"+element.id+"' id='fecharecep"+element.id+"' value='"+element.fecha_recepcion+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>State</th><!-- Select --><td><div class='col-md-12'><div class='col-sm-12'>  <select id='estadocasa' name='estadocasa"+element.id+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></select></div></div></td></tr>"+
-		"<tr><th>Property adress</th><td> <div class='col-md-12'><div class='col-sm-12'><input type='text' name='direccionregistro"+element.id+"' id='direccionregistro"+element.id+"'  value='"+element.direccion_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Purchace Price</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='preciocasa"+element.id+"' id='preciocasa"+element.id+"' value='"+element.precio_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Down payment</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='dowpayment"+element.id+"' id='dowpayment"+element.id+"' value='"+element.dowpayment+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Type of loan</th><td><div class='col-md-12'><div class='col-sm-12'><select id='prestamonombre' name='prestamonombre"+element.id+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></select></div></div></td></tr>"+
+		$("#registrocliente").append("<tr><th>Contract date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='fechafirma_"+element.id+"' id='fechafirma_"+element.id+"' value='"+element.fecha_firma+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Contract receipt date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='fecharecep_"+element.id+"' id='fecharecep_"+element.id+"' value='"+element.fecha_recepcion+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>State</th><!-- Select --><td><div class='col-md-12'><div class='col-sm-12'>  <select id='estadocasa' name='estadocasa_"+element.id+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></select></div></div></td></tr>"+
+		"<tr><th>Property adress</th><td> <div class='col-md-12'><div class='col-sm-12'><input type='text' name='direccionregistro_"+element.id+"' id='direccionregistro_"+element.id+"'  value='"+element.direccion_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Purchace Price</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='preciocasa_"+element.id+"' id='preciocasa_"+element.id+"' value='"+element.precio_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Down payment</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='dowpayment_"+element.id+"' id='dowpayment_"+element.id+"' value='"+element.dowpayment+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Type of loan</th><td><div class='col-md-12'><div class='col-sm-12'><select id='prestamonombre' name='prestamonombre_"+element.id+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></select></div></div></td></tr>"+
 		"<tr><th>Drive</th><td></td></tr>"+
-		"<tr><td colspan='2'><input type='text' name='drive"+element.id+"' id='drive"+element.id+"' value='"+element.drive+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'>    </td></tr>"+
-		"<tr><th>Realtor name</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='procesadorname"+element.id+"' id='procesadorname"+element.id+"' value='"+element.procesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Telephone</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='telefonoprecesor"+element.id+"' id='telefonoprecesor"+element.id+"' value='"+element.telefono_precesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>");
-		$('#telefonoprecesor'+element.id).mask('(000) 000-0000');
-		$('#dowpayment'+element.id).mask('00%');
-		$('#notaderegistro').append('<textarea rows="6" class="form-control detalleregistro" name="notes'+element.id+'" id="notes'+element.id+'" style="border:0px">'+element.notas+'</textarea>');
+		"<tr><td colspan='2'><input type='text' name='drive_"+element.id+"' id='drive_"+element.id+"' value='"+element.drive+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'>    </td></tr>"+
+		"<tr><th>Realtor name</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='procesadorname_"+element.id+"' id='procesadorname_"+element.id+"' value='"+element.procesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Telephone</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='telefonoprecesor_"+element.id+"' id='telefonoprecesor_"+element.id+"' value='"+element.telefono_precesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>");
+		$('#telefonoprecesor_'+element.id).mask('(000) 000-0000');
+		$('#dowpayment_'+element.id).mask('00%');
+		$('#notaderegistro').append('<textarea rows="6" class="form-control detalleregistro" name="notes_'+element.id+'" id="notes_'+element.id+'" style="border:0px">'+element.notas+'</textarea>');
 	});	
 
 	availableTags.forEach(function (element) { 
@@ -316,16 +316,16 @@ $('#btnnotaseguimiento').on('click', function() {
 
 $(document).on('change', '.cliente',function() { 
 	var nameinput = $(this).attr("name");
-	var id_cliente =nameinput.slice(-1);
+	var id_cliente =nameinput.split('_')[1];
 
 	var datosclient = new FormData();
-	datosclient.append("nombre",$('#nombre'+id_cliente).val());
-	datosclient.append("telefono",$('#telefono'+id_cliente).val());
-	datosclient.append("status",$("input[name=radio-status"+id_cliente+"]:checked").val());
-	datosclient.append("ssnumber",$('#ssn'+id_cliente).val());
-	datosclient.append("email",$('#correo'+id_cliente).val());
-	datosclient.append("direccion",$('#direccion'+id_cliente).val());
-	datosclient.append("direccion2",$('#segundadireccion'+id_cliente).val());
+	datosclient.append("nombre",$('#nombre_'+id_cliente).val());
+	datosclient.append("telefono",$('#telefono_'+id_cliente).val());
+	datosclient.append("status",$("input[name=radio-status_"+id_cliente+"]:checked").val());
+	datosclient.append("ssnumber",$('#ssn_'+id_cliente).val());
+	datosclient.append("email",$('#correo_'+id_cliente).val());
+	datosclient.append("direccion",$('#direccion_'+id_cliente).val());
+	datosclient.append("direccion2",$('#segundadireccion_'+id_cliente).val());
 	datosclient.append("idcliente",id_cliente);
 	datosclient.append("idregistro",$('#idregistro').val());
 
@@ -351,19 +351,20 @@ $(document).on('change', '.cliente',function() {
 
 $(document).on('change', '.detalleregistro',function() { 
 	var nameinput = $(this).attr("name");
-	var idregistro =nameinput.slice(-1);
+	var idregistro =nameinput.split('_')[1];
+
 	var datosregistro = new FormData();
-	datosregistro.append("fechafirma",$('#fechafirma'+idregistro).val());
-	datosregistro.append("fecharecep",$('#fecharecep'+idregistro).val());
+	datosregistro.append("fechafirma",$('#fechafirma_'+idregistro).val());
+	datosregistro.append("fecharecep",$('#fecharecep_'+idregistro).val());
 	datosregistro.append("estadocasa",$('#estadocasa').val());
-	datosregistro.append("direccionregistro",$('#direccionregistro'+idregistro).val());
-	datosregistro.append("preciocasa",$('#preciocasa'+idregistro).val());
-	datosregistro.append("dowpayment",$('#dowpayment'+idregistro).val());
+	datosregistro.append("direccionregistro",$('#direccionregistro_'+idregistro).val());
+	datosregistro.append("preciocasa",$('#preciocasa_'+idregistro).val());
+	datosregistro.append("dowpayment",$('#dowpayment_'+idregistro).val());
 	datosregistro.append("id_prestamo",$('#prestamonombre').val());
-	datosregistro.append("procesadorname",$('#procesadorname'+idregistro).val());
-	datosregistro.append("telefonoprecesor",$('#telefonoprecesor'+idregistro).val());
-	datosregistro.append("drive",$('#drive'+idregistro).val());
-	datosregistro.append("registronota",$('#notes'+idregistro).val());
+	datosregistro.append("procesadorname",$('#procesadorname_'+idregistro).val());
+	datosregistro.append("telefonoprecesor",$('#telefonoprecesor_'+idregistro).val());
+	datosregistro.append("drive",$('#drive_'+idregistro).val());
+	datosregistro.append("registronota",$('#notes_'+idregistro).val());
 	datosregistro.append("idregistro",$('#idregistro').val());
 	
 	axios.post(principalUrl+"registro/actualiza",datosregistro)
