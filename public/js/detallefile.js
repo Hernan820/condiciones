@@ -102,10 +102,10 @@ $(document).ready(function () {
 			}else{		
 				var status = "<div class='col-sm-10'>"+
 				"<label class='form-check'>"+
-					"<input name='radio-status"+element.id+"' id='radio-status"+element.id+"' type='radio' class='form-check-input'value='social' >"+
+					"<input name='radio-status"+element.id+"' id='radio-status"+element.id+"' type='radio' class='form-check-input cliente'value='social' >"+
 					"<span class='form-check-label'>Social</span></label>"+
 				"<label class='form-check'>"+
-					"<input name='radio-status"+element.id+"' id='radio-status"+element.id+"' type='radio' class='form-check-input' value='Tax ID' checked>"+
+					"<input name='radio-status"+element.id+"' id='radio-status"+element.id+"' type='radio' class='form-check-input cliente' value='Tax ID' checked>"+
 					"<span class='form-check-label'>TAX ID</span>"+
 				"</label></div>"+
 				"</div>";			}
@@ -141,9 +141,8 @@ $(document).ready(function () {
 function tbldetalleregistro(detalleregistro,tiposprestamos) {
 	$("#registrocliente").html('');
 	$("#estadocasa").html('');
-
+	$('#notaderegistro').html('');
 	//$('#nameuser').html(detalleregistro[0].name);
-	$('#notes').text(detalleregistro[0].notas);
 
 	detalleregistro.forEach(function (element) { 
 		$("#registrocliente").append("<tr><th>Contract date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='fechafirma"+element.id+"' id='fechafirma"+element.id+"' value='"+element.fecha_firma+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
@@ -159,6 +158,7 @@ function tbldetalleregistro(detalleregistro,tiposprestamos) {
 		"<tr><th>Telephone</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='telefonoprecesor"+element.id+"' id='telefonoprecesor"+element.id+"' value='"+element.telefono_precesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>");
 		$('#telefonoprecesor'+element.id).mask('(000) 000-0000');
 		$('#dowpayment'+element.id).mask('00%');
+		$('#notaderegistro').append('<textarea rows="6" class="form-control detalleregistro" name="notes'+element.id+'" id="notes'+element.id+'" style="border:0px">'+element.notas+'</textarea>');
 	});	
 
 	availableTags.forEach(function (element) { 
@@ -332,7 +332,7 @@ $(document).on('change', '.cliente',function() {
 		Swal.fire({
 			position: "top-end",
 			icon: "success",
-			title: "cliente actualizado!",
+			title: "Updated client!",
 			showConfirmButton: false,
 			timer: 1200,
 		});
@@ -350,7 +350,6 @@ $(document).on('change', '.cliente',function() {
 $(document).on('change', '.detalleregistro',function() { 
 	var nameinput = $(this).attr("name");
 	var idregistro =nameinput.slice(-1);
-
 	var datosregistro = new FormData();
 	datosregistro.append("fechafirma",$('#fechafirma'+idregistro).val());
 	datosregistro.append("fecharecep",$('#fecharecep'+idregistro).val());
@@ -362,8 +361,9 @@ $(document).on('change', '.detalleregistro',function() {
 	datosregistro.append("procesadorname",$('#procesadorname'+idregistro).val());
 	datosregistro.append("telefonoprecesor",$('#telefonoprecesor'+idregistro).val());
 	datosregistro.append("drive",$('#drive'+idregistro).val());
+	datosregistro.append("registronota",$('#notes'+idregistro).val());
 	datosregistro.append("idregistro",$('#idregistro').val());
-
+	
 	axios.post(principalUrl+"registro/actualiza",datosregistro)
     .then((respuesta) => {
 		tbldetalleregistro(respuesta.data.detalleresgitro,respuesta.data.prestamos);

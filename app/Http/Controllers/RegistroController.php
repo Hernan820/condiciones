@@ -179,6 +179,7 @@ class RegistroController extends Controller
         $registro->telefono_precesador      = $request->telefonoprecesor ?? '';
         $registro->drive      = $request->drive ?? '';
         $registro->id_prestamo     = $request->id_prestamo ;       
+        $registro->notas     = $request->registronota ?? '' ;       
 
         //$registro->num_prestamo    = $request->              #MAS ADELANTE SE LLENARAN
         //$registro->drive           = $request->drive ?? '';
