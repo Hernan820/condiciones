@@ -78,7 +78,7 @@ class ClienteController extends Controller
         WHERE registros.id = $id
         GROUP BY preguntas.id;");
 
-       $notas = DB::select("SELECT * FROM `nota_registros` WHERE nota_registros.id_registro = $id;");
+       $notas = DB::select("SELECT * FROM `nota_registros` WHERE nota_registros.id_registro = $id ORDER BY id DESC;");
 
        $tipoprestamos = prestamo::all();
 

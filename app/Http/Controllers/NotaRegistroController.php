@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\nota_registro;
 use Illuminate\Http\Request;
+use DB;
 //date_default_timezone_set("America/New_York");
 date_default_timezone_set("America/El_Salvador");
 
@@ -33,6 +34,10 @@ class NotaRegistroController extends Controller
         $nota->hora             =  date('H:i:s'); 
         $nota->id_registro      =  $request->id_registro;
         $nota->save();
+
+        $notas = DB::select("SELECT * FROM `nota_registros` WHERE nota_registros.id_registro = $request->id_registro ORDER BY id DESC;");
+
+        return $notas;
     }
 
     /**
