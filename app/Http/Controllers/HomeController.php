@@ -49,7 +49,7 @@ class HomeController extends Controller
      * vista de detalles de file
      * 
      */
-    public function vistafile(){
-        return View::make('Files.detail_files')->render();
+    public function vistafile($id){
+        return view('Files.detail_files', compact('id'));
     }
 }

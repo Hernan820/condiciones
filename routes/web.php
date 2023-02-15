@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('condicion/vistaregistros', [App\Http\Controllers\HomeController::class, 'vistaregistro']);
 
-    Route::get('registro/vistadetallefile', [App\Http\Controllers\HomeController::class, 'vistafile']);
+    Route::get('registro/vistadetallefile/{id}', [App\Http\Controllers\HomeController::class, 'vistafile']);
 
     Route::post('condicion/compania', [App\Http\Controllers\CompaniaController::class, 'index']);
 
@@ -48,9 +48,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('registro/etapa/{id}', [App\Http\Controllers\RegistroController::class, 'show']);
 
     Route::get('registros/cancelado/{estado}', [App\Http\Controllers\RegistroController::class, 'cancel']);
-
-  
-
 
     #rutas usuarios
     Route::post('condicion/agregaruser', [App\Http\Controllers\UserController::class, 'create']);
@@ -94,4 +91,12 @@ Route::middleware(['auth'])->group(function () {
   
 
 
+    # VISTA DE DETALLE
+    Route::post('registro/clientes/{id}', [App\Http\Controllers\ClienteController::class, 'show']);
+
+    Route::post('registro/notaseguimiento', [App\Http\Controllers\NotaRegistroController::class, 'create']);
+
+    Route::post('cliente/actualiza', [App\Http\Controllers\ClienteController::class, 'update']);
+
+    Route::post('registro/actualiza', [App\Http\Controllers\RegistroController::class, 'update']);
  });
