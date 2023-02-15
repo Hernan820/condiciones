@@ -7,12 +7,49 @@ $("#btn-addcompany").on("click", function () {
 
 $(document).ready(function () {
     tblCompania();
+    $("#telefono").mask("(000) 000-0000");
     
     });
+//validacion de formulario de companias
+function validaCompania() {
+    var valido = true;
+    var nombre = $("#nombre").val();
+    var telefono = $("#telefono").val();
+    var webSite = $("#webSite").val();
+    var logo= $("#logo").val();
+   
+    if (nombre == "") {
+        Swal.fire("¡Add company name!");
+        $("#nombre").focus();
+        return (valido = false);
+    }
+
+    if (telefono == "") {
+        Swal.fire("¡Add phone!");
+        $("#telefono").focus();
+        return (valido = false);
+    }
+
+    if (webSite == "") {
+        Swal.fire("¡Add webSite!");
+        $("#webSite").focus();
+        return (valido = false);
+    }
+
+    if (logo == "") {
+        Swal.fire("¡Add logo!");
+        $("#logo").focus();
+        return (valido = false);
+    }
+
+    return valido;
+}
 
 //registrar compania
 $('#guardar-compania').on('click', function() { 
-   
+    if (validaCompania() == false) {
+        return;
+    }
 
 	var compania = new FormData(document.getElementById("formCompany"));
 
