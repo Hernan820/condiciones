@@ -70,7 +70,7 @@ $(document).ready(function () {
 		tbldetalleclientes(respuesta.data.clientes,respuesta.data.registro[0].nombre_etapa);
 		tbldetalleregistro(respuesta.data.registro, respuesta.data.tipoprestamos);
 		tbldocs(respuesta.data.docs);
-		tblquestionario(respuesta.data.tipopreguntas , respuesta.data.clientes);
+	    muestra_preguntasrespuesta(respuesta.data.preguntasrespuesta);
 		notasregistro(respuesta.data.notas)
 	})
 	.catch((error) => {
@@ -209,59 +209,6 @@ function tbldetalleregistro(detalleregistro,tiposprestamos) {
 	});
 }
 
-function tblquestionario(tipopreguntas,clientes){
-	$("#pestanascuestion").html('');
-	var tipocuestionario =[];
-
-	tipopreguntas.forEach(function (element, i) {
-		if(i == 0){
-			tipocuestionario.push(element.nombre);
-		}else if(!tipocuestionario.includes(element.nombre)){
-			tipocuestionario.push(element.nombre);
-		}
-    });
-
-
-	tipocuestionario.forEach(function (element,i) {
-		$("#pestanascuestion").append('<a class="list-group-item list-group-item-action " data-bs-toggle="list"                   href="#'+element+'" role="tab" style="font-size:10px">'+element+'</a>')
-
-
-		$("#tablasquestion").append('<div class="tab-pane fade " id="'+element+'" role="tabpanel"><div class="card"> <div class="card-body"><h5 class="card-title"> Complete the following form</h5>                                                <table class="table table-bordered small-text1" id="table'+element+'">'+
-		'<thead> <tr></tr>'+
-		'</thead><tbody id="question">'+
-		'</tbody></table>    </div></div></div>')
-
-		tblquiestionarios(tipopreguntas,element,clientes);
-    });
-
-
-}
-
-function tblquiestionarios(tipopreguntas,nombrequestion,clientes){
-	$("#table"+nombrequestion+" thead tr").html('');
-	$("#table"+nombrequestion+" tbody").html('');
-
-	$("#table"+nombrequestion+" thead tr").append('<th>Questions</th>');
-
-	clientes.forEach(function (element,i) {
-			$("#table"+nombrequestion+" thead tr").append('<th>'+element.nombre_cliente+'</th>');
-	});
-
-	tipopreguntas.forEach(function (element) {
-
-		if(element.nombre == nombrequestion){
-			var tr = $('<tr>');
-			$("#table"+nombrequestion+" tbody").append(tr);
-			tr.append('<td>'+element.titulo_pregunta+'</td>');
-	
-			clientes.forEach(function (element,i) {
-				tr.append('<td><input type="text" class="form-control small-text1" style="border:0px"></td>');
-			});
-			tr.append("</tr>");
-		}
-	}); 
-}
-
 function notasregistro(notas){
 	$("#id_notasseguimiento").html('');
 	notas.forEach(function (element,i) {
@@ -283,6 +230,84 @@ function notasregistro(notas){
 
 }
 
+
+function muestra_preguntasrespuesta(datosdepregunta){
+
+	var clientes =[];
+	var tiposcuestionario =[];
+
+	datosdepregunta.forEach(function (element, i) {
+		if(i == 0){
+			clientes.push(element.nombre_cliente);
+		}else if(!clientes.includes(element.nombre_cliente)){
+			clientes.push(element.nombre_cliente);
+		}
+    });
+
+	datosdepregunta.forEach(function (element, i) {
+		if(i == 0){
+			tiposcuestionario.push(element.nombre);
+		}else if(!tiposcuestionario.includes(element.nombre)){
+			tiposcuestionario.push(element.nombre);
+		}
+    });
+
+	$("#pestanascuestion").html('');
+	tiposcuestionario.forEach(function (nombrecuestion,i) {
+		$("#pestanascuestion").append('<a class="list-group-item list-group-item-action " data-bs-toggle="list" href="#'+nombrecuestion+'" role="tab" style="font-size:10px">'+nombrecuestion+'</a>')
+
+
+		$("#tablasquestion").append('<div class="tab-pane fade " id="'+nombrecuestion+'" role="tabpanel"><div class="card"> <div class="card-body"><h5 class="card-title"> Complete the following form</h5> <table class="table table-bordered small-text1" id="table'+nombrecuestion+'">'+
+		'<thead> <tr></tr>'+
+		'</thead><tbody id="question">'+
+		'</tbody></table>    </div></div></div>')
+ 
+		muestrapreguntasclientes(datosdepregunta,nombrecuestion,clientes);
+    });
+}
+
+
+function muestrapreguntasclientes(datosdepregunta,nombrecuestion,clientes) {
+	
+	$("#table"+nombrecuestion+" thead tr").html('');
+	$("#table"+nombrecuestion+" tbody").html('');
+	$("#table"+nombrecuestion+" thead tr").append('<th>Questions</th>');
+
+	clientes.forEach(function (cliente,i) {
+			$("#table"+nombrecuestion+" thead tr").append('<th>'+cliente+'</th>');
+	});
+	
+	var arraypreguntas= [];
+	datosdepregunta.forEach(function (element) {
+		if(element.nombre == nombrecuestion){
+
+		if(!arraypreguntas.includes(element.titulo_pregunta)){
+			arraypreguntas.push(element.titulo_pregunta);
+
+			var tr = $('<tr>');
+			$("#table"+element.nombre+" tbody").append(tr);
+			tr.append('<td>'+element.titulo_pregunta+'</td>');
+	
+			clientes.forEach(function (clientenombre,i) {
+				if(clientenombre == element.nombre_cliente ){
+					tr.append('<td><input type="text" name="respuestapregunta_'+element.id+'" class="form-control small-text1" value="'+element.nombre_cliente+'" style="border:0px"></td>');
+				}
+			});
+			tr.append("</tr>");
+		}else{
+			var tabla = document.getElementById("table"+element.nombre);
+			var posicion = arraypreguntas.indexOf(element.titulo_pregunta);
+			var numeroFila = posicion + 1;
+
+			var ultimaFila = tabla.rows[numeroFila];
+			var nuevoTD = document.createElement("td");
+			nuevoTD.innerHTML = '<td><input type="text" name="respuestapregunta_'+element.id+'" class="form-control small-text1" value="'+element.nombre_cliente+'" style="border:0px"></td>';
+		
+			ultimaFila.appendChild(nuevoTD);
+		}
+	}
+	});
+}
 
 $('#btnseguimiento').on('click', function() { 
 	$('#modalnota_seguimiento').modal('show');

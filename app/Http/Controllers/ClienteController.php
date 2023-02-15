@@ -82,7 +82,16 @@ class ClienteController extends Controller
 
        $tipoprestamos = prestamo::all();
 
-       return response()->json(['clientes' => $clientes, 'registro' => $registro, 'docs' => $docs, 'tipopreguntas' => $tipopreguntas, 'notas' => $notas, 'tipoprestamos' => $tipoprestamos],200);
+       $preguntasrespuesta = DB::select("SELECT respuesta_clientes.*, registros.id as idregistro,preguntas.id as idpregunta ,preguntas.titulo_pregunta , cuestionarios.nombre ,  clientes.id as idcliente ,clientes.nombre_cliente FROM respuesta_clientes
+       INNER JOIN cuestionario_clientes on cuestionario_clientes.id = respuesta_clientes.id_cuestionario_clientes
+       INNER JOIN preguntas on preguntas.id = respuesta_clientes.id_pregunta
+       INNER JOIN cuestionarios on cuestionarios.id = cuestionario_clientes.id_cuestionario
+       INNER JOIN clientes on clientes.id = cuestionario_clientes.id_cliente
+       INNER JOIN clientes_registros on clientes_registros.id_cliente = clientes.id
+       INNER JOIN registros on registros.id = clientes_registros.id_registro
+       WHERE registros.id = $id;");
+
+       return response()->json(['clientes' => $clientes, 'registro' => $registro, 'docs' => $docs, 'tipopreguntas' => $tipopreguntas, 'notas' => $notas, 'tipoprestamos' => $tipoprestamos, 'preguntasrespuesta' => $preguntasrespuesta],200);
     }
 
     /**
