@@ -66,7 +66,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             
-            <form id="formCompany">
+            <form id="formCompany" enctype="multipart/form-data" method="POST">
                  <div class="modal-body m-3">
                     @csrf
                     <div class="mb-3">

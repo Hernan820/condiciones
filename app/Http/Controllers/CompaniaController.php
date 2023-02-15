@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use DB;
 use View;
+use DataTables;
 use App\Models\compania;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class CompaniaController extends Controller
@@ -34,7 +36,7 @@ class CompaniaController extends Controller
     public function create(Request $request)
     {
        
-        $compania = new Compania;
+        $compania = new compania;
         $compania->nombre           = $request->nombre;
         $compania->telefono         = $request->telefono;
         $compania->webSite          = $request->webSite;
@@ -59,9 +61,12 @@ class CompaniaController extends Controller
      * @param  \App\Models\compania  $compania
      * @return \Illuminate\Http\Response
      */
-    public function show(compania $compania)
+    public function show(Request $request)
     {
-        //
+        $sql = "SELECT * FROM `companias`" ;
+        $Sql = DB::select($sql);
+        
+        return response()->json($Sql); 
     }
 
     /**
