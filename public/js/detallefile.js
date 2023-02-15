@@ -253,15 +253,16 @@ function muestra_preguntasrespuesta(datosdepregunta){
     });
 
 	$("#pestanascuestion").html('');
+	$("#tablasquestion").html('');
 	tiposcuestionario.forEach(function (nombrecuestion,i) {
-		$("#pestanascuestion").append('<a class="list-group-item list-group-item-action " data-bs-toggle="list" href="#'+nombrecuestion+'" role="tab" style="font-size:10px">'+nombrecuestion+'</a>')
-
+		$("#pestanascuestion").append('<a class="list-group-item list-group-item-action" id="item'+nombrecuestion+'" data-bs-toggle="list" href="#'+nombrecuestion+'" role="tab" style="font-size:10px">'+nombrecuestion+'</a>')
 
 		$("#tablasquestion").append('<div class="tab-pane fade " id="'+nombrecuestion+'" role="tabpanel"><div class="card"> <div class="card-body"><h5 class="card-title"> Complete the following form</h5> <table class="table table-bordered small-text1" id="table'+nombrecuestion+'">'+
 		'<thead> <tr></tr>'+
 		'</thead><tbody id="question">'+
 		'</tbody></table>    </div></div></div>')
- 
+		if(i == 0){	$('#item'+nombrecuestion).tab('show');	};
+
 		muestrapreguntasclientes(datosdepregunta,nombrecuestion,clientes);
     });
 }
@@ -290,7 +291,7 @@ function muestrapreguntasclientes(datosdepregunta,nombrecuestion,clientes) {
 	
 			clientes.forEach(function (clientenombre,i) {
 				if(clientenombre == element.nombre_cliente ){
-					tr.append('<td><input type="text" name="respuestapregunta_'+element.id+'" class="form-control small-text1" value="'+element.nombre_cliente+'" style="border:0px"></td>');
+					tr.append('<td><input type="text" name="respuestapregunta_'+element.id+'" id="respuestapregunta_'+element.id+'" class="form-control respuestacliente small-text1" placeholder="Answer" value="'+element.respuesta+'" style="border:0px"></td>');
 				}
 			});
 			tr.append("</tr>");
@@ -301,7 +302,7 @@ function muestrapreguntasclientes(datosdepregunta,nombrecuestion,clientes) {
 
 			var ultimaFila = tabla.rows[numeroFila];
 			var nuevoTD = document.createElement("td");
-			nuevoTD.innerHTML = '<td><input type="text" name="respuestapregunta_'+element.id+'" class="form-control small-text1" value="'+element.nombre_cliente+'" style="border:0px"></td>';
+			nuevoTD.innerHTML = '<td><input type="text" name="respuestapregunta_'+element.id+'" id="respuestapregunta_'+element.id+'" class="form-control respuestacliente small-text1" placeholder="Answer"  value="'+element.respuesta+'" style="border:0px"></td>';
 		
 			ultimaFila.appendChild(nuevoTD);
 		}
@@ -443,4 +444,33 @@ $(document).on('change', '.documentoscheck',function() {
     });
 
 });
+
+$(document).on('change', '.respuestacliente',function() { 
+	
+	var nameinput = $(this).attr("name");
+	var id_respuesta =nameinput.split('_')[1];
+
+	var datosrespuesta = new FormData();
+	datosrespuesta.append("id_respuesta",id_respuesta );
+	datosrespuesta.append("respuestapregunta",$('#respuestapregunta_'+id_respuesta).val());
+	datosrespuesta.append("idregistro",$('#idregistro').val());
+
+	axios.post(principalUrl+"pregunta/actualiza",datosrespuesta)
+    .then((respuesta) => {
+		Swal.fire({
+			position: "top-end",
+			icon: "success",
+			title: "Updated answer!",
+			showConfirmButton: false,
+			timer: 1200,
+		});
+		muestra_preguntasrespuesta(respuesta.data);
+	})
+    .catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+        }
+    });
+});
+
 console.log('muestra el archivo detalle js');

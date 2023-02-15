@@ -99,4 +99,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('docs/actualiza', [App\Http\Controllers\DetalleDocumentoController::class, 'update']);
 
+    Route::post('pregunta/actualiza', [App\Http\Controllers\RespuestaClienteController::class, 'update']);
+
 });
