@@ -66,9 +66,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             
-            <form id="formCompany" enctype="multipart/form-data" method="POST">
+            <form id="formCompany" >
                  <div class="modal-body m-3">
                     @csrf
+                    <input id="idCompania" type="hidden" name="id" value="">
                     <div class="mb-3">
                         <label class="form-label">Name of Company</label>
                         <input id="nombre" type="text" class="form-control"name="nombre" placeholder="Name of Company">

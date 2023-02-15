@@ -41,6 +41,7 @@ class CompaniaController extends Controller
         $compania->telefono         = $request->telefono;
         $compania->webSite          = $request->webSite;
         $compania->logo             = $request->logo->store('public');
+        $compania->estado_compania = 1;
         $compania->save();
     }
 
@@ -63,7 +64,7 @@ class CompaniaController extends Controller
      */
     public function show(Request $request)
     {
-        $sql = "SELECT * FROM `companias`" ;
+        $sql = "SELECT * FROM `companias` where `estado_compania`= 1 " ;
         $Sql = DB::select($sql);
         
         return response()->json($Sql); 
@@ -75,9 +76,14 @@ class CompaniaController extends Controller
      * @param  \App\Models\compania  $compania
      * @return \Illuminate\Http\Response
      */
-    public function edit(compania $compania)
+    public function edit($id)
     {
-        //
+        $compania = compania::select("companias.*")
+        ->where("companias.id","=",$id)
+        ->get();
+        
+        return response()->json($compania);  
+        
     }
 
     /**
@@ -87,9 +93,16 @@ class CompaniaController extends Controller
      * @param  \App\Models\compania  $compania
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, compania $compania)
+    public function update(Request $request)
     {
-        //
+        $compania = compania::find($request->id);
+        $compania->nombre           = $request->nombre;
+        $compania->telefono         = $request->telefono;
+        $compania->webSite          = $request->webSite;
+        $compania->logo             = $request->logo->store('public');
+        $compania->save();
+
+        return 1;
     }
 
     /**
@@ -98,8 +111,11 @@ class CompaniaController extends Controller
      * @param  \App\Models\compania  $compania
      * @return \Illuminate\Http\Response
      */
-    public function destroy(compania $compania)
+    public function destroy($id)
     {
-        //
+        $compania = compania::find($id);
+        $compania->estado_compania = 0;
+        $compania->save();
+        return 1 ;
     }
 }

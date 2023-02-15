@@ -88,6 +88,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('compania', [App\Http\Controllers\CompaniaController::class, 'vista_compania']);
     Route::post('compania/add', [App\Http\Controllers\CompaniaController::class, 'create']);
     Route::get('compania/show', [App\Http\Controllers\CompaniaController::class, 'show'])->name('compania.show');
+    Route::post('compania/edita/{id}', [App\Http\Controllers\CompaniaController::class, 'edit']);
+    Route::post('compania/delete/{id}', [App\Http\Controllers\CompaniaController::class, 'destroy']);
+    Route::post('compania/actualiza', [App\Http\Controllers\CompaniaController::class, 'update']); 
   
 
 
