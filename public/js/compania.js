@@ -3,9 +3,20 @@ $("#btn-addcompany").on("click", function () {
     $("#formCompany")[0].reset();
     $("#idCompania").val("");
     document.getElementById("guardar-compania").innerText = "Add company";
+    $('#previsualizarImagenes').attr('src','');
+    $("#previsualizarImagenes").css("display", "none");
 });
 
 $(document).ready(function () {
+ $('#logo').change(function (){
+        let reader = new FileReader();
+        reader.onload=(e)=>{
+            $("#previsualizarImagenes").css("display", "block");
+            $('#previsualizarImagenes').attr('src',e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
+
     tblCompania();
     $("#telefono").mask("(000) 000-0000");
 
@@ -17,6 +28,7 @@ function validaCompania() {
     var telefono = $("#telefono").val();
     var webSite = $("#webSite").val();
     var logo= $("#logo").val();
+    var id_compania=$("#idCompania").val();
    
     if (nombre == "") {
         Swal.fire("¡Add company name!");
@@ -36,10 +48,12 @@ function validaCompania() {
         return (valido = false);
     }
     
-    if (logo == "") {
-        Swal.fire("¡Add logo!");
-        $("#logo").focus();
-        return (valido = false);
+    if (id_compania==""){
+        if (logo == "") {
+            Swal.fire("¡Add logo!");
+            $("#logo").focus();
+            return (valido = false);
+        }
     }
 
     return valido;
@@ -149,7 +163,7 @@ function tblCompania() {
 }
 //editar compania
 $(document).on("click", ".opcionesCompania", function () {
-    var idCompania = $(this).find(".data").val();
+     var idCompania = $(this).find(".data").val();
 
     if (this.id == "editCompania") {
         axios
@@ -159,14 +173,14 @@ $(document).on("click", ".opcionesCompania", function () {
                 $("#nombre").focus();
                 document.getElementById("guardar-compania").innerText = "Update";
                 $(".modal-title").html("edit Company");
+                $('#logo').val("");
                 $("#idCompania").val(respuesta.data[0].id);
                 $("#nombre").val(respuesta.data[0].nombre);
                 $("#telefono").val(respuesta.data[0].telefono);
                 $("#webSite").val(respuesta.data[0].webSite);
-                $("#logo").val(respuesta.data[0].logo);
-              
-                
-            console.log(respuesta.data);
+                $('#previsualizarImagenes').attr('src',''+principalUrl+'storage/'+respuesta.data[0].logo+'');
+                $("#previsualizarImagenes").css("display", "block");
+                console.log(respuesta.data);
             })
             .catch((error) => {
                 if (error.response) {

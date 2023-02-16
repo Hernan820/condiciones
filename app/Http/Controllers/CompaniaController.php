@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use View;
+use Storage;
 use DataTables;
 use App\Models\compania;
 use Illuminate\Support\Str;
@@ -96,16 +97,26 @@ class CompaniaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {
-        $compania = compania::find($request->id);
-        $compania->nombre           = $request->nombre;
-        $compania->telefono         = $request->telefono;
-        $compania->webSite          = $request->webSite;
-        $compania->logo             = $request->logo->store('public');
-        $compania->save();
-
-        return 1;
-    }
+        {
+            $compania = compania::find($request->id);
+            $newImage = $request->file('logo');
+        
+            if ($newImage) {
+                Storage::delete($compania->logo); // eliminar la imagen anterior
+                $rutaimagen = $request->logo->store('public/');// guardar la nueva imagen
+                $ruta = str_replace('public/','',$rutaimagen);
+                $compania->logo = $ruta; // actualizar el campo de la base de datos
+            }
+            
+            $compania->nombre           = $request->nombre;
+            $compania->telefono         = $request->telefono;
+            $compania->webSite          = $request->webSite;
+            $compania->estado_compania = 1;
+       
+            $compania->save(); // guardar el modelo actualizado
+        
+            return 1;
+        }
 
     /**
      * Remove the specified resource from storage.
