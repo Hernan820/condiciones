@@ -35,12 +35,14 @@ class CompaniaController extends Controller
      */
     public function create(Request $request)
     {
+        $rutaimagen = $request->logo->store('public');
+        $ruta = str_replace('public/','',$rutaimagen);
        
         $compania = new compania;
         $compania->nombre           = $request->nombre;
         $compania->telefono         = $request->telefono;
         $compania->webSite          = $request->webSite;
-        $compania->logo             = $request->logo->store('public');
+        $compania->logo             = $ruta;
         $compania->estado_compania = 1;
         $compania->save();
     }

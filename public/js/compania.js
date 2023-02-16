@@ -8,7 +8,7 @@ $("#btn-addcompany").on("click", function () {
 $(document).ready(function () {
     tblCompania();
     $("#telefono").mask("(000) 000-0000");
-    
+
     });
 //validacion de formulario de companias
 function validaCompania() {
@@ -35,7 +35,7 @@ function validaCompania() {
         $("#webSite").focus();
         return (valido = false);
     }
-
+    
     if (logo == "") {
         Swal.fire("¡Add logo!");
         $("#logo").focus();
@@ -126,7 +126,11 @@ function tblCompania() {
         columns: [
             { data: "nombre" },
             { data: "telefono" },
-            { data: "logo"},
+            { data: "logo",
+            render:function(data){
+                return('<img src="'+principalUrl+'storage/'+data+'" width="110" alt="">');
+            }
+            },
             { data: "webSite"},
             {
                 data: "id",
@@ -158,8 +162,9 @@ $(document).on("click", ".opcionesCompania", function () {
                 $("#idCompania").val(respuesta.data[0].id);
                 $("#nombre").val(respuesta.data[0].nombre);
                 $("#telefono").val(respuesta.data[0].telefono);
-                 $("#webSite").val(respuesta.data[0].webSite);
-                 $("#logo").val(respuesta.data[0].logo);
+                $("#webSite").val(respuesta.data[0].webSite);
+                $("#logo").val(respuesta.data[0].logo);
+              
                 
             console.log(respuesta.data);
             })
