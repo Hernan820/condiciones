@@ -9,6 +9,7 @@ use App\Models\registro;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\prestamo;
+use App\Models\respuesta_cliente;
 
 class RegistroController extends Controller
 {
@@ -53,8 +54,6 @@ class RegistroController extends Controller
         $registro->estado_registro = 1; 
         $registro->save();
 
-
-        
         $index = 0;
         foreach ($request->nombres  as $name) {
             $cliente = new cliente;
@@ -76,10 +75,8 @@ class RegistroController extends Controller
            $detallecliente->save() ;
             $index++;
 
-           // if($cliente->tipe_client == 1){
                 foreach ($request->checkcuestionario as $cuestionario) {
                     $cuestionario_client = new cuestionario_cliente;
-                    
                     $cuestionario_client->id_cliente       = $cliente->id;
                     $cuestionario_client->id_cuestionario  = $cuestionario;
                     if($cuestionario != ""){
@@ -88,8 +85,17 @@ class RegistroController extends Controller
                         $cuestionario_client->checkcuestionario  = 0;
                     }
                     $cuestionario_client->save();
+
+                    $preguntas = DB::select("SELECT * FROM `preguntas` WHERE preguntas.id_cuestionario = $cuestionario;");
+
+                    foreach ($preguntas as $pregunta) {
+                    $respuestascliente = new respuesta_cliente;
+                    $respuestascliente->id_cuestionario_clientes = $cuestionario_client->id;
+                    $respuestascliente->id_pregunta              = $pregunta->id;
+                    $respuestascliente->respuesta                = '';
+                    $respuestascliente->save();
+                    }
                };
-            //}
         }
 
         foreach ($request->chekcdocument as $docs) {
@@ -109,8 +115,6 @@ class RegistroController extends Controller
                 }
         };
          
-
-      
       return 1;
         
     }
@@ -179,6 +183,7 @@ class RegistroController extends Controller
         $registro->telefono_precesador      = $request->telefonoprecesor ?? '';
         $registro->drive      = $request->drive ?? '';
         $registro->id_prestamo     = $request->id_prestamo ;       
+        $registro->notas     = $request->registronota ?? '' ;       
 
         //$registro->num_prestamo    = $request->              #MAS ADELANTE SE LLENARAN
         //$registro->drive           = $request->drive ?? '';

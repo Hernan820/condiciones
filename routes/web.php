@@ -102,4 +102,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('cliente/actualiza', [App\Http\Controllers\ClienteController::class, 'update']);
 
     Route::post('registro/actualiza', [App\Http\Controllers\RegistroController::class, 'update']);
- });
+
+    Route::post('docs/actualiza', [App\Http\Controllers\DetalleDocumentoController::class, 'update']);
+
+    Route::post('pregunta/actualiza', [App\Http\Controllers\RespuestaClienteController::class, 'update']);
+
+});

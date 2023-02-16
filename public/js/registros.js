@@ -76,57 +76,6 @@ axios.post(principalUrl + "condicion/cuestionario")
 
 /****ESTADOS** */
 
-var availableTags = [
-	"Alaska",
-	"Arizona",
-	"Arkansas",
-	"California",
-	"Carolina del Norte",
-	"Carolina del Sur",
-	"Colorado",
-	"Connecticut",
-	"Dakota del Norte",
-	"Dakota del Sur",
-	"Delaware",
-	"Florida",
-	"Georgia",
-	"Hawái",
-	"Idaho",
-	"Illinois",
-	"Indiana",
-	"Iowa",
-	"Kansas",
-	"Kentucky",
-	"Luisiana",
-	"Maine",
-	"Maryland",
-	"Massachusetts",
-	"Míchigan",
-	"Minnesota",
-	"Misisipi",
-	"Misuri",
-	"Montana",
-	"Nebraska",
-	"Nevada",
-	"New Jersey",
-	"New York",
-	"New Hampshire",
-	"New México",
-	"Ohio",
-	"Oklahoma",
-	"Oregón",
-	"Pensilvania",
-	"Rhode Island",
-	"Tennessee",
-	"Texas",
-	"Utah",
-	"Vermont",
-	"Virginia",
-	"Virginia Occidental",
-	"Washington",
-	"Wisconsin",
-	"Wyoming",
-		];
 
 		$("#estadoscasa").empty();
 		$("#estadoscasa").append("<option value='' readonly >countries</option>"); 
@@ -675,7 +624,13 @@ $('#btncliente').on('click', function() {
 	num = $('#tblcliente tbody tr.fila-fija').length;
 
 	if(num == 0){
-        var tr = $('<tr >');
+
+		var estado = $('input:radio[name=radio_typeclient]:checked').val();
+		if($('input:radio[name=radio_typeclient]:checked').val() == 1){
+			var tr = $('<tr class="table-primary" >');
+		}else{
+			var tr = $('<tr >');
+		}
 		$("#filasclientes").append(tr);
 		tr.append("<td >"+$('#nameclient').val()+" <input type='hidden' class='clientenombre' name='nombres[]' value="+$('#nameclient').val()+"> <input type='hidden' class='clientessn' name='securityn[]' value="+$('#ssn').val()+"></td>");
 		tr.append("<td >"+$('#customerPhone').val()+" <input type='hidden' class='clientetelefono' name='tel[]' value="+"'"+$('#customerPhone').val()+"'"+"> <input type='hidden' class='clientemail' name='email[]' value="+$('#emailclient').val()+"> <input type='hidden' class='tipocliente' name='typeclient[]' value="+$('input:radio[name=radio_typeclient]:checked').val()+"> </td>");
@@ -687,6 +642,10 @@ $('#btncliente').on('click', function() {
    $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(0)').html($('#nameclient').val()+" <input type='hidden' class='clientenombre' name='nombres[]' value="+$('#nameclient').val()+"> <input type='hidden' class='clientessn' name='securityn[]' value="+$('#ssn').val()+">");
    $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(1)').html($('#customerPhone').val()+" <input type='hidden' class='clientetelefono' name='tel[]' value="+$('#customerPhone').val()+"> <input type='hidden' class='clientemail' name='email[]' value="+$('#emailclient').val()+"> <input type='hidden' class='tipocliente' name='typeclient[]' value="+$('input:radio[name=radio_typeclient]:checked').val()+">");
    $(`#tblcliente tbody tr.fila-fija:eq(${num})`).find('td:eq(2)').html($('input:radio[name=radio_status]:checked').val()+"<input type='hidden' class='clientestatus' name='status[]' value="+"'"+$('input:radio[name=radio_status]:checked').val()+"'"+"> <input type='hidden' class='clientedirecc' name='direccion[]' value="+$('#inputAddress').val()+">	<input type='hidden' class='clientedirecc2' name='direccion2[]' value="+$('#inputAddress2').val()+">");
+   
+   if($('input:radio[name=radio_status]:checked').val() == 1){
+   $(`#tblcliente tbody tr.fila-fija:eq(${num})`).addClass('table-primary');
+   }
 
 	}
 
