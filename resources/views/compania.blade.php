@@ -66,20 +66,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             
-            <form id="formCompany">
+            <form id="formCompany" >
                  <div class="modal-body m-3">
                     @csrf
+                    <input id="idCompania" type="hidden" name="id" value="">
                     <div class="mb-3">
                         <label class="form-label">Name of Company</label>
                         <input id="nombre" type="text" class="form-control"name="nombre" placeholder="Name of Company">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Phone</label>
-                        <input id="telefono" type="text" class="form-control"name="telefono" placeholder="Phone">
+                        <input id="telefono" type="text" class="form-control"name="telefono" placeholder="(000) 000-0000">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Web site</label>
-                        <input id="webSite" type="text" class="form-control"name="webSite" placeholder="Web site">
+                        <label class="form-label">Website</label>
+                        <input id="webSite" type="text" class="form-control"name="webSite" placeholder="WebSite">
                     </div>
                     <div class="mb-3">
                         <label class="form-label w-100">Add Logo</label>
