@@ -1,3 +1,10 @@
+$("#btn-add-cuestionario").on("click", function () {
+    $(".modal-title").html("Create new Questionary");
+    $("#form-cuestionario")[0].reset();
+    document.getElementById("btnsave").innerText = "Add Questionary";
+    $("#idCompania").val("");
+});
+
 $(document).ready(function () {
        $('#datetimepicker-minimum-CUESTIONARIO').datetimepicker({format: 'L'});
         tblCuestionario();
@@ -71,3 +78,65 @@ function tblCuestionario() {
         ],
     });
 }
+//Editar
+$(document).on("click", ".opcionesCuestionario", function () {
+    var id_cuestionario = $(this).find(".data").val();
+
+    if (this.id == "editCuestionario") {
+        axios
+            .post(principalUrl + "cuestionario/edita/" + id_cuestionario)
+            .then((respuesta) => {
+                $("#Modal-cuestionario").modal("show");
+                $(".modal-title").html("Edit Questionary");
+                $("#date").focus();
+                $("#id-cuestionario").val(respuesta.data[0].id);
+                $("#date").val(respuesta.data[0].fecha);
+                $("#detail").val(respuesta.data[0].detalle);
+                $("#name").val(respuesta.data[0].nombre);
+                $("#flag").val(respuesta.data[0].flag);
+                
+                document.getElementById("guardar-cuestionario").innerText = "Update";
+              
+
+            console.log(respuesta.data);
+            })
+            .catch((error) => {
+                if (error.response) {
+                    console.log(error.response.data);
+                }
+            });
+    } else if (this.id == "deleteCuestionario") {
+        Swal.fire({
+            title: "Delete User",
+            text: "Are you sure to delete the questionnaire?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Continuer",
+            cancelButtonText: "Cancel",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios
+                    .post(principalUrl + "cuestionario/delete/" + id_cuestionario)
+                    .then((respuesta) => {
+                        respuesta.data;
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "record saved!",
+                            showConfirmButton: false,
+                            timer: 1000,
+                        });
+                        tblUsers();
+                    })
+                    .catch((error) => {
+                        if (error.response) {
+                            console.log(error.response.data);
+                        }
+                    });
+            } else {
+            }
+        });
+    }
+});

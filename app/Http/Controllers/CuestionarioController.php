@@ -67,9 +67,13 @@ class CuestionarioController extends Controller
      * @param  \App\Models\cuestionario  $cuestionario
      * @return \Illuminate\Http\Response
      */
-    public function edit(cuestionario $cuestionario)
+    public function edit($id)
     {
-        //
+        $cuestionario = cuestionario::select("cuestionarios.*")
+        ->where("cuestionarios.id","=",$id)
+        ->get();
+        
+        return response()->json($cuestionario);  
     }
 
     /**
