@@ -23,9 +23,15 @@ class CuestionarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $cuestionario = new cuestionario(); 
+        $cuestionario->fecha      = $request->date; 
+        $cuestionario->detalle     = $request->detail; 
+        $cuestionario->nombre      = $request->name; 
+        $cuestionario->flag        = $request->flag; 
+
+        $cuestionario->save();
     }
 
     /**

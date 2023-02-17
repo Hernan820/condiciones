@@ -38,7 +38,7 @@
                       ADD NEW QUIZ
                     </button>
                     <div class="card-body">
-                        <table id="tabla-compania" class="table table-striped" style="width:100%">
+                        <table id="tabla-cuestionario" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>DATE</th>
@@ -108,6 +108,10 @@
                     <div class="mb-3">
                         <label class="form-label">name</label>
                         <input id="name" type="text" class="form-control"name="name" placeholder="name">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">flag</label>
+                        <input id="flag" type="text" class="form-control"name="flag" placeholder="flag">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -109,4 +109,5 @@ Route::middleware(['auth'])->group(function () {
 
     #vista de quiestionarios.
     Route::get('cuestionario', [App\Http\Controllers\CuestionarioController::class, 'index'])->name('cuestionario.index');
+    Route::post('cuestionario/add', [App\Http\Controllers\CuestionarioController::class, 'create'])->name('cuestionario.create');
 });
