@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use View;
 use App\Models\cuestionario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CuestionarioController extends Controller
 {
@@ -14,7 +16,7 @@ class CuestionarioController extends Controller
      */
     public function index()
     {
-        //
+        return View::make('cuestionario')->render();
     }
 
     /**
@@ -22,9 +24,15 @@ class CuestionarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $cuestionario = new cuestionario(); 
+        $cuestionario->fecha      = $request->date; 
+        $cuestionario->detalle     = $request->detail; 
+        $cuestionario->nombre      = $request->name; 
+        $cuestionario->flag        = $request->flag; 
+
+        $cuestionario->save();
     }
 
     /**
@@ -44,11 +52,12 @@ class CuestionarioController extends Controller
      * @param  \App\Models\cuestionario  $cuestionario
      * @return \Illuminate\Http\Response
      */
-    public function show( )
+    public function show( Request $request)
     {
-        $cuestionario = cuestionario::all();
-
-        return response()->json($cuestionario);
+        $sql = "SELECT * FROM `cuestionarios`" ;
+        $Sql = DB::select($sql);
+        
+        return response()->json($Sql); 
 
     }
 

@@ -90,6 +90,23 @@ $('#vistamanagement').on('click', function() {
    });
 
 });
+//vista questionario
+$('#vistaCuestionario').on('click', function() {
+  event.preventDefault();
+
+  $.ajax({
+     type:'GET',
+     url: principalUrl+'cuestionario',
+     dataType:"html",
+ }).done(function(data) {
+   $(".sidebar-item").removeClass("active");
+   $("#itemCuestionario").addClass("active");
+
+     $('.contenido').html(data);   
+
+   });
+
+});
 
 const availableTags = [
 	"Alaska",

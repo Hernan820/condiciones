@@ -66,7 +66,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             
-            <form id="formCompany" >
+            <form id="formCompany" enctype="multipart/form-data">
                  <div class="modal-body m-3">
                     @csrf
                     <input id="idCompania" type="hidden" name="id" value="">
@@ -84,7 +84,10 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label w-100">Add Logo</label>
-                        <input id="logo"  name="logo" type="file" class="hidden">
+                        <input id="logo"  name="logo" type="file" class="hidden" value="">
+                    </div>
+                    <div class="form-group col-md-12" id="mostrarImagen">
+                        <img src="" width="150px" height="120px" name="" id="previsualizarImagenes" style="display:none">
                     </div>
             
                     <div class="modal-footer">
