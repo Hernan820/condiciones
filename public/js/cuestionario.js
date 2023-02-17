@@ -1,4 +1,5 @@
 $(document).ready(function () {
+       $('#datetimepicker-minimum-CUESTIONARIO').datetimepicker({format: 'L'});
         tblCuestionario();
         $("#telefono").mask("(000) 000-0000");
    
