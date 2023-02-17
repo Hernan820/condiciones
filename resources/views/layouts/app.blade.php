@@ -76,6 +76,11 @@
                         </a>
                     </li> 
                     @endif
+                    <li class="sidebar-item " id="itemCuestionario">
+                        <a class="sidebar-link" href="" id="vistaCuestionario" >
+                            <i class="align-middle me-2 fas fa-fw fa-question"></i> <span class="align-middle">Questionnaires</span>
+                        </a>
+                    </li> 
                     
 <!-- END  
                      <--<li class="sidebar-item" id="opcioncondiciones">

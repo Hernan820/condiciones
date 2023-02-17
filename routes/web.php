@@ -107,4 +107,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('pregunta/actualiza', [App\Http\Controllers\RespuestaClienteController::class, 'update']);
 
+    #vista de quiestionarios.
+    Route::get('cuestionario', [App\Http\Controllers\CuestionarioController::class, 'index'])->name('cuestionario.index');
 });

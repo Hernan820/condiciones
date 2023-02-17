@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\cuestionario;
 use Illuminate\Http\Request;
+use View;
 
 class CuestionarioController extends Controller
 {
@@ -14,7 +15,7 @@ class CuestionarioController extends Controller
      */
     public function index()
     {
-        //
+        return View::make('cuestionario')->render();
     }
 
     /**
