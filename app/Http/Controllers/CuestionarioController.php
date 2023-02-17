@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use View;
 use App\Models\cuestionario;
 use Illuminate\Http\Request;
-use View;
+use Illuminate\Support\Facades\DB;
 
 class CuestionarioController extends Controller
 {
@@ -51,11 +52,12 @@ class CuestionarioController extends Controller
      * @param  \App\Models\cuestionario  $cuestionario
      * @return \Illuminate\Http\Response
      */
-    public function show( )
+    public function show( Request $request)
     {
-        $cuestionario = cuestionario::all();
-
-        return response()->json($cuestionario);
+        $sql = "SELECT * FROM `cuestionarios`" ;
+        $Sql = DB::select($sql);
+        
+        return response()->json($Sql); 
 
     }
 

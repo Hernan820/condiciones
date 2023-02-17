@@ -62,7 +62,7 @@
                     ADD NEW QUESTION
                  </button>
                 <div class="card-body">
-                        <table id="datatableactivos-reponsive" class="table table-striped" style="width:100%">
+                        <table id="tabla-pregunta" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>TITLE</th>
