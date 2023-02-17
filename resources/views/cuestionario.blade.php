@@ -125,7 +125,7 @@
                         <select id="flag" name="flag" class="form-control">
                             <option selected>Chosee...</option>
                             <option value="1">Cliente</option>
-                            <option value="2">Usuario</option>
+                            <option value="0">Usuario</option>
                         </select>
                     </div>
                     <div class="modal-footer">

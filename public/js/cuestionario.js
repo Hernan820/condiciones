@@ -48,9 +48,16 @@ function tblCuestionario() {
             { data: "fecha" },
             { data: "detalle" },
             { data: "nombre",},
-            { data: "flag"},
-            {
-                data: "id",
+            { data: "flag",
+            render: function (data) {
+				if(data == 1){
+					return (" <td>Cliente</td>");
+				}else if(data==0){
+					return (" <td>Usuario</td>");
+				}
+			}, },
+
+            { data: "id",
                 render: function (data) {
                     return (
                         "<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesCuestionario' id='editCuestionario' href='#'><input type='hidden' class='data' value=" +
