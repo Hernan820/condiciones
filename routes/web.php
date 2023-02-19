@@ -119,5 +119,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('pregunta/idcuestionario', [App\Http\Controllers\PreguntaController::class, 'namecuestionario'])->name('pregunta.namecuestionario');
     Route::post('pregunta/category', [App\Http\Controllers\PreguntaController::class, 'categoriaName'])->name('pregunta.categoriaName');
     Route::post('pregunta/add', [App\Http\Controllers\PreguntaController::class, 'create'])->name('pregunta.create');
+    Route::get('pregunta/show', [App\Http\Controllers\PreguntaController::class, 'show'])->name('pregunta.show');
 
 });

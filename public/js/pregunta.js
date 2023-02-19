@@ -24,7 +24,7 @@ $("#guardar-pregunta").on("click", function () {
                 showConfirmButton: false,
                 timer: 1200,
             });
-            
+            tblPregunta();
             $("#id_pregunta").val("");
             $("#title").val("");
             $("#status").val("");
@@ -43,7 +43,38 @@ $("#guardar-pregunta").on("click", function () {
 $(document).ready(function () {
    namecuestionario();
    categoriaName();
+   tblPregunta();
  });
+
+ //funcion para mostrar tabla cuestionario
+function tblPregunta() {
+    var PreguntaTabla = $("#tabla-pregunta").DataTable();
+    PreguntaTabla.destroy();
+
+    var PreguntaTabla  = $("#tabla-pregunta").DataTable({
+        responsive: true,
+        ajax: {
+            url: principalUrl + "pregunta/show",
+            dataSrc: "",
+        },
+        columns: [
+            { data: "titulo_pregunta" },
+            { data: "nombre" },
+            { data: "nombre_categoria"},
+            { data: "id",
+                render: function (data) {
+                    return (
+                        "<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesPreguntas' id='editPregunta' href='#'><input type='hidden' class='data' value=" +
+                        data +
+                        " ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> Edit</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesPreguntas'  id='deletePregunta' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value=" +
+                        data +
+                        " ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Delete</a><div class='dropdown-divider'></div>"
+                    );
+                },
+            },
+        ],
+    });
+}
 //name cuestionario funcion.
 function namecuestionario(){
     $("#iden_cuestionario").empty();

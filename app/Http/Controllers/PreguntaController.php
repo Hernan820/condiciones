@@ -63,10 +63,14 @@ class PreguntaController extends Controller
      * @param  \App\Models\pregunta  $pregunta
      * @return \Illuminate\Http\Response
      */
-    public function show(pregunta $pregunta)
+    public function show()
     {
-        //
-    }
+        $sql = "SELECT preguntas.titulo_pregunta,cuestionarios.nombre,categorias.nombre_categoria,preguntas.id from preguntas INNER JOIN cuestionarios ON preguntas.id_cuestionario = cuestionarios.id INNER JOIN categorias ON preguntas.id_categoria= categorias.id WHERE preguntas.estado_pregunta = 1; " ;
+        $pregunta = DB::select($sql);
+
+        return response()->json($pregunta); 
+        
+}
 
     /**
      * Show the form for editing the specified resource.

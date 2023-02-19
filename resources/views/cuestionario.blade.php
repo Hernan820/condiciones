@@ -66,7 +66,6 @@
                             <thead>
                                 <tr>
                                     <th>TITLE</th>
-                                    <th>STATUS</th>
                                     <th>ID QUESTIONNARES</th>
                                     <th>ID CATEGORY</th>
                                     <th>ACTIONS</th>
