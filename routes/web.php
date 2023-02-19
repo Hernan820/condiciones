@@ -114,6 +114,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('cuestionario', [App\Http\Controllers\CuestionarioController::class, 'index'])->name('cuestionario.index');
     Route::post('cuestionario/add', [App\Http\Controllers\CuestionarioController::class, 'create'])->name('cuestionario.create');
     Route::get('cuestionario/show', [App\Http\Controllers\CuestionarioController::class, 'show'])->name('cuestionario.show');
+    Route::post('cuestionario/edita/{id}', [App\Http\Controllers\CuestionarioController::class, 'edit'])->name('cuestionario.edit');
+    Route::post('cuestionario/actualiza', [App\Http\Controllers\CuestionarioController::class, 'update'])->name('cuestionario.update');
+    Route::post('cuestionario/delete/{id}', [App\Http\Controllers\CuestionarioController::class, 'destroy'])->name('cuestionario.destroy');
 
-   
+    #vista pregunta 
+    Route::post('pregunta/idcuestionario', [App\Http\Controllers\PreguntaController::class, 'namecuestionario'])->name('pregunta.namecuestionario');
+    Route::post('pregunta/category', [App\Http\Controllers\PreguntaController::class, 'categoriaName'])->name('pregunta.categoriaName');
+    Route::post('pregunta/add', [App\Http\Controllers\PreguntaController::class, 'create'])->name('pregunta.create');
+
 });

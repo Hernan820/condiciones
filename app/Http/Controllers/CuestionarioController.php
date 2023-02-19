@@ -28,9 +28,10 @@ class CuestionarioController extends Controller
     {
         $cuestionario = new cuestionario(); 
         $cuestionario->fecha      = $request->date; 
-        $cuestionario->detalle     = $request->detail; 
+        $cuestionario->detalle     = $request->detalle; 
         $cuestionario->nombre      = $request->name; 
         $cuestionario->flag        = $request->flag; 
+        $cuestionario->estado_cuestionario = 1;
 
         $cuestionario->save();
     }
@@ -54,7 +55,7 @@ class CuestionarioController extends Controller
      */
     public function show( Request $request)
     {
-        $sql = "SELECT * FROM `cuestionarios`" ;
+        $sql = "SELECT * FROM `cuestionarios` where `estado_cuestionario`= 1 " ;
         $Sql = DB::select($sql);
         
         return response()->json($Sql); 
@@ -67,9 +68,13 @@ class CuestionarioController extends Controller
      * @param  \App\Models\cuestionario  $cuestionario
      * @return \Illuminate\Http\Response
      */
-    public function edit(cuestionario $cuestionario)
+    public function edit($id)
     {
-        //
+        $cuestionario = cuestionario::select("cuestionarios.*")
+        ->where("cuestionarios.id","=",$id)
+        ->get();
+        
+        return response()->json($cuestionario);  
     }
 
     /**
@@ -79,9 +84,18 @@ class CuestionarioController extends Controller
      * @param  \App\Models\cuestionario  $cuestionario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, cuestionario $cuestionario)
+    public function update(Request $request)
     {
-        //
+        $cuestionario = cuestionario::find($request->id);
+        $cuestionario->fecha       = $request->date; 
+        $cuestionario->detalle     = $request->detalle; 
+        $cuestionario->nombre      = $request->name; 
+        $cuestionario->flag        = $request->flag; 
+        $cuestionario->estado_cuestionario = 1;
+
+        $cuestionario->save();
+
+        return 1;
     }
 
     /**
@@ -90,8 +104,11 @@ class CuestionarioController extends Controller
      * @param  \App\Models\cuestionario  $cuestionario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(cuestionario $cuestionario)
+    public function destroy($id)
     {
-        //
+        $cuestionario = cuestionario::find($id);
+        $cuestionario->estado_cuestionario = 0;
+        $cuestionario->save();
+        return 1 ;
     }
 }

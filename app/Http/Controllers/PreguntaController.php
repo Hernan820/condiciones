@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\pregunta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PreguntaController extends Controller
 {
@@ -22,9 +23,27 @@ class PreguntaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $pregunta = new pregunta(); 
+        $pregunta->titulo_pregunta     = $request->title; 
+        $pregunta->id_cuestionario     = $request->iden_cuestionario; 
+        $pregunta->id_categoria        = $request->category; 
+        $pregunta->estado_pregunta  = 1;
+
+        $pregunta->save();
+    }
+
+    public function namecuestionario(){
+        $sql = "SELECT * FROM `cuestionarios` where estado_cuestionario = 1" ;
+        $Sql = DB::select($sql);
+        return response()->json($Sql); 
+    }
+
+    public function categoriaName(){
+        $sql = "SELECT * FROM `categorias`where estado_categoria = 1" ;
+        $Sql = DB::select($sql);
+        return response()->json($Sql); 
     }
 
     /**
