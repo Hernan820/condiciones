@@ -148,26 +148,22 @@
             <form id="form-pregunta">
                  <div class="modal-body m-3">
                     @csrf
-                    <input id="id-pregunta" type="hidden" name="id-pregunta" value="">
+                    <input id="id_pregunta" type="hidden" name="id_pregunta" value="">
                     <div class="mb-3">
                         <label class="form-label">Title</label>
                         <input id="title" type="text" class="form-control"name="title" placeholder="title">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">status</label>
-                        <input id="status" type="text" class="form-control"name="status" placeholder="status">
+                        <label for="id_cuestionario">Name of questionary</label>
+                        <select id="iden_cuestionario" name="iden_cuestionario" class="form-control">
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Id Questionnares</label>
-                        <input id="iden-cuestionario" type="text" class="form-control"name="iden-cuestionario" placeholder="Id Questionnares">
+                        <label class="form-label w-100">Category</label>
+                        <select id="category" name="category" class="form-control">
+                        </select>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label w-100">Id Category</label>
-                        <input id="category"  name="category" type="text" class="form-control" placeholder="Id Category">
-                    </div>
-                   
-            
-                    <div class="modal-footer">
+                   <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button  id="guardar-pregunta" type="button" class="btn btn-primary">Save changes</button>
                     </div>
@@ -180,4 +176,5 @@
 
 <script>
     $.getScript("{{ asset('js/cuestionario.js') }}");
+    $.getScript("{{ asset('js/pregunta.js') }}");
 </script>
