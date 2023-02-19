@@ -379,6 +379,9 @@ $(document).on('change.datetimepicker',function(evento){
 	var idregistro =nameinput.split('_')[1];
 
 	if (inputdata === 'false') {
+
+		console.log('entro al change');
+/*
 	var datosfechas = new FormData();
 	datosfechas.append("fechafirma",$('#fechafirma').val());
 	datosfechas.append("fecharecep",$('#fecharecibido').val());
@@ -400,7 +403,7 @@ $(document).on('change.datetimepicker',function(evento){
 		if (error.response) {
 			console.log(error.response.data);
 		}
-	});
+	});*/
 	}
 	$(evento.target).find('input').attr('data-loaded', false);
 });
