@@ -95,8 +95,16 @@ function tbldetalleregistro(detalleregistro,tiposprestamos) {
 	//$('#nameuser').html(detalleregistro[0].name);
 
 	detalleregistro.forEach(function (element) { 
-		$("#registrocliente").append("<tr><th>Contract date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='fechafirma_"+element.id+"' id='fechafirma_"+element.id+"' value='"+element.fecha_firma+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Contract receipt date</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='fecharecep_"+element.id+"' id='fecharecep_"+element.id+"' value='"+element.fecha_recepcion+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+
+		$("#registrocliente").append("<tr><th>Contract date</th><td><div class='col-md-12'><div class='col-sm-12'>    <div class='mb-3'>"+
+		"<div class='input-group date ' id='datetimepicker-registro'			data-target-input='nearest'>"+
+		"<input type='text' class='form-control datetimepicker-input detalleregistrofecha' id='fechafirma' name='fechafirma_"+element.id+"' value='"+element.fecha_firma+"' autocomplete='off' style='border: 0px;'  data-target='#datetimepicker-registro' data-loaded='true' />"+
+		"<div class='input-group-text ' data-target='#datetimepicker-registro' data-toggle='datetimepicker'><i class='fa fa-calendar'></i></div></div>"+
+	     "</div></div></div></td></tr>"+
+		"<tr><th>Contract receipt date</th><td><div class='col-md-12'><div class='col-sm-12'><div class='mb-3'><div class='input-group date ' id='datetimepicker-registrorecibido' data-target-input='nearest'>"+
+		"<input type='text' class='form-control datetimepicker-input detalleregistrofecha' name='fecharecep_"+element.id+"' id='fecharecibido' value='"+element.fecha_recepcion+"' autocomplete='off' style='border: 0px;' data-target='#datetimepicker-registrorecibido' data-loaded='true' />"+
+		"<div class='input-group-text 'data-target='#datetimepicker-registrorecibido' data-toggle='datetimepicker'><i class='fa fa-calendar'></i></div>"+
+		"</div>	</div></div></div></td></tr>"+
 		"<tr><th>State</th><!-- Select --><td><div class='col-md-12'><div class='col-sm-12'>  <select id='estadocasa' name='estadocasa_"+element.id+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></select></div></div></td></tr>"+
 		"<tr><th>Property adress</th><td> <div class='col-md-12'><div class='col-sm-12'><input type='text' name='direccionregistro_"+element.id+"' id='direccionregistro_"+element.id+"'  value='"+element.direccion_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
 		"<tr><th>Purchace Price</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='preciocasa_"+element.id+"' id='preciocasa_"+element.id+"' value='"+element.precio_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
@@ -109,6 +117,8 @@ function tbldetalleregistro(detalleregistro,tiposprestamos) {
 		$('#telefonoprecesor_'+element.id).mask('(000) 000-0000');
 		$('#dowpayment_'+element.id).mask('00%');
 		$('#notaderegistro').append('<textarea rows="6" class="form-control detalleregistro" name="notes_'+element.id+'" id="notes_'+element.id+'" style="border:0px">'+element.notas+'</textarea>');
+		$('#datetimepicker-registro').datetimepicker({format: 'L'});
+	    $('#datetimepicker-registrorecibido').datetimepicker();
 	});	
 
 	availableTags.forEach(function (element) { 
@@ -361,6 +371,43 @@ $(document).on('change', '.detalleregistro',function() {
         }
     });
  });
+
+
+$(document).on('change.datetimepicker',function(evento){
+	var inputdata =	$(evento.target).find('input').attr('data-loaded');
+	var nameinput = $(evento.target).find('input').attr("name");
+	var idregistro =nameinput.split('_')[1];
+
+	if (inputdata === 'false') {
+
+		console.log('entro al change');
+/*
+	var datosfechas = new FormData();
+	datosfechas.append("fechafirma",$('#fechafirma').val());
+	datosfechas.append("fecharecep",$('#fecharecibido').val());
+	datosfechas.append("idregistro",$('#idregistro').val());
+
+	axios.post(principalUrl+"registro/actualizafechas",datosfechas)
+	.then((respuesta) => {
+		tbldetalleregistro(respuesta.data.detalleresgitro,respuesta.data.prestamos);
+		respuesta.data
+		Swal.fire({
+			position: "top-end",
+			icon: "success",
+			title: "Fechas Actualizadas !",
+			showConfirmButton: false,
+			timer: 1200,
+		});
+	})
+	.catch((error) => {
+		if (error.response) {
+			console.log(error.response.data);
+		}
+	});*/
+	}
+	$(evento.target).find('input').attr('data-loaded', false);
+});
+
 
 
 $(document).on('change', '.documentoscheck',function() { 

@@ -339,16 +339,21 @@ function canceladotbl(){
 	});
 }
 
+var xhr;
 $(document).on('click', '.opcionesitem',function() { 
 
 	var idregistro = $(this).find(".data").val();
 
 	if(this.id == 'itemuno'){
-		$.ajax({
+		  if (xhr) {
+			xhr.abort(); 
+		  }
+		  xhr = $.ajax({
 			type:'GET',
 			url: principalUrl+'registro/vistadetallefile/'+idregistro,
 			dataType:"html",
 		}).done(function(data) {
+			$('.contenido').empty();   
 
 			$('.contenido').html(data);   
 	  
