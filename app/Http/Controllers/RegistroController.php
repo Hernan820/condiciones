@@ -186,8 +186,6 @@ class RegistroController extends Controller
         $registro->notas     = $request->registronota ?? '' ;       
 
         //$registro->num_prestamo    = $request->              #MAS ADELANTE SE LLENARAN
-        //$registro->drive           = $request->drive ?? '';
-       // $registro->notas           = $request->notes ?? '';
        // $registro->Appraisal       = $request->             #MAS ADELANTE SE LLENARAN
         $registro->save(); 
 
@@ -203,6 +201,34 @@ class RegistroController extends Controller
         return response()->json(['detalleresgitro' => $detalleresgitro, 'prestamos' => $prestamos],200);
     }
 
+    /**
+     * 
+     * 
+     * 
+     */
+    public function updatefechas(Request $request){
+
+        $registro =  registro::find($request->idregistro);
+
+        if($request->fecharecep != '' && $request->fechafirma != ''){
+            $registro->fecha_recepcion = $request->fecharecep;
+            $registro->fecha_firma     = $request->fechafirma;
+        }
+
+        $registro->save();
+
+        $detalleresgitro = registro::join("users","users.id", "=", "registros.id_usuario")
+        ->join("prestamos","prestamos.id", "=", "registros.id_prestamo")
+        ->join("etapas","etapas.id", "=", "registros.id_etapa")
+        ->select('registros.*','users.*','prestamos.*','etapas.*')
+        ->where('registros.id','=',$request->idregistro)
+        ->get();
+ 
+         $prestamos =prestamo::all();
+               
+         return response()->json(['detalleresgitro' => $detalleresgitro, 'prestamos' => $prestamos],200);
+
+    }
     /**
      * Remove the specified resource from storage.
      *

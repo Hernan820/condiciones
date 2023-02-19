@@ -107,4 +107,5 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('pregunta/actualiza', [App\Http\Controllers\RespuestaClienteController::class, 'update']);
 
+    Route::post('registro/actualizafechas', [App\Http\Controllers\RegistroController::class, 'updatefechas']);
 });
