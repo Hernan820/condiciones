@@ -31,6 +31,7 @@ class CuestionarioController extends Controller
         $cuestionario->detalle     = $request->detalle; 
         $cuestionario->nombre      = $request->name; 
         $cuestionario->flag        = $request->flag; 
+        $cuestionario->estado_cuestionario = 1;
 
         $cuestionario->save();
     }
@@ -54,7 +55,7 @@ class CuestionarioController extends Controller
      */
     public function show( Request $request)
     {
-        $sql = "SELECT * FROM `cuestionarios`" ;
+        $sql = "SELECT * FROM `cuestionarios` where `estado_cuestionario`= 1 " ;
         $Sql = DB::select($sql);
         
         return response()->json($Sql); 
@@ -90,6 +91,7 @@ class CuestionarioController extends Controller
         $cuestionario->detalle     = $request->detalle; 
         $cuestionario->nombre      = $request->name; 
         $cuestionario->flag        = $request->flag; 
+        $cuestionario->estado_cuestionario = 1;
 
         $cuestionario->save();
 
@@ -102,8 +104,11 @@ class CuestionarioController extends Controller
      * @param  \App\Models\cuestionario  $cuestionario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(cuestionario $cuestionario)
+    public function destroy($id)
     {
-        //
+        $cuestionario = cuestionario::find($id);
+        $cuestionario->estado_cuestionario = 0;
+        $cuestionario->save();
+        return 1 ;
     }
 }

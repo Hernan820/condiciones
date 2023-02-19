@@ -142,8 +142,8 @@ $(document).on("click", ".opcionesCuestionario", function () {
             });
     } else if (this.id == "deleteCuestionario") {
         Swal.fire({
-            title: "Delete User",
-            text: "Are you sure to delete the questionnaire?",
+            title: "Delete  Questionary",
+            text: "Are you sure to delete the questionary?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -163,7 +163,7 @@ $(document).on("click", ".opcionesCuestionario", function () {
                             showConfirmButton: false,
                             timer: 1000,
                         });
-                        tblUsers();
+                        tblCuestionario();
                     })
                     .catch((error) => {
                         if (error.response) {

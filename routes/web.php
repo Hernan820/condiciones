@@ -113,4 +113,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('cuestionario/show', [App\Http\Controllers\CuestionarioController::class, 'show'])->name('cuestionario.show');
     Route::post('cuestionario/edita/{id}', [App\Http\Controllers\CuestionarioController::class, 'edit'])->name('cuestionario.edit');
     Route::post('cuestionario/actualiza', [App\Http\Controllers\CuestionarioController::class, 'update'])->name('cuestionario.update');
+    Route::post('cuestionario/delete/{id}', [App\Http\Controllers\CuestionarioController::class, 'destroy'])->name('cuestionario.destroy');
 });
