@@ -40,54 +40,68 @@ $('#vistabancos').on('click', function() {
   })
 });
 
+var xhr;
 $('#vistaregistro').on('click', function() {
    event.preventDefault();
+   if (xhr) {
+    xhr.abort(); 
+  }
+  
+  xhr = $.ajax({
+    type:'GET',
+    url: principalUrl+'condicion/vistaregistros',
+    dataType:"html",
+    cache: false,
+}).done(function(data) {
+  $(".sidebar-item").removeClass("active");
+  $("#itemregistro").addClass("active");
+  $('.contenido').empty();   
 
-   $.ajax({
-      type:'GET',
-      url: principalUrl+'condicion/vistaregistros',
-      dataType:"html",
-  }).done(function(data) {
-    $(".sidebar-item").removeClass("active");
-    $("#itemregistro").addClass("active");
+    $('.contenido').html(data);
 
-      $('.contenido').html(data);   
-
-    });
-
+  });
 });
 
+var hxr;
 $('#vistamanagement').on('click', function() {
     event.preventDefault();
- 
-    $.ajax({
-       type:'GET',
-       url: principalUrl+'user',
-       dataType:"html",
-   }).done(function(data) {
-     $(".sidebar-item").removeClass("active");
-     $("#itemManagement").addClass("active");
- 
-       $('.contenido').html(data);   
- 
-     });
- 
+      
+   if (hxr) {
+    hxr.abort(); 
+  }
+  
+  hxr = $.ajax({
+    type:'GET',
+    url: principalUrl+'user',
+    dataType:"html",
+}).done(function(data) {
+  $(".sidebar-item").removeClass("active");
+  $("#itemManagement").addClass("active");
+
+    $('.contenido').html(data);
+
+  });
  });
 
+ var rxh;
  $('#vistaCompania').on('click', function() {
   event.preventDefault();
 
-  $.ajax({
-     type:'GET',
-     url: principalUrl+'compania',
-     dataType:"html",
- }).done(function(data) {
-   $(".sidebar-item").removeClass("active");
-   $("#itemCompania").addClass("active");
+   if (rxh) {
+    rxh.abort(); 
+  }
+  
+  rxh = $.ajax({
+    type:'GET',
+    url: principalUrl+'compania',
+    dataType:"html",
+}).done(function(data) {
+  $(".sidebar-item").removeClass("active");
+  $("#itemCompania").addClass("active");
 
-     $('.contenido').html(data);   
+    $('.contenido').html(data);
 
-   });
+  });
 
 });
 
