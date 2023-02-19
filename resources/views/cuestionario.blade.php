@@ -96,22 +96,35 @@
             <form id="form-cuestionario" >
                  <div class="modal-body m-3">
                     @csrf
-                    <input id="id-cuestionario" type="hidden" name="id-cuestionario" value="">
+                    <input id="id-cuestionario" type="hidden" name="id">
                     <div class="mb-3">
-                        <label class="form-label">date</label>
-                        <input id="date" type="text" class="form-control"name="date" placeholder="date">
+                        <label for="inputFirstName">Date</label>
+                        <div class="input-group date" id="datetimepicker-minimum-CUESTIONARIO"
+                            data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input"
+                                id="date" name="date" autocomplete="off"
+                                data-target="#datetimepicker-minimum-CUESTIONARIO" />
+                            <div class="input-group-text"
+                                data-target="#datetimepicker-minimum-CUESTIONARIO"
+                                data-toggle="datetimepicker"><i
+                                    class="fa fa-calendar"></i></div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">detail</label>
-                        <input id="detail" type="text" class="form-control"name="detail" placeholder="detail">
+                        <input id="detalle" type="text" class="form-control"name="detalle" placeholder="detail">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">name</label>
                         <input id="name" type="text" class="form-control"name="name" placeholder="name">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">flag</label>
-                        <input id="flag" type="text" class="form-control"name="flag" placeholder="flag">
+                    <div class="mb-3 col-md-12">
+                        <label for="flag">Flag</label>
+                        <select id="flag" name="flag" class="form-control">
+                            <option selected>Chosee...</option>
+                            <option value="1">Cliente</option>
+                            <option value="0">Usuario</option>
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -135,26 +148,22 @@
             <form id="form-pregunta">
                  <div class="modal-body m-3">
                     @csrf
-                    <input id="id-pregunta" type="hidden" name="id-pregunta" value="">
+                    <input id="id_pregunta" type="hidden" name="id_pregunta" value="">
                     <div class="mb-3">
                         <label class="form-label">Title</label>
                         <input id="title" type="text" class="form-control"name="title" placeholder="title">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">status</label>
-                        <input id="status" type="text" class="form-control"name="status" placeholder="status">
+                        <label for="id_cuestionario">Name of questionary</label>
+                        <select id="iden_cuestionario" name="iden_cuestionario" class="form-control">
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Id Questionnares</label>
-                        <input id="iden-cuestionario" type="text" class="form-control"name="iden-cuestionario" placeholder="Id Questionnares">
+                        <label class="form-label w-100">Category</label>
+                        <select id="category" name="category" class="form-control">
+                        </select>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label w-100">Id Category</label>
-                        <input id="category"  name="category" type="text" class="form-control" placeholder="Id Category">
-                    </div>
-                   
-            
-                    <div class="modal-footer">
+                   <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button  id="guardar-pregunta" type="button" class="btn btn-primary">Save changes</button>
                     </div>
@@ -167,4 +176,5 @@
 
 <script>
     $.getScript("{{ asset('js/cuestionario.js') }}");
+    $.getScript("{{ asset('js/pregunta.js') }}");
 </script>
