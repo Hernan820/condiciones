@@ -62,19 +62,25 @@
                         <i class="align-middle me-2 fas fa-fw fa-file-text"></i> <span class="align-middle">Files in process</span>
                         </a>
                     </li> 
-                  @if(@Auth::user()->hasRole('Admin'))
+                  @if(@Auth::user()->hasRole('Admin|master'))
                     <li class="sidebar-item " id="itemManagement">
                         <a class="sidebar-link" href="" id="vistamanagement" >
                             <i class="align-middle me-2 fas fa-fw fa-user"></i> <span class="align-middle">Users Management</span>
                         </a>
                     </li>   
                     @endif
-
+                 @if(@Auth::user()->hasRole('Admin|master'))
                     <li class="sidebar-item " id="itemCompania">
                         <a class="sidebar-link" href="" id="vistaCompania" >
                         	<i class="align-middle me-2 fas fa-fw fa-briefcase"></i> <span class="align-middle">Companies</span>
                         </a>
-                    </li>   
+                    </li> 
+                    @endif
+                    <li class="sidebar-item " id="itemCuestionario">
+                        <a class="sidebar-link" href="" id="vistaCuestionario" >
+                            <i class="align-middle me-2 fas fa-fw fa-question"></i> <span class="align-middle">Questionnaires</span>
+                        </a>
+                    </li> 
                     
 <!-- END  
                      <--<li class="sidebar-item" id="opcioncondiciones">

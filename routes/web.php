@@ -107,5 +107,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('pregunta/actualiza', [App\Http\Controllers\RespuestaClienteController::class, 'update']);
 
+     
     Route::post('registro/actualizafechas', [App\Http\Controllers\RegistroController::class, 'updatefechas']);
+
+    #vista de quiestionarios.
+    Route::get('cuestionario', [App\Http\Controllers\CuestionarioController::class, 'index'])->name('cuestionario.index');
+    Route::post('cuestionario/add', [App\Http\Controllers\CuestionarioController::class, 'create'])->name('cuestionario.create');
+    Route::get('cuestionario/show', [App\Http\Controllers\CuestionarioController::class, 'show'])->name('cuestionario.show');
+
+   
 });
