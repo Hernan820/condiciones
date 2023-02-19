@@ -11,9 +11,50 @@ $(document).ready(function () {
         $("#telefono").mask("(000) 000-0000");
    
     });
+
+//FUNCION PARA VALIDACION
+    function validacuestionario() {
+    
+    var valido = true;
+    var fecha= $("#date").val();
+    var detalle = $("#detalle").val();
+    var nombre = $("#name").val();
+    var flag= $("#flag").val();
+  
+   
+    if (fecha == "") {
+        Swal.fire("¡Add date!");
+        $("#date").focus();
+        return (valido = false);
+    }
+
+    if (detalle == "") {
+        Swal.fire("¡Add Detail!");
+        $("#detalle").focus();
+        return (valido = false);
+    }
+
+    if (nombre == "") {
+        Swal.fire("¡Add name of questionary!");
+        $("#name").focus();
+        return (valido = false);
+    }
+
+    if (flag !=1 && flag != 0) {
+        Swal.fire("¡Add flag!");
+        $("#flag").focus();
+        return (valido = false);
+    }
+
+    return valido;
+}
 // REGISTRAR NUEVO CUESTIONARIO
 $("#guardar-cuestionario").on("click", function () {
-  
+    
+    if (validacuestionario() == false) {
+        return;
+    }
+
     var cuestionario = new FormData(document.getElementById("form-cuestionario"));
     
     cuestionario.append("id",$("#id-cuestionario").val());
@@ -113,7 +154,7 @@ function tblCuestionario() {
         ],
     });
 }
-//Editar
+//Editar Y ELIMINAR
 $(document).on("click", ".opcionesCuestionario", function () {
     var id_cuestionario = $(this).find(".data").val();
 
