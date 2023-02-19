@@ -28,7 +28,7 @@ class CuestionarioController extends Controller
     {
         $cuestionario = new cuestionario(); 
         $cuestionario->fecha      = $request->date; 
-        $cuestionario->detalle     = $request->detail; 
+        $cuestionario->detalle     = $request->detalle; 
         $cuestionario->nombre      = $request->name; 
         $cuestionario->flag        = $request->flag; 
 
@@ -83,9 +83,17 @@ class CuestionarioController extends Controller
      * @param  \App\Models\cuestionario  $cuestionario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, cuestionario $cuestionario)
+    public function update(Request $request)
     {
-        //
+        $cuestionario = cuestionario::find($request->id);
+        $cuestionario->fecha       = $request->date; 
+        $cuestionario->detalle     = $request->detalle; 
+        $cuestionario->nombre      = $request->name; 
+        $cuestionario->flag        = $request->flag; 
+
+        $cuestionario->save();
+
+        return 1;
     }
 
     /**

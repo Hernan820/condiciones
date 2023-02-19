@@ -96,10 +96,8 @@
             <form id="form-cuestionario" >
                  <div class="modal-body m-3">
                     @csrf
-                    <div>
-                        <input id="id-cuestionario" type="hidden" name="id-cuestionario" value="">
-                    </div>
-                   <div class="mb-3">
+                    <input id="id-cuestionario" type="hidden" name="id">
+                    <div class="mb-3">
                         <label for="inputFirstName">Date</label>
                         <div class="input-group date" id="datetimepicker-minimum-CUESTIONARIO"
                             data-target-input="nearest">
@@ -114,7 +112,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">detail</label>
-                        <input id="detail" type="text" class="form-control"name="detail" placeholder="detail">
+                        <input id="detalle" type="text" class="form-control"name="detalle" placeholder="detail">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">name</label>

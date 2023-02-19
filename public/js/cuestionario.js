@@ -1,8 +1,8 @@
 $("#btn-add-cuestionario").on("click", function () {
     $(".modal-title").html("Create new Questionary");
     $("#form-cuestionario")[0].reset();
-    document.getElementById("btnsave").innerText = "Add Questionary";
-    $("#idCompania").val("");
+    document.getElementById("guardar-cuestionario").innerText = "Add Questionary";
+    $("#id-cuestionario").val("");
 });
 
 $(document).ready(function () {
@@ -13,31 +13,66 @@ $(document).ready(function () {
     });
 // REGISTRAR NUEVO CUESTIONARIO
 $("#guardar-cuestionario").on("click", function () {
-   var cuestionario = new FormData();
   
-    cuestionario .append("date", $("#date").val());
-    cuestionario .append("detail", $("#detail").val());
-    cuestionario .append("name", $("#name").val());
-    cuestionario .append("flag", $("#flag").val());
+    var cuestionario = new FormData(document.getElementById("form-cuestionario"));
+    
+    cuestionario.append("id",$("#id-cuestionario").val());
+    cuestionario.append("date",$("#date").val());
+    cuestionario.append("detalle",$("#detalle").val());
+    cuestionario.append("name",$("#name").val());
+    cuestionario.append("flag",$("#flag").val());
+    
 
-    axios.post(principalUrl + "cuestionario/add",cuestionario)
-    .then((respuesta) => {
-		$('#Modal-cuestionario').modal('hide');
-		Swal.fire({
-			position: "top-end",
-			icon: "success",
-			title: "record saved!",
-			showConfirmButton: false,
-			timer: 1200,
-		});
-        tblCuestionario();
-    })
-    .catch((error) => {
-        if (error.response) {
-            console.log(error.response.data);
-        }
-    });
-
+    if ($("#id-cuestionario").val() != "") {
+        axios
+        .post(principalUrl + "cuestionario/actualiza", cuestionario)
+        .then((respuesta) => {
+            console.log(respuesta.data)
+           Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "actualized Questionary!",
+                showConfirmButton: false,
+                timer: 1200,
+            });
+            tblCuestionario();
+            $("#id-cuestionario").val("");
+            $("#date").val("");
+            $("#detalle").val("");
+            $("#name").val("");
+            $("#flag").val("");
+            $("#Modal-cuestionario").modal("hide");
+        })
+        .catch((error) => {
+            if (error.response) {
+                console.log(error.response.data);
+            }
+        });
+    } else {
+        axios.post(principalUrl + "cuestionario/add",cuestionario)
+        .then((respuesta) => {
+            $('#Modal-cuestionario').modal('hide');
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "record saved!",
+                showConfirmButton: false,
+                timer: 1200,
+            });
+            tblCuestionario();
+            $("#id-cuestionario").val("");
+            $("#date").val("");
+            $("#detalle").val("");
+            $("#name").val("");
+            $("#flag").val("");
+            $("#Modal-cuestionario").modal("hide");
+        })
+        .catch((error) => {
+            if (error.response) {
+                console.log(error.response.data);
+            }
+        });
+    }
 });
 
 //funcion para mostrar tabla cuestionario
@@ -91,7 +126,7 @@ $(document).on("click", ".opcionesCuestionario", function () {
                 $("#date").focus();
                 $("#id-cuestionario").val(respuesta.data[0].id);
                 $("#date").val(respuesta.data[0].fecha);
-                $("#detail").val(respuesta.data[0].detalle);
+                $("#detalle").val(respuesta.data[0].detalle);
                 $("#name").val(respuesta.data[0].nombre);
                 $("#flag").val(respuesta.data[0].flag);
                 

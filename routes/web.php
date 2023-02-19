@@ -112,4 +112,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('cuestionario/add', [App\Http\Controllers\CuestionarioController::class, 'create'])->name('cuestionario.create');
     Route::get('cuestionario/show', [App\Http\Controllers\CuestionarioController::class, 'show'])->name('cuestionario.show');
     Route::post('cuestionario/edita/{id}', [App\Http\Controllers\CuestionarioController::class, 'edit'])->name('cuestionario.edit');
+    Route::post('cuestionario/actualiza', [App\Http\Controllers\CuestionarioController::class, 'update'])->name('cuestionario.update');
 });
