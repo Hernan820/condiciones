@@ -65,8 +65,12 @@ class PreguntaController extends Controller
      */
     public function show()
     {
-        $sql = "SELECT preguntas.titulo_pregunta,cuestionarios.nombre,categorias.nombre_categoria,preguntas.id from preguntas INNER JOIN cuestionarios ON preguntas.id_cuestionario = cuestionarios.id INNER JOIN categorias ON preguntas.id_categoria= categorias.id WHERE preguntas.estado_pregunta = 1; " ;
-        $pregunta = DB::select($sql);
+        $pregunta = pregunta::join("cuestionarios","preguntas.id_cuestionario", "=", "cuestionarios.id")
+        ->join("categorias","preguntas.id_categoria", "=", "categorias.id")
+        ->select("preguntas.titulo_pregunta","cuestionarios.nombre","categorias.nombre_categoria","preguntas.id")
+        ->where("preguntas.estado_pregunta","=","1")
+        ->get();
+
 
         return response()->json($pregunta); 
         
@@ -78,9 +82,16 @@ class PreguntaController extends Controller
      * @param  \App\Models\pregunta  $pregunta
      * @return \Illuminate\Http\Response
      */
-    public function edit(pregunta $pregunta)
+    public function edit($id)
     {
-        //
+        $pregunta = pregunta::join("cuestionarios","preguntas.id_cuestionario", "=", "cuestionarios.id")
+        ->join("categorias","preguntas.id_categoria", "=", "categorias.id")
+        ->select("preguntas.titulo_pregunta","cuestionarios.id as idcuestionario","categorias.id as idcategoria","preguntas.id as id_pregunta")
+        ->where("preguntas.estado_pregunta","=","1")
+        ->where("preguntas.id","=",$id)
+        ->get();
+
+        return response()->json($pregunta); 
     }
 
     /**

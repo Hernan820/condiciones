@@ -147,7 +147,7 @@
             <form id="form-pregunta">
                  <div class="modal-body m-3">
                     @csrf
-                    <input id="id_pregunta" type="hidden" name="id_pregunta" value="">
+                    <input id="id_pregunta" type="hidden" name="id" value="">
                     <div class="mb-3">
                         <label class="form-label">Title</label>
                         <input id="title" type="text" class="form-control"name="title" placeholder="title">

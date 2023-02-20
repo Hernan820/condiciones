@@ -119,9 +119,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('cuestionario/delete/{id}', [App\Http\Controllers\CuestionarioController::class, 'destroy'])->name('cuestionario.destroy');
 
     #vista pregunta 
-    Route::post('pregunta/idcuestionario', [App\Http\Controllers\PreguntaController::class, 'namecuestionario'])->name('pregunta.namecuestionario');
-    Route::post('pregunta/category', [App\Http\Controllers\PreguntaController::class, 'categoriaName'])->name('pregunta.categoriaName');
+    Route::get('pregunta/idcuestionario', [App\Http\Controllers\PreguntaController::class, 'namecuestionario'])->name('pregunta.namecuestionario');
+    Route::get('pregunta/category', [App\Http\Controllers\PreguntaController::class, 'categoriaName'])->name('pregunta.categoriaName');
     Route::post('pregunta/add', [App\Http\Controllers\PreguntaController::class, 'create'])->name('pregunta.create');
     Route::get('pregunta/show', [App\Http\Controllers\PreguntaController::class, 'show'])->name('pregunta.show');
-
+    Route::post('pregunta/edita/{id}', [App\Http\Controllers\PreguntaController::class, 'edit'])->name('pregunta.edit');
+    
 });
