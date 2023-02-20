@@ -101,9 +101,16 @@ class PreguntaController extends Controller
      * @param  \App\Models\pregunta  $pregunta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, pregunta $pregunta)
+    public function update(Request $request)
     {
-        //
+        $pregunta = pregunta::find($request->idPregunta);
+        $pregunta->titulo_pregunta     = $request->title; 
+        $pregunta->id_cuestionario     = $request->iden_cuestionario; 
+        $pregunta->id_categoria        = $request->category; 
+        $pregunta->estado_pregunta  = 1;
+        $pregunta->save();
+
+        return 1;
     }
 
     /**

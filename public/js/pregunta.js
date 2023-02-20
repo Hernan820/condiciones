@@ -3,6 +3,8 @@ $("#btn-add-pregunta").on("click", function () {
     $("#form-pregunta")[0].reset();
     document.getElementById("guardar-pregunta").innerText = "Add Question";
     $("#id_pregunta").val("");
+    namecuestionario();
+    categoriaName();
 });
 
 //document
@@ -15,12 +17,38 @@ $(document).ready(function () {
 $("#guardar-pregunta").on("click", function () {
     
     var pregunta = new FormData(document.getElementById("form-pregunta"));
-    
-    pregunta.append("id_pregunta",$("#id_pregunta").val());
+
+    pregunta.append("idPregunta",$("#id_pregunta").val());
     pregunta.append("title",$("#title").val());
     pregunta.append("iden_cuestionario",$("#iden_cuestionario").val());
     pregunta.append("category",$("#category").val());
-   
+
+    if ($("#id_pregunta").val() != "") {
+        axios
+        .post(principalUrl + "pregunta/actualiza", pregunta)
+        .then((respuesta) => {
+            console.log(respuesta.data)
+           Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "actualized Question!",
+                showConfirmButton: false,
+                timer: 1200,
+            });
+            tblPregunta();
+            $("#id_pregunta").val("");
+            $("#title").val("");
+            $("#iden_cuestionario").val("");
+            $("#category").val("");
+            $("#Modal-pregunta").modal("hide");
+        })
+        .catch((error) => {
+            if (error.response) {
+                console.log(error.response.data);
+            }
+        });
+        
+    } else {
         axios.post(principalUrl + "pregunta/add",pregunta)
         .then((respuesta) => {
             $('#Modal-pregunta').modal('hide');
@@ -43,6 +71,7 @@ $("#guardar-pregunta").on("click", function () {
             console.log(error.response.data);
         }
     });
+    }
 });
 //funcion para mostrar tabla cuestionario
 function tblPregunta() {
@@ -84,7 +113,7 @@ $(document).on("click", ".opcionesPreguntas", function () {
             .then((respuesta) => {
                 $(".modal-title").html("Edit Question");
                 $("#title").focus();
-                $("#id_pregunta").val(respuesta.data[0].id);
+                $("#id_pregunta").val(respuesta.data[0].id_pregunta);
                 $("#title").val(respuesta.data[0].titulo_pregunta);
                 $("#iden_cuestionario").val(respuesta.data[0].idcuestionario);
                 $("#category").val(respuesta.data[0].idcategoria);

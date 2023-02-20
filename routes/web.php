@@ -124,5 +124,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('pregunta/add', [App\Http\Controllers\PreguntaController::class, 'create'])->name('pregunta.create');
     Route::get('pregunta/show', [App\Http\Controllers\PreguntaController::class, 'show'])->name('pregunta.show');
     Route::post('pregunta/edita/{id}', [App\Http\Controllers\PreguntaController::class, 'edit'])->name('pregunta.edit');
+    Route::post('pregunta/actualiza', [App\Http\Controllers\PreguntaController::class, 'update'])->name('pregunta.update');
     
 });
