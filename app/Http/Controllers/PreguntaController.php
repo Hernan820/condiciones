@@ -119,8 +119,11 @@ class PreguntaController extends Controller
      * @param  \App\Models\pregunta  $pregunta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(pregunta $pregunta)
+    public function destroy($id)
     {
-        //
+        $pregunta = pregunta::find($id);
+        $pregunta->estado_pregunta = 0;
+        $pregunta->save();
+        return 1 ;
     }
 }

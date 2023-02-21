@@ -129,7 +129,7 @@ $(document).on("click", ".opcionesPreguntas", function () {
             });
     } else if (this.id == "deletePregunta") {
         Swal.fire({
-            title: "Delete  Questionary",
+            title: "Delete  Question",
             text: "Are you sure to delete the question?",
             icon: "warning",
             showCancelButton: true,
