@@ -119,8 +119,8 @@
                             }
                             </style>
 
-                            <div class="col-md-9 col-xl-9">
-                                <div class="tab-content" id="tablasquestion">
+                            <div class="col-md-9 col-xl-9 mb-0 p-0">
+                                <div class="tab-content mb-0 p-0" id="tablasquestion">
 
                                 </div>
                             </div>

@@ -109,7 +109,7 @@ function tbldetalleregistro(detalleregistro,tiposprestamos) {
 		"<tr><th>Telephone</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text'  onchange='registrodetalle(this)' name='telefonoprecesor_"+element.id+"' id='telefonoprecesor_"+element.id+"' value='"+element.telefono_precesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>");
 		$('#telefonoprecesor_'+element.id).mask('(000) 000-0000');
 		$('#dowpayment_'+element.id).mask('00%');
-		$('#notaderegistro').append('<textarea rows="6" class="form-control detalleregistro" name="notes_'+element.id+'" id="notes_'+element.id+'" style="border:0px">'+element.notas+'</textarea>');
+		$('#notaderegistro').append('<textarea rows="6" class="form-control detalleregistro" onchange="registrodetalle(this)" name="notes_'+element.id+'" id="notes_'+element.id+'" style="border:0px">'+element.notas+'</textarea>');
 		$('#datetimepicker-registro').datetimepicker({format: 'L'});
 	    $('#datetimepicker-registrorecibido').datetimepicker();
 	});	
@@ -210,7 +210,7 @@ function muestra_preguntasrespuesta(datosdepregunta){
 	tiposcuestionario.forEach(function (nombrecuestion,i) {
 		$("#pestanascuestion").append('<a class="list-group-item list-group-item-action" id="item'+nombrecuestion+'" data-bs-toggle="list" href="#'+nombrecuestion+'" role="tab" style="font-size:10px">'+nombrecuestion+'</a>')
 
-		$("#tablasquestion").append('<div class="tab-pane fade " id="'+nombrecuestion+'" role="tabpanel"><div class="card"> <div class="card-body"><h5 class="card-title"> Complete the following form</h5> <table class="table table-bordered small-text1" id="table'+nombrecuestion+'">'+
+		$("#tablasquestion").append('<div class="tab-pane fade " id="'+nombrecuestion+'" role="tabpanel"><div class="card"> <div class="card-body mb-0 p-0"><h5 class="card-title"> Complete the following form</h5> <table class="table table-bordered small-text1" id="table'+nombrecuestion+'">'+
 		'<thead> <tr></tr>'+
 		'</thead><tbody id="question">'+
 		'</tbody></table>    </div></div></div>')
@@ -407,7 +407,7 @@ $(document).on('change', '.respuestacliente',function() {
 	datosrespuesta.append("respuestapregunta",$('#respuestapregunta_'+id_respuesta).val());
 	datosrespuesta.append("idregistro",$('#idregistro').val());
 
-	axios.post(principalUrl+"pregunta/actualiza",datosrespuesta)
+	axios.post(principalUrl+"pregunta/actualizarespuesta",datosrespuesta)
     .then((respuesta) => {
 		Swal.fire({
 			position: "top-end",
