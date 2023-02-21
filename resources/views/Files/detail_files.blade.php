@@ -6,8 +6,8 @@
     </h1>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard-default.html">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Files</a></li>
+            <li class="breadcrumb-item">Home</li>
+            <li class="breadcrumb-item">Files</li>
             <li class="breadcrumb-item"><b>Status: in process</b></li>
             <li class="breadcrumb-item"><b>File Porcessor: <span id="nameuser"></span> </b></li>
         </ol>
@@ -22,7 +22,7 @@
 
                     <div class="d-inline-block dropdown show">
                         <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
-                            <i class="align-middle" data-feather="more-vertical"></i>
+                            <i class="align-middle me-2 fas fa-fw fa-ellipsis-v" data-feather="more-vertical"></i>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end">
@@ -63,11 +63,11 @@
             <div class="tab">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item"><a class="nav-link active" href="#tab-1" data-bs-toggle="tab" role="tab"><i
-                                class="align-middle me-2" data-feather="list"></i> Check list</a></li>
+                                class="align-middle me-2 fas fa-fw fa-list-ul" data-feather="list"></i> Check list</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tab-2" data-bs-toggle="tab" role="tab"><i
-                                class="align-middle me-2" data-feather="server"></i> Questionnaires</a></li>
+                                class="align-middle me-2 fas fa-fw fa-server" data-feather="server"></i> Questionnaires</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tab-3" data-bs-toggle="tab" role="tab"><i
-                                class="align-middle me-2" data-feather="message-square"></i> Follow ups</a></li>
+                                class="align-middle me-2 far fa-fw fa-comment-alt" data-feather="message-square"></i> Follow ups</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab-1" role="tabpanel">
@@ -152,7 +152,7 @@
 
                     <div class="d-inline-block dropdown show">
                         <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
-                            <i class="align-middle" data-feather="more-vertical"></i>
+                            <i class="align-middle me-2 fas fa-fw fa-ellipsis-v" data-feather="more-vertical"></i>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end">
