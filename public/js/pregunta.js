@@ -14,7 +14,40 @@ $(document).ready(function () {
     tblPregunta();
   });
 
+//FUNCION PARA VALIDACION
+function validapregunta() {
+    
+    var valido = true;
+    var title= $("#title").val();
+    var idcuestionary = $("#iden_cuestionario").val();
+    var category= $("#category").val();
+    
+    if (title == "") {
+        Swal.fire("¡Add title!");
+        $("title").focus();
+        return (valido = false);
+    }
+
+    if (idcuestionary == "") {
+        Swal.fire("¡Add Questionary Name!");
+        $("#iden_cuestionario").focus();
+        return (valido = false);
+    }
+
+    if (category == "") {
+        Swal.fire("¡Add name of category!");
+        $("#category").focus();
+        return (valido = false);
+    }
+
+    return valido;
+}
+
 $("#guardar-pregunta").on("click", function () {
+
+    if (validapregunta() == false) {
+        return;
+    }
     
     var pregunta = new FormData(document.getElementById("form-pregunta"));
 
