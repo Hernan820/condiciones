@@ -1,7 +1,7 @@
 var clipboard = new Clipboard('#copiarinfo');
 
-$('#datetimepicker-minimum').datetimepicker({format: 'L'});
-$('#datetimepicker-minimum2').datetimepicker();
+$('#datetimepicker-minimum').datetimepicker({format: 'YYYY-MM-DD'});
+$('#datetimepicker-minimum2').datetimepicker({format: 'YYYY-MM-DD'});
 
 // Select2
 $(".select2").each(function() { 

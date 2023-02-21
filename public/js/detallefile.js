@@ -96,24 +96,17 @@ function tbldetalleregistro(detalleregistro,tiposprestamos) {
 
 	detalleregistro.forEach(function (element) { 
 
-		$("#registrocliente").append("<tr><th>Contract date</th><td><div class='col-md-12'><div class='col-sm-12'>    <div class='mb-3'>"+
-		"<div class='input-group date ' id='datetimepicker-registro'			data-target-input='nearest'>"+
-		"<input type='text' class='form-control datetimepicker-input detalleregistrofecha' id='fechafirma' name='fechafirma_"+element.id+"' value='"+element.fecha_firma+"' autocomplete='off' style='border: 0px;'  data-target='#datetimepicker-registro' data-loaded='true' />"+
-		"<div class='input-group-text ' data-target='#datetimepicker-registro' data-toggle='datetimepicker'><i class='fa fa-calendar'></i></div></div>"+
-	     "</div></div></div></td></tr>"+
-		"<tr><th>Contract receipt date</th><td><div class='col-md-12'><div class='col-sm-12'><div class='mb-3'><div class='input-group date ' id='datetimepicker-registrorecibido' data-target-input='nearest'>"+
-		"<input type='text' class='form-control datetimepicker-input detalleregistrofecha' name='fecharecep_"+element.id+"' id='fecharecibido' value='"+element.fecha_recepcion+"' autocomplete='off' style='border: 0px;' data-target='#datetimepicker-registrorecibido' data-loaded='true' />"+
-		"<div class='input-group-text 'data-target='#datetimepicker-registrorecibido' data-toggle='datetimepicker'><i class='fa fa-calendar'></i></div>"+
-		"</div>	</div></div></div></td></tr>"+
-		"<tr><th>State</th><!-- Select --><td><div class='col-md-12'><div class='col-sm-12'>  <select id='estadocasa' name='estadocasa_"+element.id+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></select></div></div></td></tr>"+
-		"<tr><th>Property adress</th><td> <div class='col-md-12'><div class='col-sm-12'><input type='text' name='direccionregistro_"+element.id+"' id='direccionregistro_"+element.id+"'  value='"+element.direccion_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Purchace Price</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='preciocasa_"+element.id+"' id='preciocasa_"+element.id+"' value='"+element.precio_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Down payment</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='dowpayment_"+element.id+"' id='dowpayment_"+element.id+"' value='"+element.dowpayment+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Type of loan</th><td><div class='col-md-12'><div class='col-sm-12'><select id='prestamonombre' name='prestamonombre_"+element.id+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></select></div></div></td></tr>"+
+		$("#registrocliente").append("<tr><th>Contract date</th><td> <div class='form-group col-md-12'> <input type='date' class='form-control detalleregistro'  onchange='registrodetalle(this)' id='fechacontrato'  name='fechacontrato_"+element.id+"' value='"+element.fecha_firma+"' > </div></td></tr>"+
+		"<tr><th>Contract receipt date</th><td>    <div class='form-group col-md-12'> <input type='date' class='form-control detalleregistro' onchange='registrodetalle(this)' id='fecharecep'  name='fecharecep_"+element.id+"'  value='"+element.fecha_recepcion+"'>	  </div> </td></tr>"+
+		"<tr><th>State</th><!-- Select --><td><div class='col-md-12'><div class='col-sm-12'>  <select  onchange='registrodetalle(this)' id='estadocasa' name='estadocasa_"+element.id+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></select></div></div></td></tr>"+
+		"<tr><th>Property adress</th><td> <div class='col-md-12'><div class='col-sm-12'><input onchange='registrodetalle(this)' type='text' name='direccionregistro_"+element.id+"' id='direccionregistro_"+element.id+"'  value='"+element.direccion_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Purchace Price</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text'  onchange='registrodetalle(this)' name='preciocasa_"+element.id+"' id='preciocasa_"+element.id+"' value='"+element.precio_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Down payment</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text'  onchange='registrodetalle(this)' name='dowpayment_"+element.id+"' id='dowpayment_"+element.id+"' value='"+element.dowpayment+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Type of loan</th><td><div class='col-md-12'><div class='col-sm-12'><select id='prestamonombre' name='prestamonombre_"+element.id+"'  onchange='registrodetalle(this)' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></select></div></div></td></tr>"+
 		"<tr><th>Drive</th><td></td></tr>"+
-		"<tr><td colspan='2'><input type='text' name='drive_"+element.id+"' id='drive_"+element.id+"' value='"+element.drive+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'>    </td></tr>"+
-		"<tr><th>Realtor name</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='procesadorname_"+element.id+"' id='procesadorname_"+element.id+"' value='"+element.procesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Telephone</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='telefonoprecesor_"+element.id+"' id='telefonoprecesor_"+element.id+"' value='"+element.telefono_precesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>");
+		"<tr><td colspan='2'><input type='text' onchange='registrodetalle(this)' name='drive_"+element.id+"' id='drive_"+element.id+"' value='"+element.drive+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'>    </td></tr>"+
+		"<tr><th>Realtor name</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text'  onchange='registrodetalle(this)' name='procesadorname_"+element.id+"' id='procesadorname_"+element.id+"' value='"+element.procesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
+		"<tr><th>Telephone</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text'  onchange='registrodetalle(this)' name='telefonoprecesor_"+element.id+"' id='telefonoprecesor_"+element.id+"' value='"+element.telefono_precesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>");
 		$('#telefonoprecesor_'+element.id).mask('(000) 000-0000');
 		$('#dowpayment_'+element.id).mask('00%');
 		$('#notaderegistro').append('<textarea rows="6" class="form-control detalleregistro" name="notes_'+element.id+'" id="notes_'+element.id+'" style="border:0px">'+element.notas+'</textarea>');
@@ -335,13 +328,13 @@ $(document).on('change', '.cliente',function() {
   
  });
 
-$(document).on('change', '.detalleregistro',function() { 
-	var nameinput = $(this).attr("name");
+function registrodetalle(btn){
+	var nameinput = $(btn).attr("name");
 	var idregistro =nameinput.split('_')[1];
 
 	var datosregistro = new FormData();
-	datosregistro.append("fechafirma",$('#fechafirma_'+idregistro).val());
-	datosregistro.append("fecharecep",$('#fecharecep_'+idregistro).val());
+	datosregistro.append("fechafirma",$('#fechacontrato').val());
+	datosregistro.append("fecharecep",$('#fecharecep').val());
 	datosregistro.append("estadocasa",$('#estadocasa').val());
 	datosregistro.append("direccionregistro",$('#direccionregistro_'+idregistro).val());
 	datosregistro.append("preciocasa",$('#preciocasa_'+idregistro).val());
@@ -370,45 +363,7 @@ $(document).on('change', '.detalleregistro',function() {
             console.log(error.response.data);
         }
     });
- });
-
-
-$(document).on('change.datetimepicker',function(evento){
-	var inputdata =	$(evento.target).find('input').attr('data-loaded');
-	var nameinput = $(evento.target).find('input').attr("name");
-	var idregistro =nameinput.split('_')[1];
-
-	if (inputdata === 'false') {
-
-		console.log('entro al change');
-/*
-	var datosfechas = new FormData();
-	datosfechas.append("fechafirma",$('#fechafirma').val());
-	datosfechas.append("fecharecep",$('#fecharecibido').val());
-	datosfechas.append("idregistro",$('#idregistro').val());
-
-	axios.post(principalUrl+"registro/actualizafechas",datosfechas)
-	.then((respuesta) => {
-		tbldetalleregistro(respuesta.data.detalleresgitro,respuesta.data.prestamos);
-		respuesta.data
-		Swal.fire({
-			position: "top-end",
-			icon: "success",
-			title: "Fechas Actualizadas !",
-			showConfirmButton: false,
-			timer: 1200,
-		});
-	})
-	.catch((error) => {
-		if (error.response) {
-			console.log(error.response.data);
-		}
-	});*/
-	}
-	$(evento.target).find('input').attr('data-loaded', false);
-});
-
-
+}
 
 $(document).on('change', '.documentoscheck',function() { 
 	var nameinput = $(this).attr("name");
