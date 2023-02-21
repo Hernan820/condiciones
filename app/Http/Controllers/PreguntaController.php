@@ -63,10 +63,18 @@ class PreguntaController extends Controller
      * @param  \App\Models\pregunta  $pregunta
      * @return \Illuminate\Http\Response
      */
-    public function show(pregunta $pregunta)
+    public function show()
     {
-        //
-    }
+        $pregunta = pregunta::join("cuestionarios","preguntas.id_cuestionario", "=", "cuestionarios.id")
+        ->join("categorias","preguntas.id_categoria", "=", "categorias.id")
+        ->select("preguntas.titulo_pregunta","cuestionarios.nombre","categorias.nombre_categoria","preguntas.id")
+        ->where("preguntas.estado_pregunta","=","1")
+        ->get();
+
+
+        return response()->json($pregunta); 
+        
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -74,9 +82,16 @@ class PreguntaController extends Controller
      * @param  \App\Models\pregunta  $pregunta
      * @return \Illuminate\Http\Response
      */
-    public function edit(pregunta $pregunta)
+    public function edit($id)
     {
-        //
+        $pregunta = pregunta::join("cuestionarios","preguntas.id_cuestionario", "=", "cuestionarios.id")
+        ->join("categorias","preguntas.id_categoria", "=", "categorias.id")
+        ->select("preguntas.titulo_pregunta","cuestionarios.id as idcuestionario","categorias.id as idcategoria","preguntas.id as id_pregunta")
+        ->where("preguntas.estado_pregunta","=","1")
+        ->where("preguntas.id","=",$id)
+        ->get();
+
+        return response()->json($pregunta); 
     }
 
     /**
@@ -86,9 +101,16 @@ class PreguntaController extends Controller
      * @param  \App\Models\pregunta  $pregunta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, pregunta $pregunta)
+    public function update(Request $request)
     {
-        //
+        $pregunta = pregunta::find($request->idPregunta);
+        $pregunta->titulo_pregunta     = $request->title; 
+        $pregunta->id_cuestionario     = $request->iden_cuestionario; 
+        $pregunta->id_categoria        = $request->category; 
+        $pregunta->estado_pregunta  = 1;
+        $pregunta->save();
+
+        return 1;
     }
 
     /**
@@ -97,8 +119,11 @@ class PreguntaController extends Controller
      * @param  \App\Models\pregunta  $pregunta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(pregunta $pregunta)
+    public function destroy($id)
     {
-        //
+        $pregunta = pregunta::find($id);
+        $pregunta->estado_pregunta = 0;
+        $pregunta->save();
+        return 1 ;
     }
 }

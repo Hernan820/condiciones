@@ -211,8 +211,7 @@ $(document).on("click", ".opcionesCuestionario", function () {
                             console.log(error.response.data);
                         }
                     });
-            } else {
-            }
+            } 
         });
     }
 });
