@@ -86,7 +86,7 @@ class RegistroController extends Controller
                     }
                     $cuestionario_client->save();
 
-                    $preguntas = DB::select("SELECT * FROM `preguntas` WHERE preguntas.id_cuestionario = $cuestionario;");
+                    $preguntas = DB::select("SELECT * FROM `preguntas` WHERE preguntas.id_cuestionario = $cuestionario AND preguntas.estado_pregunta = 1;");
 
                     foreach ($preguntas as $pregunta) {
                     $respuestascliente = new respuesta_cliente;
