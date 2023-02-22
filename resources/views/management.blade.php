@@ -19,7 +19,14 @@
 
     <div class="col-12 col-lg-12">
         <div class="tab">
-            
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link active" href="#tab-1" data-bs-toggle="tab" role="tab">
+                        <i class="align-middle me-2 fas fa-fw fa-user-check"></i> Users</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#tab-2" data-bs-toggle="tab" role="tab">
+                    <i class="align-middle me-2 fas fa-fw fa-users"></i>Roles</a>
+                </li>
+            </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab-1" role="tabpanel">
                     <h4 class="tab-title">
@@ -47,7 +54,31 @@
                         </table>
                     </div>
                 </div>
-              
+              <!--tabla roles-->
+              <div class="tab-pane active" id="tab-2" role="tabpanel">
+                <h4 class="tab-title">
+                  Role Management
+                </h4>
+                <br>
+                <button accesskey="a" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalRol" id="btnnewRole"><i
+                        class="fas fa-fw fa-users"></i> Add new Role</button><br><br>
+                <div class="card-body">
+                    <table id="datatables-reponsiveUser" class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>NO</th>
+                                <th>NAME</th>
+                                <th>PERMISSIONS</th>
+                                <th>OPCION</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             </div>
         </div>
     </div>
@@ -109,6 +140,38 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="btnsave">Save changes</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--modal nem role-->
+
+<div class="modal fade" id="ModalRol" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create New Rol </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body m-3">
+                <form  class=""id="formRol">
+                    <input id="iduser" type="hidden" name="id" value="">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input id="name_rol"  id="" type="text" class="form-control"name="name" placeholder="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="permisos">Permissions</label>
+                        <select id="permisos" name="permisos" class="form-control">
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnsave-rol">Save changes</button>
 
             </div>
         </div>

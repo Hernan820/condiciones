@@ -326,7 +326,7 @@
                         </div>
                         <div class="col-4 text-end">
                         <p class="mb-0">
-								&copy; 2022 - <a href="https://contigomortgage.com" class="text-muted">Contigo Mortgage</a>
+								&copy; <?php echo date('Y'); ?> <a href="https://contigomortgage.com" class="text-muted">Contigo Mortgage</a>
 							</p>
                         </div>
                     </div>
