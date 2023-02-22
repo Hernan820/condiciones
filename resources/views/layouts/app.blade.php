@@ -8,7 +8,7 @@
     <meta name="description" content="Modern, flexible and responsive Bootstrap 5 admin &amp; dashboard template">
     <meta name="author" content="Bootlab">
 
-    <title>Spark</title>
+    <title>Loan management.</title>
 
     <!-- PICK ONE OF THE STYLES BELOW -->
     <!-- <link href="css/modern.css" rel="stylesheet"> -->

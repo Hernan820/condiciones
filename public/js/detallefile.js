@@ -73,7 +73,7 @@ $(document).ready(function () {
 					  "</td>"+
 		   "</tr><tr>"+
 			   "<th>SSN</th>"+
-			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='ssn_"+element.id+"' id='ssn_"+element.id+"' value='"+element.socials_number+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
+			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' placeholder='(000) 000-0000' name='ssn_"+element.id+"' id='ssn_"+element.id+"' value='"+element.socials_number+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
 		   "</tr><tr>"+
 			   "<th>Email</th>"+
 			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='correo_"+element.id+"' id='correo_"+element.id+"' value='"+element.correo+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
@@ -84,6 +84,8 @@ $(document).ready(function () {
 			   "<th>Former address</th>"+
 			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='segundadireccion_"+element.id+"' id='segundadireccion_"+element.id+"' value='"+element.direcionalternativa+"' class='form-control cliente' style='border: 0px;'></div></div></td></tr>"); 
 			   $('#telefono_'+element.id).mask('(000) 000-0000');
+			   $('#ssn_'+element.id).mask('(000) 000-0000');
+	         
 
 		});
 }

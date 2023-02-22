@@ -177,7 +177,7 @@ $(document).on("click", ".opcionesUser", function () {
                         Swal.fire({
                             position: "top-end",
                             icon: "success",
-                            title: "registro actualizado!",
+                            title: "User Deleted!",
                             showConfirmButton: false,
                             timer: 1000,
                         });
@@ -224,7 +224,7 @@ $("#btnsave").on("click", function () {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "actualized User!",
+                    title: "updated user!",
                     showConfirmButton: false,
                     timer: 1200,
                 });

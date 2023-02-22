@@ -214,7 +214,7 @@
                                                     <div class="mb-3">
                                                         <label for="ssn" style="margin-top: 7px;">SSN</label>
                                                         <input type="email" class="form-control inputclient" id="ssn"
-                                                            name="ssn" placeholder="" autocomplete="off">
+                                                            name="ssn" placeholder="000-00-0000" autocomplete="off">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="inputEmail4" style="margin-top: 7px;">Email</label>
