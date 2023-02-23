@@ -130,4 +130,7 @@ Route::middleware(['auth'])->group(function () {
     #VISTA DE TO OPENING
     Route::get('vista/opening', [App\Http\Controllers\RegistroController::class, 'index']);
 
+    Route::get('registro/opnening', [App\Http\Controllers\RegistroController::class, 'opening']);
+
+    Route::post('registro/fecha/{id}', [App\Http\Controllers\RegistroController::class, 'fechaopening']);
 });

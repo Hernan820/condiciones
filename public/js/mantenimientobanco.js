@@ -120,7 +120,7 @@ $('#vistaopening').on('click', function() {
    dataType:"html",
 }).done(function(data) {
  $(".sidebar-item").removeClass("active");
- $("#itemCompania").addClass("active");
+ $("#itemOpenign").addClass("active");
 
    $('.contenido').html(data);
 

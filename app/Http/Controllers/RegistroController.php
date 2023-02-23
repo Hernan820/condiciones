@@ -307,4 +307,32 @@ class RegistroController extends Controller
 
         return response()->json($registros);        
     }
+
+    /**
+     *
+     */
+    public function opening(){
+
+        $sql = "SELECT prestamos.*, clientes.*, registros.*, registros.id as idregister FROM `registros` 
+        INNER JOIN clientes_registros on clientes_registros.id_registro = registros.id
+        INNER JOIN clientes on clientes.id = clientes_registros.id_cliente
+        INNER JOIN prestamos on prestamos.id = registros.id_prestamo
+        WHERE registros.id_etapa  in(2)  AND clientes.tipe_client = 1  AND registros.id_estado != 3;";
+
+        $registros = DB::select($sql);
+
+        return response()->json($registros);  
+    }
+    /**
+     * 
+     */
+    public function fechaopening($id){
+
+        $registro= registro::find($id);
+         if($registro->fecha_abierto == null){
+            $registro->fecha_abierto = date('Y-m-d'); 
+         }
+        $registro->save();
+        return 1 ;
+    }
 }
