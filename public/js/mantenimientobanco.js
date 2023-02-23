@@ -90,7 +90,7 @@ $('#vistamanagement').on('click', function() {
    if (rxh) {
     rxh.abort(); 
   }
-  
+
   rxh = $.ajax({
     type:'GET',
     url: principalUrl+'compania',
@@ -104,6 +104,30 @@ $('#vistamanagement').on('click', function() {
   });
 
 });
+
+//vista de Sent yo opening
+var xxr;
+$('#vistaopening').on('click', function() {
+ event.preventDefault();
+
+  if (xxr) {
+   xxr.abort(); 
+ }
+
+ xxr = $.ajax({
+   type:'GET',
+   url: principalUrl+'vista/opening',
+   dataType:"html",
+}).done(function(data) {
+ $(".sidebar-item").removeClass("active");
+ $("#itemCompania").addClass("active");
+
+   $('.contenido').html(data);
+
+ });
+
+});
+
 //vista questionario
 $('#vistaCuestionario').on('click', function() {
   event.preventDefault();

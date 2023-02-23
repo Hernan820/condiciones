@@ -126,4 +126,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('pregunta/edita/{id}', [App\Http\Controllers\PreguntaController::class, 'edit'])->name('pregunta.edit');
     Route::post('pregunta/actualiza', [App\Http\Controllers\PreguntaController::class, 'update'])->name('pregunta.update');
     Route::post('pregunta/delete/{id}', [App\Http\Controllers\PreguntaController::class, 'destroy'])->name('pregunta.destroy');
+
+    #VISTA DE TO OPENING
+    Route::get('vista/opening', [App\Http\Controllers\RegistroController::class, 'index']);
+
 });

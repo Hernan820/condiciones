@@ -81,7 +81,12 @@
                             <i class="align-middle me-2 fas fa-fw fa-question"></i> <span class="align-middle">Questionnaires</span>
                         </a>
                     </li> 
-                    
+
+                    <li class="sidebar-item " id="itemOpenign">
+                        <a class="sidebar-link" href="" id="vistaopening" >
+                            <i class="align-middle me-2 fas fa-fw fa-folder"></i> <span class="align-middle">Files to opening</span>
+                        </a>
+                    </li>                     
 <!-- END  
                      <--<li class="sidebar-item" id="opcioncondiciones">
                         <a class="sidebar-link" id="vistabancos" href="">

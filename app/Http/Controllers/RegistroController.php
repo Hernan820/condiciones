@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\prestamo;
 use App\Models\respuesta_cliente;
+use View;
 
 class RegistroController extends Controller
 {
@@ -20,7 +21,7 @@ class RegistroController extends Controller
      */
     public function index()
     {
-        //
+        return View::make('Files.sent_opening')->render();
     }
 
     /**
