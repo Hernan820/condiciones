@@ -55,7 +55,7 @@
                     </div>
                 </div>
               <!--tabla roles-->
-              <div class="tab-pane active" id="tab-2" role="tabpanel">
+              <div class="tab-pane" id="tab-2" role="tabpanel">
                 <h4 class="tab-title">
                   Role Management
                 </h4>
@@ -63,11 +63,11 @@
                 <button accesskey="a" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalRol" id="btnnewRole"><i
                         class="fas fa-fw fa-users"></i> Add new Role</button><br><br>
                 <div class="card-body">
-                    <table id="datatables-reponsiveUser" class="table table-striped" style="width:100%">
+                    <table id="tabla-roles" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>NO</th>
-                                <th>NAME</th>
+                                <th>NAME ROL</th>
                                 <th>PERMISSIONS</th>
                                 <th>OPCION</th>
                                 
@@ -157,28 +157,52 @@
             </div>
             <div class="modal-body m-3">
                 <form  class=""id="formRol">
-                    <input id="iduser" type="hidden" name="id" value="">
+                    <input id="idRol" type="hidden" name="id" value="">
                     <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input id="name_rol"  id="" type="text" class="form-control"name="name" placeholder="name">
+                        <label class="form-label">Name Rol</label>
+                        <input id="name_rol"  type="text" class="form-control"name="name" placeholder="name">
                     </div>
                     <div class="mb-3">
                         <label for="permisos">Permissions</label>
                         <select id="permisos" name="permisos" class="form-control">
                         </select>
                     </div>
+                    <div>
+                    <button id="btn-addpermi" name="btn-addpermi" class="btn btn-primary" type="button">Add Permission</button>
+                    </div>
+                    <div class="col-12 col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title"> Permissions</h5>
+                                <h6 class="card-subtitle text-muted">
+                                </h6>
+                            </div>
+                            <table class="table table-striped table-sm" id="tblRolPermisos">
+                                <thead>
+                                    <tr>
+                                        <th style="width:25%">Permissions</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="filasRolPermisos">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnsave-rol">Save changes</button>
+        
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="btnsave-rol">Save changes</button>
-
-            </div>
+           
         </div>
     </div>
 </div>
 
 <script>
     $.getScript("{{ asset('js/user.js') }}");
+    $.getScript("{{ asset('js/rol.js') }}");
     </script>
 

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use View;
-use App\Models\roles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RolController extends Controller
 {
@@ -26,7 +27,17 @@ class RolController extends Controller
      */
     public function create(Request $request)
     {
-       
+        $roles = new Role; 
+        $roles->name         =  $request->name;
+        $roles->guard_name   = 'web';
+        $roles->estado_rol   = 1;
+        $roles->save();
+        
+        
+        foreach ($request->permiso as $permisos){
+            $roles->givePermissionTo($permisos);
+        
+        }
     }
 
     /**
@@ -40,14 +51,26 @@ class RolController extends Controller
         //
     }
 
+    public function namepermisos(){
+        $sql = "SELECT * FROM `permissions`" ;
+        $Sql = DB::select($sql);
+        return response()->json($Sql); 
+    }
+
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\roles  $roles
      * @return \Illuminate\Http\Response
      */
-    public function show( Request $request)
+    public function show()
     {
+      $roles = Role::join("role_has_permissions","role_has_permissions.role_id","=","roles.id")
+      ->join("permissions","role_has_permissions.permission_id","=","permissions.id")
+      ->select("roles.id","roles.name as namerol","permissions.name")
+      ->where("roles.estado_rol","=","1")
+      ->get();
+      return response()->json($roles); 
        
 
     }

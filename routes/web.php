@@ -126,4 +126,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('pregunta/edita/{id}', [App\Http\Controllers\PreguntaController::class, 'edit'])->name('pregunta.edit');
     Route::post('pregunta/actualiza', [App\Http\Controllers\PreguntaController::class, 'update'])->name('pregunta.update');
     Route::post('pregunta/delete/{id}', [App\Http\Controllers\PreguntaController::class, 'destroy'])->name('pregunta.destroy');
+
+    # vista roles
+    Route::get('permisos/name', [App\Http\Controllers\RolController::class, 'namepermisos'])->name('permisos.namepermisos');
+    Route::get('roles/show', [App\Http\Controllers\RolController::class, 'show'])->name('roles.show');
+    Route::post('rol/add', [App\Http\Controllers\RolController::class, 'create'])->name('rol.create');
 });
