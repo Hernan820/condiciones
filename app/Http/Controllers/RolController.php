@@ -83,7 +83,14 @@ class RolController extends Controller
      */
     public function edit($id)
     {
-       
+        $roles = Role::join("role_has_permissions","role_has_permissions.role_id","=","roles.id")
+        ->join("permissions","role_has_permissions.permission_id","=","permissions.id")
+        ->select("roles.id","roles.name as namerol","permissions.name")
+        ->where("roles.estado_rol","=","1")
+        ->where("roles.id","=",$id)
+        ->get();
+
+        return response()->json($roles);
     }
 
     /**

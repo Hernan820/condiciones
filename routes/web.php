@@ -131,4 +131,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('permisos/name', [App\Http\Controllers\RolController::class, 'namepermisos'])->name('permisos.namepermisos');
     Route::get('roles/show', [App\Http\Controllers\RolController::class, 'show'])->name('roles.show');
     Route::post('rol/add', [App\Http\Controllers\RolController::class, 'create'])->name('rol.create');
+    Route::post('rol/edita/{id}', [App\Http\Controllers\RolController::class, 'edit'])->name('rol.edit');
 });

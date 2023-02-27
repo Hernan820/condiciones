@@ -1,17 +1,15 @@
 $("#btnnewRole").on("click", function () {
+    $("#filasRolPermisos").html("");
     $(".modal-title").html("Create new Role");
     $("#formRol")[0].reset();
     document.getElementById("btnsave-rol").innerText = "Add Rol";
-    $("#id_Rol").val("");
+    $("#idRol").val("");
 });
 
 $(document).ready(function () {
-
-     tblRoles();
-     namepermisos();
-    
-
- });
+tblRoles();
+namepermisos();
+});
 //agregar permisos
 $("#btn-addpermi").on("click", function () {
     var tr = $('<tr >');
@@ -51,6 +49,7 @@ $("#btnsave-rol").on("click", function () {
     $("input[name='permiso[]']").each(function(indice, inputDatos){
         console.log($(this).val());
 	})
+    console.log("inputid "+$("#idRol").val());
     if ($("#idRol").val() != "") {
         axios
         .post(principalUrl + "rol/actualiza", rol)
@@ -67,6 +66,7 @@ $("#btnsave-rol").on("click", function () {
             namepermisos();
             $("#idRol").val("");
             $("#name_Rol").val("");
+            $("#permisos").val("");
             $("#ModalRol").modal("hide");
         })
         .catch((error) => {
@@ -89,6 +89,7 @@ $("#btnsave-rol").on("click", function () {
             namepermisos();
             $("#idRol").val("");
             $("#name_Rol").val("");
+            $("#permisos").val("");
             $("#ModalRol").modal("hide");
         })
         .catch((error) => {
@@ -117,9 +118,9 @@ function tblRoles() {
             { data: "id",
                 render: function (data) {
                     return (
-                        "<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesCuestionario' id='editCuestionario' href='#'><input type='hidden' class='data' value=" +
+                        "<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesRoles' id='editRol' href='#'><input type='hidden' class='data' value=" +
                         data +
-                        " ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> Edit</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesCuestionario'  id='deleteCuestionario' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value=" +
+                        " ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> Edit</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesRoles'  id='deleteRol' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value=" +
                         data +
                         " ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Delete</a><div class='dropdown-divider'></div>"
                     );
@@ -128,6 +129,68 @@ function tblRoles() {
         ],
     });
 }
+
+//Editar Y ELIMINAR
+$(document).on("click", ".opcionesRoles", function () {
+    var id_Rol = $(this).find(".data").val();
+
+    if (this.id == "editRol") {
+        $("#filasRolPermisos").empty();
+        axios
+            .post(principalUrl + "rol/edita/" + id_Rol)
+            .then((respuesta) => {
+                $(".modal-title").html("Edit Rol");
+                $("#name").focus();
+                $("#idRol").val(respuesta.data[0].id);
+                $("#name_rol").val(respuesta.data[0].namerol);
+                $("#permisos").val("");
+                respuesta.data.forEach(function (element) {
+                    $("#filasRolPermisos").append("<tr> <td>"+element.name+"</td> <td class='table-action' >&nbsp;<a href='#' class='eliminaPermiso'><i class='align-middle fas fa-fw fa-trash'></i></a></td> </tr>"); 
+                   });
+                document.getElementById("btnsave-rol").innerText = "Update";
+                $("#ModalRol").modal("show");
+
+            console.log(respuesta.data);
+            })
+            .catch((error) => {
+                if (error.response) {
+                    console.log(error.response.data);
+                }
+            });
+    } else if (this.id == "deleteRol") {
+        Swal.fire({
+            title: "Delete Rol",
+            text: "Are you sure to delete the Rol?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Continuer",
+            cancelButtonText: "Cancel",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios
+                    .post(principalUrl + "rol/delete/" + id_Rol)
+                    .then((respuesta) => {
+                        respuesta.data;
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "record saved!",
+                            showConfirmButton: false,
+                            timer: 1000,
+                        });
+                        tblPregunta();
+                    })
+                    .catch((error) => {
+                        if (error.response) {
+                            console.log(error.response.data);
+                        }
+                    });
+            } 
+        });
+    }
+});
 
 //name permission  funcion.
 function namepermisos(){
