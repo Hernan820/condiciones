@@ -36,19 +36,16 @@ class RegistroController extends Controller
         $registro->fecha_recepcion = $request->datereceipt;
         $registro->fecha_firma     = $request->datecontrac;                                                                                                                
         $registro->dowpayment      = $request->dowpayment ?? '';
-        $registro->precio_casa     = $request->purchaceprice ?? '';    #tamnien   ES EL PRUCHARSE 
+        $registro->precio_casa     = $request->purchaceprice ?? '';    
         $registro->estado          = $request->estadocasa;
         $registro->drive           = $request->drive ?? '';
-       // $registro->num_prestamo    = $request->              #MAS ADELANTE SE LLENARAN
         $registro->direccion_casa  = $request->property_address ?? '';
         $registro->notas           = $request->notes ?? '';
         $registro->procesador      = $request->realtorname ?? '';
         $registro->telefono_precesador      = $request->realtorphone ?? '';
-
-        //$registro->Appraisal       = $request->             #MAS ADELANTE SE LLENARAN
         $registro->id_etapa        = 1; 
         $registro->id_prestamo     = 1;       
-        $registro->id_banco        = 1;                     #MAS ADELANTE SE LLENARAN
+        $registro->id_banco        = 1;                     
         $registro->id_usuario      = auth()->user()->id; 
         $registro->id_estado       = 1;
         $registro->id_compania     = 1;
@@ -58,7 +55,6 @@ class RegistroController extends Controller
         $index = 0;
         foreach ($request->nombres  as $name) {
             $cliente = new cliente;
-            $cliente->nombre_cliente       = $name;
             $cliente->telefono             = $request->tel[$index];
             $cliente->correo               = $request->email[$index] ?? '';  
             $cliente->direccion            = $request->direccion[$index] ?? '';
@@ -185,9 +181,6 @@ class RegistroController extends Controller
         $registro->drive      = $request->drive ?? '';
         $registro->id_prestamo     = $request->id_prestamo ;       
         $registro->notas     = $request->registronota ?? '' ;       
-
-        //$registro->num_prestamo    = $request->              #MAS ADELANTE SE LLENARAN
-       // $registro->Appraisal       = $request->             #MAS ADELANTE SE LLENARAN
         $registro->save(); 
 
        $detalleresgitro = registro::join("users","users.id", "=", "registros.id_usuario")

@@ -25,9 +25,7 @@
                     <h4 class="tab-title">
                       Files to opening
                     </h4>
-                    <br>
-                    <button accesskey="a" class="btn btn-primary" data-bs-toggle="modal" id="btnnewuser"><i
-                            class="fas fa-folder-plus"></i> Add new User</button><br><br>
+                    <br><br><br>
                     <div class="card-body">
                         <table id="tblfilesopnening" class="table table-striped" style="width:100%">
                             <thead>

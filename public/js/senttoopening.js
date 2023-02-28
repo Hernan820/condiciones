@@ -53,23 +53,39 @@ $(document).on('click', '.itemopening',function() {
     var item = this.id;
 
     if(item == 'primeritem'){
-        axios.post(principalUrl + "registro/fecha/"+idregistro)
-        .then((respuesta) => {
-            if(respuesta.data == 1){
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Open loan!",
-                    showConfirmButton: false,
-                    timer: 1000,
+
+        Swal.fire({
+			title: "Open record",
+			text: "You want to open this record?",
+			icon: "info",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Continuer",
+			cancelButtonText: "Cancel",
+		}).then((result) => {
+			if (result.isConfirmed) {
+		
+                axios.post(principalUrl + "registro/fecha/"+idregistro)
+                .then((respuesta) => {
+                    if(respuesta.data == 1){
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Open loan!",
+                            showConfirmButton: false,
+                            timer: 1000,
+                        });
+                    }
+                })
+                .catch((error) => {
+                    if (error.response) {
+                        console.log(error.response.data);
+                    }
                 });
-            }
-        })
-        .catch((error) => {
-            if (error.response) {
-                console.log(error.response.data);
-            }
-        });
+			} else {
+			}
+		});
     }
 });
 
