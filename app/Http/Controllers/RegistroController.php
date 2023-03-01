@@ -55,6 +55,7 @@ class RegistroController extends Controller
         $index = 0;
         foreach ($request->nombres  as $name) {
             $cliente = new cliente;
+            $cliente->nombre_cliente       = $name;
             $cliente->telefono             = $request->tel[$index];
             $cliente->correo               = $request->email[$index] ?? '';  
             $cliente->direccion            = $request->direccion[$index] ?? '';
