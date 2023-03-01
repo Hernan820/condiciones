@@ -38,8 +38,14 @@ var registertbl	= $("#tblfilesopnening").DataTable({
         },
     ],
     createdRow: (row, data, dataIndex, cells) => {
+        if(data.fecha_abierto != null){
+            $(row).addClass(' table-success');
+
+        }else{
         if (data.id_estado == 2){
-            $(row).addClass(' table-danger'); }
+            $(row).addClass(' table-danger');
+         }
+        }
     }
 });
  
@@ -76,6 +82,7 @@ $(document).on('click', '.itemopening',function() {
                             showConfirmButton: false,
                             timer: 1000,
                         });
+                     filesopening();
                     }
                 })
                 .catch((error) => {
