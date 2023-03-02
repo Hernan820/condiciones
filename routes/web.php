@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('condicion/vistaregistros', [App\Http\Controllers\HomeController::class, 'vistaregistro']);
 
-    Route::get('registro/vistadetallefile/{id}', [App\Http\Controllers\HomeController::class, 'vistafile']);
+    Route::get('registro/vistadetallefile/{id}/{vista}', [App\Http\Controllers\HomeController::class, 'vistafile']);
 
     Route::post('condicion/compania', [App\Http\Controllers\CompaniaController::class, 'index']);
 
