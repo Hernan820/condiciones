@@ -132,4 +132,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('roles/show', [App\Http\Controllers\RolController::class, 'show'])->name('roles.show');
     Route::post('rol/add', [App\Http\Controllers\RolController::class, 'create'])->name('rol.create');
     Route::post('rol/edita/{id}', [App\Http\Controllers\RolController::class, 'edit'])->name('rol.edit');
+    Route::post('rol/actualiza', [App\Http\Controllers\RolController::class, 'update'])->name('rol.update');
 });
