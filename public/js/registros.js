@@ -294,7 +294,7 @@ function activostbl(){
 			}, },
 			{ data: "idregister",
 			render: function (data) {
-				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesitem' id='itemuno' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem'  id='itemdos' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemtres' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-window-close' data-feather='x-square'></i> Cancel file</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcuatro' href='#'><input type='hidden' class='data' value="+data+" ><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div></div>");
+				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button> <div class='dropdown-menu' style=''><a class='dropdown-item opcionesitem' id='itemuno' href='#'><input type='hidden' class='data' value="+data+"><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a> </div>");
 			},
 		    },
 		],
@@ -351,7 +351,7 @@ $(document).on('click', '.opcionesitem',function() {
 		  }
 		  xhr = $.ajax({
 			type:'GET',
-			url: principalUrl+'registro/vistadetallefile/'+idregistro,
+			url: principalUrl+'registro/vistadetallefile/'+idregistro+'/0',
 			dataType:"html",
 		}).done(function(data) {
 			$('.contenido').empty();   

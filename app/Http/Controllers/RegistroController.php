@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\prestamo;
 use App\Models\respuesta_cliente;
+use View;
 
 class RegistroController extends Controller
 {
@@ -20,7 +21,7 @@ class RegistroController extends Controller
      */
     public function index()
     {
-        //
+        return View::make('Files.sent_opening')->render();
     }
 
     /**
@@ -35,19 +36,16 @@ class RegistroController extends Controller
         $registro->fecha_recepcion = $request->datereceipt;
         $registro->fecha_firma     = $request->datecontrac;                                                                                                                
         $registro->dowpayment      = $request->dowpayment ?? '';
-        $registro->precio_casa     = $request->purchaceprice ?? '';    #tamnien   ES EL PRUCHARSE 
+        $registro->precio_casa     = $request->purchaceprice ?? '';    
         $registro->estado          = $request->estadocasa;
         $registro->drive           = $request->drive ?? '';
-       // $registro->num_prestamo    = $request->              #MAS ADELANTE SE LLENARAN
         $registro->direccion_casa  = $request->property_address ?? '';
         $registro->notas           = $request->notes ?? '';
         $registro->procesador      = $request->realtorname ?? '';
         $registro->telefono_precesador      = $request->realtorphone ?? '';
-
-        //$registro->Appraisal       = $request->             #MAS ADELANTE SE LLENARAN
         $registro->id_etapa        = 1; 
         $registro->id_prestamo     = 1;       
-        $registro->id_banco        = 1;                     #MAS ADELANTE SE LLENARAN
+        $registro->id_banco        = 1;                     
         $registro->id_usuario      = auth()->user()->id; 
         $registro->id_estado       = 1;
         $registro->id_compania     = 1;
@@ -184,9 +182,6 @@ class RegistroController extends Controller
         $registro->drive      = $request->drive ?? '';
         $registro->id_prestamo     = $request->id_prestamo ;       
         $registro->notas     = $request->registronota ?? '' ;       
-
-        //$registro->num_prestamo    = $request->              #MAS ADELANTE SE LLENARAN
-       // $registro->Appraisal       = $request->             #MAS ADELANTE SE LLENARAN
         $registro->save(); 
 
        $detalleresgitro = registro::join("users","users.id", "=", "registros.id_usuario")
@@ -305,5 +300,33 @@ class RegistroController extends Controller
         $registros = DB::select($sql);
 
         return response()->json($registros);        
+    }
+
+    /**
+     *
+     */
+    public function opening(){
+
+        $sql = "SELECT prestamos.*, clientes.*, registros.*, registros.id as idregister FROM `registros` 
+        INNER JOIN clientes_registros on clientes_registros.id_registro = registros.id
+        INNER JOIN clientes on clientes.id = clientes_registros.id_cliente
+        INNER JOIN prestamos on prestamos.id = registros.id_prestamo
+        WHERE registros.id_etapa  in(2)  AND clientes.tipe_client = 1  AND registros.id_estado != 3;";
+
+        $registros = DB::select($sql);
+
+        return response()->json($registros);  
+    }
+    /**
+     * 
+     */
+    public function fechaopening($id){
+
+        $registro= registro::find($id);
+         if($registro->fecha_abierto == null){
+            $registro->fecha_abierto = date('Y-m-d'); 
+         }
+        $registro->save();
+        return 1 ;
     }
 }

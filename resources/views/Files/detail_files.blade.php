@@ -1,4 +1,5 @@
 <input type='hidden' id='idregistro' value="{{$id}}">
+<input type='hidden' id='vista' value="{{$vista}}">
 
 <div class="header">
     <h1 class="header-title">
