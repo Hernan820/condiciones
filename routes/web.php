@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('condicion/vistaregistros', [App\Http\Controllers\HomeController::class, 'vistaregistro']);
 
-    Route::get('registro/vistadetallefile/{id}', [App\Http\Controllers\HomeController::class, 'vistafile']);
+    Route::get('registro/vistadetallefile/{id}/{vista}', [App\Http\Controllers\HomeController::class, 'vistafile']);
 
     Route::post('condicion/compania', [App\Http\Controllers\CompaniaController::class, 'index']);
 
@@ -132,4 +132,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('roles/show', [App\Http\Controllers\RolController::class, 'show'])->name('roles.show');
     Route::post('rol/add', [App\Http\Controllers\RolController::class, 'create'])->name('rol.create');
     Route::post('rol/edita/{id}', [App\Http\Controllers\RolController::class, 'edit'])->name('rol.edit');
+
+  #VISTA DE TO OPENING
+    Route::get('vista/opening', [App\Http\Controllers\RegistroController::class, 'index']);
+
+    Route::get('registro/opnening', [App\Http\Controllers\RegistroController::class, 'opening']);
+
+    Route::post('registro/fecha/{id}', [App\Http\Controllers\RegistroController::class, 'fechaopening']);
 });

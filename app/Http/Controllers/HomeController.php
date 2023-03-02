@@ -49,7 +49,7 @@ class HomeController extends Controller
      * vista de detalles de file
      * 
      */
-    public function vistafile($id){
-        return view('Files.detail_files', compact('id'));
+    public function vistafile($id, $vista){
+        return view('Files.detail_files', compact('id','vista'));
     }
 }

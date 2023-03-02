@@ -21,7 +21,13 @@ $(document).ready(function () {
 		tbldetalleregistro(respuesta.data.registro, respuesta.data.tipoprestamos);
 		tbldocs(respuesta.data.docs);
 	    muestra_preguntasrespuesta(respuesta.data.preguntasrespuesta);
-		notasregistro(respuesta.data.notas)
+		notasregistro(respuesta.data.notas);
+
+		if(respuesta.data.registro[0].nombre_etapa == "files openig" && respuesta.data.registro[0].id_estado != 3){
+			$('input').prop('disabled', true);   
+		}else{
+			$('input').prop('disabled', false);   
+		}
 	})
 	.catch((error) => {
 		if (error.response) {
