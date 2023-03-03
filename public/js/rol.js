@@ -7,11 +7,25 @@ $("#btnnewRole").on("click", function () {
 });
 
 $(document).ready(function () {
-tblRoles();
-namepermisos();
+   tblRoles();
+   namepermisos();
+   $('#name_rol').keyup(function (e){
+    var str = $('#name_rol').val();
+    str = str.replace(/\W+(?!$)/g, '_').toLowerCase();
+    $('#name_rol').val(str);
+    $('name_rol').attr('placeholder,str');
+});
+
 });
 //agregar permisos
 $("#btn-addpermi").on("click", function () {
+    var inputSelect= $("#permisos").val();
+    var validoPermiso = true;
+    if(inputSelect == ""){
+        Swal.fire("¡Add permission!");
+        return (validoPermiso = false);
+    }
+
     var tr = $('<tr >');
 
     $("#filasRolPermisos").append(tr);
@@ -42,8 +56,6 @@ $(document).on('click', '.eliminaPermiso',function() {
 });
 // REGISTRAR NUEVO ROL
 $("#btnsave-rol").on("click", function () {
-    
-
     var rol = new FormData(document.getElementById("formRol"));
 
     $("input[name='permiso[]']").each(function(indice, inputDatos){
@@ -114,7 +126,7 @@ function tblRoles() {
         columns: [
             {data:"id"},
             { data:"namerol" },
-            {data: "name"},
+            {data: "permisosname"},
             { data: "id",
                 render: function (data) {
                     return (
@@ -145,7 +157,7 @@ $(document).on("click", ".opcionesRoles", function () {
                 $("#name_rol").val(respuesta.data[0].namerol);
                 $("#permisos").val("");
                 respuesta.data.forEach(function (element) {
-                    $("#filasRolPermisos").append("<tr> <td>"+element.name+"</td> <td class='table-action' >&nbsp;<a href='#' class='eliminaPermiso'><i class='align-middle fas fa-fw fa-trash'></i></a></td> </tr>"); 
+                    $("#filasRolPermisos").append("<tr> <td>"+element.name+" <input type='hidden' class='Permiso_nombre' name='permiso[]'  value="+element.name+"></td>  <td class='table-action' >&nbsp;<a href='#' class='eliminaPermiso'><i class='align-middle fas fa-fw fa-trash'></i></a></td> </tr>"); 
                    });
                 document.getElementById("btnsave-rol").innerText = "Update";
                 $("#ModalRol").modal("show");
@@ -180,7 +192,7 @@ $(document).on("click", ".opcionesRoles", function () {
                             showConfirmButton: false,
                             timer: 1000,
                         });
-                        tblPregunta();
+                        tblRoles();
                     })
                     .catch((error) => {
                         if (error.response) {
