@@ -65,11 +65,9 @@ class RolController extends Controller
      */
     public function show()
     {
-      $sql = "SELECT roles.id, roles.name as namerol, GROUP_CONCAT(permissions.name) AS permisosname FROM roles INNER JOIN role_has_permissions on role_has_permissions.role_id = roles.id INNER JOIN permissions on role_has_permissions.permission_id = permissions.id GROUP BY roles.id";
+      $sql = "SELECT roles.id, roles.name as namerol, GROUP_CONCAT(permissions.name) AS permisosname FROM roles INNER JOIN role_has_permissions on role_has_permissions.role_id = roles.id INNER JOIN permissions on role_has_permissions.permission_id = permissions.id where roles.estado_rol = 1 GROUP BY roles.id";
       $roles = DB::select($sql);
       return response()->json($roles); 
-       
-
     }
 
     /**
@@ -119,6 +117,9 @@ class RolController extends Controller
      */
     public function destroy($id)
     {
-        
+        $roles = Role::find($id);
+        $roles->estado_rol = 0;
+        $roles->save();
+        return 1 ;
     }
 }

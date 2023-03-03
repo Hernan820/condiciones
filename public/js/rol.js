@@ -19,6 +19,13 @@ $(document).ready(function () {
 });
 //agregar permisos
 $("#btn-addpermi").on("click", function () {
+    var inputSelect= $("#permisos").val();
+    var validoPermiso = true;
+    if(inputSelect == ""){
+        Swal.fire("¡Add permission!");
+        return (validoPermiso = false);
+    }
+
     var tr = $('<tr >');
 
     $("#filasRolPermisos").append(tr);
@@ -49,8 +56,6 @@ $(document).on('click', '.eliminaPermiso',function() {
 });
 // REGISTRAR NUEVO ROL
 $("#btnsave-rol").on("click", function () {
-    
-
     var rol = new FormData(document.getElementById("formRol"));
 
     $("input[name='permiso[]']").each(function(indice, inputDatos){
@@ -187,7 +192,7 @@ $(document).on("click", ".opcionesRoles", function () {
                             showConfirmButton: false,
                             timer: 1000,
                         });
-                        tblPregunta();
+                        tblRoles();
                     })
                     .catch((error) => {
                         if (error.response) {
