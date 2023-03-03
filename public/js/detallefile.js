@@ -23,7 +23,7 @@ $(document).ready(function () {
 	    muestra_preguntasrespuesta(respuesta.data.preguntasrespuesta);
 		notasregistro(respuesta.data.notas);
 
-		if(respuesta.data.registro[0].nombre_etapa == "files openig" && respuesta.data.registro[0].id_estado != 3){
+		if(respuesta.data.registro[0].nombre_etapa == "files openig" && respuesta.data.registro[0].id_estado != 3 && $("#vista").val() == 0){
 			$('input').prop('disabled', true);   
 		}else{
 			$('input').prop('disabled', false);   
