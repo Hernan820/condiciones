@@ -33,7 +33,7 @@ class RolController extends Controller
         $roles->estado_rol   = 1;
         $roles->save();
         
-        
+       
         foreach ($request->permiso as $permisos){
             $roles->givePermissionTo($permisos);
         
@@ -65,14 +65,9 @@ class RolController extends Controller
      */
     public function show()
     {
-      $roles = Role::join("role_has_permissions","role_has_permissions.role_id","=","roles.id")
-      ->join("permissions","role_has_permissions.permission_id","=","permissions.id")
-      ->select("roles.id","roles.name as namerol","permissions.name")
-      ->where("roles.estado_rol","=","1")
-      ->get();
+      $sql = "SELECT roles.id, roles.name as namerol, GROUP_CONCAT(permissions.name) AS permisosname FROM roles INNER JOIN role_has_permissions on role_has_permissions.role_id = roles.id INNER JOIN permissions on role_has_permissions.permission_id = permissions.id where roles.estado_rol = 1 GROUP BY roles.id";
+      $roles = DB::select($sql);
       return response()->json($roles); 
-       
-
     }
 
     /**
@@ -102,7 +97,16 @@ class RolController extends Controller
      */
     public function update(Request $request)
     {
-        
+        $roles = Role::find($request->id);
+        $roles->name         =  $request->name;
+        $roles->guard_name   = 'web';
+        $roles->estado_rol   = 1;
+        $roles->save();
+
+        $permissions = $request->only('permiso');
+        if (count($permissions) > 0) {
+            $roles->syncPermissions($permissions);
+        }
     }
 
     /**
@@ -113,6 +117,9 @@ class RolController extends Controller
      */
     public function destroy($id)
     {
-        
+        $roles = Role::find($id);
+        $roles->estado_rol = 0;
+        $roles->save();
+        return 1 ;
     }
 }
