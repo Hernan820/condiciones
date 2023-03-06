@@ -16,15 +16,7 @@ $(".select2").each(function() {
 /*********************************************************** */
 
 $(document).ready(function () {
-
-		/*	$("#estados").select2({
-			    allowClear: true,
-        width: '300px',
-        height: '34px',
-        placeholder: 'select..'
-        //data: data
-    });*/
-	//$('#datecontrac').mask('00/00/00');	
+	
 	$("#btonnuevo").hide();
 	$('#purchaceprice').mask('#,##0.00', {reverse: true});
 	$('#purchaceprice').change(function () {
@@ -34,7 +26,7 @@ $(document).ready(function () {
 	$('#dowpayment').mask('00%');
 	$('#realtorphone').mask('(000) 000-0000');
 	$('#customerPhone').mask('(000) 000-0000');
-	$('#ssn').mask('(000) 000-0000');
+	$('#ssn').mask('000-00-0000');
 	
 	pendientestbl();
 	activostbl();
@@ -260,6 +252,7 @@ function pendientestbl(){
 		    },
 		],
         createdRow: (row, data, dataIndex, cells) => {
+			$(row).addClass(' text-center'); 
             if (data.id_estado == 2){
                 $(row).addClass(' table-danger'); }
         }
@@ -299,6 +292,7 @@ function activostbl(){
 		    },
 		],
 		createdRow: (row, data, dataIndex, cells) => {
+			$(row).addClass(' text-center'); 
             if (data.id_estado == 2){
                 $(row).addClass(' table-danger'); }
         }
@@ -336,7 +330,10 @@ function canceladotbl(){
 				return ("<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesitem' id='itemuno' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 fas fa-fw fa-ellipsis-v' data-feather='more-vertical'></i> See details</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem'  id='itemdos' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-edit' data-feather='edit'></i> Get customerinfo</a><div class='dropdown-divider'></div><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcuatro' href='#'><input type='hidden' class='data' value="+data+" ><i class='ion ion-md-shuffle me-2' data-feather='shuffle'></i> File with Problems</a><div class='dropdown-divider'></div><a class='dropdown-item opcionesitem' id='itemcinco' href='#'><input type='hidden' class='data' value="+data+" ><i class='align-middle me-2 far fa-fw fa-paper-plane'  data-feather='send'></i> Send to opening</a></div></div>");
 			},
 		    },
-		]
+		],
+		createdRow: (row, data, dataIndex, cells) => {
+			$(row).addClass(' text-center'); 
+        }
 	});
 }
 
@@ -627,10 +624,6 @@ function nuevobtn(){
 $('#btncliente').on('click', function() {
 	if (validaclient() == false) {return;}
 
-	
-
-	
-
 		var estado = $('input:radio[name=radio_typeclient]:checked').val();
 		if($('input:radio[name=radio_typeclient]:checked').val() == 1){
 			var tr = $('<tr class="table-primary" >');
@@ -643,7 +636,6 @@ $('#btncliente').on('click', function() {
 		tr.append("<td class='d-none d-md-table-cell' >"+$('input:radio[name=radio_status]:checked').val()+"<input type='hidden' class='clientestatus' name='status[]' value="+"'"+$('input:radio[name=radio_status]:checked').val()+"'"+"> <input type='hidden' class='clientedirecc' name='direccion[]' value="+$('#inputAddress').val()+"> <input type='hidden' class='clientedirecc2' name='direccion2[]' value="+$('#inputAddress2').val()+"></td>");
 		tr.append('<td class="table-action" >&nbsp;<a href="#" class="eliminaclient"><i class="align-middle fas fa-fw fa-trash"></i></a></td>');
 	
-
    $('.inputclient').val('');
    $("input[name=radio_status]").prop('checked', false);
    $("input[name=radio_typeclient]").prop('checked', false);

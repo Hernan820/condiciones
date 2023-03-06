@@ -43,6 +43,7 @@ var registertbl	= $("#tblfilesopnening").DataTable({
         },
     ],
     createdRow: (row, data, dataIndex, cells) => {
+        $(row).addClass(' text-center'); 
         if(data.fecha_abierto != null){
             $(row).addClass(' table-success');
 

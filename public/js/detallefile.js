@@ -25,8 +25,10 @@ $(document).ready(function () {
 
 		if(respuesta.data.registro[0].nombre_etapa == "files openig" && respuesta.data.registro[0].id_estado != 3 && $("#vista").val() == 0){
 			$('input').prop('disabled', true);   
+			$('select').prop('disabled', true);   
 		}else{
-			$('input').prop('disabled', false);   
+			$('input').prop('disabled', false);  
+			$('select').prop('disabled', false);     
 		}
 	})
 	.catch((error) => {
