@@ -43,6 +43,7 @@ class RegistroController extends Controller
         $registro->notas           = $request->notes ?? '';
         $registro->procesador      = $request->realtorname ?? '';
         $registro->telefono_precesador      = $request->realtorphone ?? '';
+        $registro->direccion_casa  = $request->inputAdressPropiedad ?? '';
         $registro->id_etapa        = 1; 
         $registro->id_prestamo     = 1;       
         $registro->id_banco        = 1;                     

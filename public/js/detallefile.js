@@ -23,10 +23,12 @@ $(document).ready(function () {
 	    muestra_preguntasrespuesta(respuesta.data.preguntasrespuesta);
 		notasregistro(respuesta.data.notas);
 
-		if(respuesta.data.registro[0].nombre_etapa == "files openig" && respuesta.data.registro[0].id_estado != 3){
+		if(respuesta.data.registro[0].nombre_etapa == "files openig" && respuesta.data.registro[0].id_estado != 3 && $("#vista").val() == 0){
 			$('input').prop('disabled', true);   
+			$('select').prop('disabled', true);   
 		}else{
-			$('input').prop('disabled', false);   
+			$('input').prop('disabled', false);  
+			$('select').prop('disabled', false);     
 		}
 	})
 	.catch((error) => {
@@ -34,6 +36,11 @@ $(document).ready(function () {
 			console.log(error.response.data);
 		}
 	});
+
+	setTimeout(function(){ 
+		$('#sidebar').addClass('toggled');
+	}, 3000);
+
  });
 
 
@@ -90,7 +97,7 @@ $(document).ready(function () {
 			   "<th>Former address</th>"+
 			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='segundadireccion_"+element.id+"' id='segundadireccion_"+element.id+"' value='"+element.direcionalternativa+"' class='form-control cliente' style='border: 0px;'></div></div></td></tr>"); 
 			   $('#telefono_'+element.id).mask('(000) 000-0000');
-			   $('#ssn_'+element.id).mask('(000) 000-0000');
+			   $('#ssn_'+element.id).mask('000-00-0000');
 	         
 
 		});
@@ -104,8 +111,8 @@ function tbldetalleregistro(detalleregistro,tiposprestamos) {
 
 	detalleregistro.forEach(function (element) { 
 
-		$("#registrocliente").append("<tr><th>Contract date</th><td> <div class='form-group col-md-12'> <input type='date' class='form-control detalleregistro'  onchange='registrodetalle(this)' id='fechacontrato'  name='fechacontrato_"+element.id+"' value='"+element.fecha_firma+"' > </div></td></tr>"+
-		"<tr><th>Contract receipt date</th><td>    <div class='form-group col-md-12'> <input type='date' class='form-control detalleregistro' onchange='registrodetalle(this)' id='fecharecep'  name='fecharecep_"+element.id+"'  value='"+element.fecha_recepcion+"'>	  </div> </td></tr>"+
+		$("#registrocliente").append("<tr><th>Contract date</th><td> <div class='form-group col-md-12'> <input type='date' class='form-control detalleregistro'  onchange='registrodetalle(this)' id='fechacontrato'  name='fechacontrato_"+element.id+"' value='"+element.fecha_firma+"' style='border: 0px;' > </div></td></tr>"+
+		"<tr><th>Contract receipt date</th><td>    <div class='form-group col-md-12'> <input type='date' class='form-control detalleregistro' onchange='registrodetalle(this)' id='fecharecep'  name='fecharecep_"+element.id+"'  value='"+element.fecha_recepcion+"' style='border: 0px;' >	  </div> </td></tr>"+
 		"<tr><th>State</th><!-- Select --><td><div class='col-md-12'><div class='col-sm-12'>  <select  onchange='registrodetalle(this)' id='estadocasa' name='estadocasa_"+element.id+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></select></div></div></td></tr>"+
 		"<tr><th>Property adress</th><td> <div class='col-md-12'><div class='col-sm-12'><input onchange='registrodetalle(this)' type='text' name='direccionregistro_"+element.id+"' id='direccionregistro_"+element.id+"'  value='"+element.direccion_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
 		"<tr><th>Purchace Price</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text'  onchange='registrodetalle(this)' name='preciocasa_"+element.id+"' id='preciocasa_"+element.id+"' value='"+element.precio_casa+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
@@ -117,7 +124,7 @@ function tbldetalleregistro(detalleregistro,tiposprestamos) {
 		"<tr><th>Telephone</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text'  onchange='registrodetalle(this)' name='telefonoprecesor_"+element.id+"' id='telefonoprecesor_"+element.id+"' value='"+element.telefono_precesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>");
 		$('#telefonoprecesor_'+element.id).mask('(000) 000-0000');
 		$('#dowpayment_'+element.id).mask('00%');
-		$('#notaderegistro').append('<textarea rows="6" class="form-control detalleregistro" onchange="registrodetalle(this)" name="notes_'+element.id+'" id="notes_'+element.id+'" style="border:0px">'+element.notas+'</textarea>');
+		$('#notaderegistro').append('<textarea rows="6" class="form-control detalleregistro" placeholder="Leave a note" onchange="registrodetalle(this)" name="notes_'+element.id+'" id="notes_'+element.id+'" style="border:0px">'+element.notas+'</textarea>');
 		$('#datetimepicker-registro').datetimepicker({format: 'L'});
 	    $('#datetimepicker-registrorecibido').datetimepicker();
 	});	
@@ -233,22 +240,31 @@ function muestrapreguntasclientes(datosdepregunta,nombrecuestion,clientes) {
 	
 	$("#table"+nombrecuestion+" thead tr").html('');
 	$("#table"+nombrecuestion+" tbody").html('');
-	$("#table"+nombrecuestion+" thead tr").append('<th>Questions</th>');
+	$("#table"+nombrecuestion+" thead tr").append('<th style="color: black; font-size: 12px;" >Questions</th>');
 
 	clientes.forEach(function (cliente,i) {
-			$("#table"+nombrecuestion+" thead tr").append('<th>'+cliente+'</th>');
+			$("#table"+nombrecuestion+" thead tr").append('<th style="color: black; font-size: 12px;" >'+cliente+'</th>');
 	});
 	
 	var arraypreguntas= [];
+	var arraycategoria= [];
+
 	datosdepregunta.forEach(function (element) {
 		if(element.nombre == nombrecuestion){
 
 		if(!arraypreguntas.includes(element.titulo_pregunta)){
 			arraypreguntas.push(element.titulo_pregunta);
 
+            var columnCount = $("#table"+element.nombre+" th").length;
+			
+			if(!arraycategoria.includes(element.nombre_categoria)){
+				arraycategoria.push(element.nombre_categoria);
+				$("#table"+element.nombre+" tbody").append('<tr><td COLSPAN="'+columnCount+'" align="center" class="table-success mb-0 p-0" style="color: black; font-size: 14px;"><strong>'+element.nombre_categoria+'</strong></td></tr>');
+			}
+
 			var tr = $('<tr>');
 			$("#table"+element.nombre+" tbody").append(tr);
-			tr.append('<td>'+element.titulo_pregunta+'</td>');
+			tr.append('<td style="color: black; font-size: 12px;"><strong>'+element.titulo_pregunta+'</strong></td>');
 	
 			clientes.forEach(function (clientenombre,i) {
 				if(clientenombre == element.nombre_cliente ){
@@ -257,13 +273,21 @@ function muestrapreguntasclientes(datosdepregunta,nombrecuestion,clientes) {
 			});
 			tr.append("</tr>");
 		}else{
-			var tabla = document.getElementById("table"+element.nombre);
-			var posicion = arraypreguntas.indexOf(element.titulo_pregunta);
-			var numeroFila = posicion + 1;
+			var table = document.getElementById("table"+element.nombre);
+            var column = table.querySelectorAll("td:nth-child(1)"); 
+			var posicionFila = '' ;
 
-			var ultimaFila = tabla.rows[numeroFila];
+			  column.forEach((cell) => {
+				if(cell.textContent == element.titulo_pregunta){
+					posicionFila =cell.parentNode.rowIndex;
+				}
+				var rowIndex = cell.parentNode.rowIndex;
+				console.log(`Fila: ${rowIndex}, Contenido: ${cell.textContent}`);
+			  });
+
+			var ultimaFila = table.rows[posicionFila];
 			var nuevoTD = document.createElement("td");
-			nuevoTD.innerHTML = '<td><input type="text" name="respuestapregunta_'+element.id+'" id="respuestapregunta_'+element.id+'" class="form-control respuestacliente small-text1" placeholder="Answer"  value="'+element.respuesta+'" style="border:0px"></td>';
+			nuevoTD.innerHTML = '<td ><input type="text" name="respuestapregunta_'+element.id+'" id="respuestapregunta_'+element.id+'" class="form-control respuestacliente small-text1" placeholder="Answer"  value="'+element.respuesta+'" style="border:0px"></td>';
 		
 			ultimaFila.appendChild(nuevoTD);
 		}

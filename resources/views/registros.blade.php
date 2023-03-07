@@ -357,12 +357,21 @@
                                                         <div class="mb-3 col-md-12">
                                                             <label for="realtorphone">Realtor telephone</label>
                                                             <input type="text" name="realtorphone" id="realtorphone"
-                                                                autocomplete="off" placeholder="(631) 609-9108"
+                                                                autocomplete="off" placeholder="(000) 000-0000"
                                                                 class="form-control">
                                                         </div>
                                                     </div>
-                                                </div>
 
+                                                    <div class="mb-3 col-md-12">
+                                                        <div class="mb-3 col-md-12">
+                                                        <label for="inputAddress">Property address</label>
+                                                        <input type="text" class="form-control "
+                                                            id="inputAdressPropiedad" autocomplete="off" name="inputAdressPropiedad"
+                                                            placeholder="1234 Main St">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="mb-3 col-md-12">
