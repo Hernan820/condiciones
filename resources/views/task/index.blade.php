@@ -35,7 +35,7 @@
                         pending task
                     </h4>
                     <br>
-                    <button id="btn-add-task" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal-task">
+                    <button id="btn-add-task" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal-tarea">
                      Add new task
                     </button>
                     <div class="card-body">
@@ -127,11 +127,7 @@
                                                     <a class="btn btn-primary btn-sm" href="#">View</a>
                                                 </div>
                                             </div>
-                                           
-                                        </div>
-    
-                                       
-    
+                                           </div>
                                     </div>
                                 </div>
                             </div>
@@ -145,15 +141,15 @@
 
 <!--modal para tarea-->
 
-<div class="modal fade" id="Modal-task" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="Modal-tarea" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Create new task</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             
-            <form id="form-pregunta">
+            <form id="form-tarea">
                  <div class="modal-body m-3">
                     @csrf
                     <input id="id_tarea" type="hidden" name="id_tarea" value="">
@@ -162,7 +158,7 @@
                         <div class="input-group date" id="datetimepicker-minimum-tarea"
                             data-target-input="nearest">
                             <input type="text" class="form-control datetimepicker-input"
-                                id="date" name="date" autocomplete="off"
+                                id="date" name="datetarea" autocomplete="off"
                                 data-target="#datetimepicker-minimum-tarea" />
                             <div class="input-group-text"
                                 data-target="#datetimepicker-minimum-tarea"
@@ -224,12 +220,12 @@
                                         <span class="ql-formats">
                                             <button class="ql-clean"></button>
                                         </span>
-                                    </div>
-                                    <div id="quill-editor"></div>
+                                       </div>
+                                    <div id="quill-editor" name ="description"></div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                       </div>
                     <div class="mb-3">
                         <label for="permisos">assigned user for this task</label>
                         <select id="usuario" name="usuario" class="form-control">
@@ -237,7 +233,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button  id="guardar-pregunta" type="button" class="btn btn-primary">Save changes</button>
+                        <button  id="guardar-tarea" type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>   
                 
@@ -249,16 +245,7 @@
 
 <script>
     $.getScript("{{ asset('js/tareas.js') }}");
+  </script>
 
-</script>
-<svg width="0" height="0" style="position:absolute">
-    <defs>
-        <symbol viewBox="0 0 512 512" id="ion-ios-pulse-strong">
-            <path
-                d="M448 273.001c-21.27 0-39.296 13.999-45.596 32.999h-38.857l-28.361-85.417a15.999 15.999 0 0 0-15.183-10.956c-.112 0-.224 0-.335.004a15.997 15.997 0 0 0-15.049 11.588l-44.484 155.262-52.353-314.108C206.535 54.893 200.333 48 192 48s-13.693 5.776-15.525 13.135L115.496 306H16v31.999h112c7.348 0 13.75-5.003 15.525-12.134l45.368-182.177 51.324 307.94c1.229 7.377 7.397 11.92 14.864 12.344.308.018.614.028.919.028 7.097 0 13.406-3.701 15.381-10.594l49.744-173.617 15.689 47.252A16.001 16.001 0 0 0 352 337.999h51.108C409.973 355.999 427.477 369 448 369c26.511 0 48-22.492 48-49 0-26.509-21.489-46.999-48-46.999z">
-            </path>
-        </symbol>
-    </defs>
-</svg>
-<script src="js/app.js"></script>
+
 

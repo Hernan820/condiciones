@@ -22,9 +22,15 @@ class TareasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Request $request) {
+        
+        $tareas = new tareas; 
+        $tareas->nombre_tarea   = $request->name_tarea; 
+        $tareas->descripcion    = $request->descripcion; 
+        $tareas->fecha_hora     = $request->datetarea; 
+        $tareas->id_usuario     = $request->usuario;
+        $tareas->id_estado      = 4;
+        $tareas->save();
     }
 
     /**
@@ -35,7 +41,7 @@ class TareasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
