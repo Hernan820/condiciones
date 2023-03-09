@@ -180,6 +180,18 @@ $(document).on('click', '.itemopening',function() {
 
             console.log(nuevo_arreglo[0].data);
             console.log(nuevo_arreglo[1].data);
+            var arrayusuaios = [];
+            nuevo_arreglo[2].data.forEach(function (element,i) {
+                if(!arrayusuaios.includes(element.id_usuario)){
+                    arrayusuaios.push(element.id_usuario);
+                    if(i == 0){
+                        $('#usuariosderesgitro').val(element.id_usuario);
+                    }else{
+                        var valor = $('#usuariosderesgitro').val();
+                        $('#usuariosderesgitro').val(valor+','+element.id_usuario);
+                    }
+                }
+             });
 
             nuevo_arreglo[0].data.forEach(function (element) {
                 $("#selectusuarios").append("<option value="+element.id+" >"+element.name+"</option>"); 
@@ -200,6 +212,19 @@ $(document).on('click', '.itemopening',function() {
 $('#btnAsigancion').on('click', function() { 
 
 	if ( $("#selectusuarios").val() == "") {Swal.fire("¡Select a user to assign the loan!"); return;}
+
+    var valor1 =$("#selectusuarios").val();
+    var valor2 =$("#usuariosderesgitro").val().split(',');
+    var nombres = ''
+    valor2.forEach(function (element,i) {
+        if(valor1.includes(element)){
+            var opcionTexto = $('#selectusuarios option[value="'+element+'"]').text();
+            if(i == 0){nombres= opcionTexto;
+            }else{nombres= nombres+','+opcionTexto;}
+        }
+    });
+
+	if ( nombres != "") {Swal.fire("¡Users "+nombres+" are already assigning to this record!"); return;}
 
 	var datos = new FormData();
 	    datos.append("usuariosselect",$('#selectusuarios').val());

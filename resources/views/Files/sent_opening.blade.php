@@ -99,6 +99,7 @@
                         </select>
                     </div>
                 </div>
+                <input type="hidden" name="usuariosderesgitro" id="usuariosderesgitro" value="">
 				<input type="hidden" name="registroid" id="registroid" value="">
             </div>
             <div class="modal-footer">
