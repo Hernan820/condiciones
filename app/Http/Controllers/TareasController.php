@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\tareas;
 use Illuminate\Http\Request;
-
+use View;
 class TareasController extends Controller
 {
     /**
@@ -14,7 +14,7 @@ class TareasController extends Controller
      */
     public function index()
     {
-        //
+        return View::make('task/index')->render();
     }
 
     /**

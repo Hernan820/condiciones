@@ -86,7 +86,13 @@
                         <a class="sidebar-link" href="" id="vistaopening" >
                             <i class="align-middle me-2 fas fa-fw fa-folder"></i> <span class="align-middle">Files to opening</span>
                         </a>
-                    </li>                     
+                    </li> 
+                    
+                    <li class="sidebar-item " id="itemTask">
+                        <a class="sidebar-link" href="" id="vistaTask" >
+                            <i class="align-middle me-2 fas fa-fw fa-tasks"></i> <span class="align-middle">tasks</span>
+                        </a>
+                    </li> 
 <!-- END  
                      <--<li class="sidebar-item" id="opcioncondiciones">
                         <a class="sidebar-link" id="vistabancos" href="">
