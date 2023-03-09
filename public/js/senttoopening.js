@@ -1,7 +1,28 @@
 
 $(document).ready(function () {
+    $("#selectusuarios").empty();
+
+    $("#selectusuarios").select2({
+        dropdownParent: $('#modalAsignacion'),
+        placeholder: "Select the users",
+        tags: false,
+    });
+    $("#selectusuarios").html('');
+    $("#selectusuarios").select2("val", "");
+    $("#selectusuarios").val(null).trigger('change');
     filesopening();
 });
+
+// Cuando la vista se cierra o se oculta, vacía el Select2
+$('#modalAsignacion').on('hidden.bs.modal', function () {
+    $("#selectusuarios").select2({
+        dropdownParent: $('#modalAsignacion'),
+        placeholder: "Select the users",
+        tags: false,
+    }).val([]).trigger('change');
+    $("#selectusuarios").val([]);
+    $("#selectusuarios").empty();
+  });
 
 function filesopening(){
 
@@ -38,6 +59,8 @@ var registertbl	= $("#tblfilesopnening").DataTable({
                     "<i class='align-middle me-2 fas fa-fw fa-undo-alt' data-feather='edit'></i> Return to progress stage</a>"+
                     "<div class='dropdown-divider'></div><a class='dropdown-item itemopening' id='itemtres' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='optionopening' value="+data+">"+
                     "<i class='align-middle me-2 fas fa-fw fa-check' data-feather='edit'></i> Open loan</a>"+
+                    "<div class='dropdown-divider'></div><a class='dropdown-item itemopening' id='itemcuatro' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='optionopening' value="+data+">"+
+                    "<i class='align-middle me-2 fas fa-fw fa-users' data-feather='edit'></i> Asiganciones</a>"+
                     "</div></div>");
         },
         },
@@ -58,11 +81,9 @@ var registertbl	= $("#tblfilesopnening").DataTable({
 }
 
 var xgt;
-
 $(document).on('click', '.itemopening',function() { 
 
 	var idregistro = $(this).find(".optionopening").val();
-
     var item = this.id;
 
     if(item == 'primeritem'){
@@ -147,7 +168,59 @@ $(document).on('click', '.itemopening',function() {
 			} else {
 			}
 		});
+    }else if(item == 'itemcuatro'){
+
+      $("#selectusuarios").html('');
+      $("#selectusuarios").select2("val", "");
+      $("#selectusuarios").val(null).trigger('change');
+
+      var arryaRutas = ['condiciones/Users','registro/reporte/'+idregistro,'registro/usuariosasignados/'+idregistro];
+      Promise.all(arryaRutas.map( item => { return axios.get(principalUrl +item) }))
+        .then(nuevo_arreglo => {  
+
+            console.log(nuevo_arreglo[0].data);
+            console.log(nuevo_arreglo[1].data);
+
+            nuevo_arreglo[0].data.forEach(function (element) {
+                $("#selectusuarios").append("<option value="+element.id+" >"+element.name+"</option>"); 
+             });
+             $("#fechacontrato").val(nuevo_arreglo[1].data.registros[0].fecha_firma);
+             $("#clienteregistro").val(nuevo_arreglo[1].data.registros[0].nombre_cliente);
+             $("#registroid").val(nuevo_arreglo[1].data.registros[0].idregister);
+             $('#modalAsignacion').modal('show');
+        })
+        .catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+        }
+        });
     }
+});
+
+$('#btnAsigancion').on('click', function() { 
+
+	if ( $("#selectusuarios").val() == "") {Swal.fire("¡Select a user to assign the loan!"); return;}
+
+	var datos = new FormData();
+	    datos.append("usuariosselect",$('#selectusuarios').val());
+		datos.append("idregistro",$('#registroid').val());
+
+    axios.post(principalUrl+"registro/asiganacion",datos)
+    .then((respuesta) => {
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Open loan!",
+            showConfirmButton: false,
+            timer: 1000,
+        });
+	  $('#modalAsignacion').modal('hide');
+    })
+    .catch((error) => {
+        if (error.response) {
+            console.log(error.response.data);
+        }
+    });
 });
 
 

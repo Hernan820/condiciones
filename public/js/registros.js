@@ -358,7 +358,7 @@ $(document).on('click', '.opcionesitem',function() {
 		  });
 	}else if(this.id == 'itemdos'){
 
-		axios.post(principalUrl + "registro/reporte/"+idregistro)
+		axios.get(principalUrl + "registro/reporte/"+idregistro)
 		.then((respuesta) => {
 			 $('#reportregistro').text(' Name: '+respuesta.data.registros[0].nombre_cliente+"\n Phone: "+
 			 respuesta.data.registros[0].telefono+"\n Email: "+

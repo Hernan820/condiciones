@@ -33,9 +33,16 @@ class AsignacionesRegistroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function asignar(Request $request)
     {
-        //
+        $separada = explode(',', $request->usuariosselect);
+
+        foreach ($separada as $idusuario) {
+            $asiganarregistro = new asignaciones_registro;
+            $asiganarregistro->id_usuario  = $idusuario;
+            $asiganarregistro->id_registro  = $request->idregistro;
+            $asiganarregistro->save();
+            }
     }
 
     /**
@@ -81,5 +88,12 @@ class AsignacionesRegistroController extends Controller
     public function destroy(asignaciones_registro $asignaciones_registro)
     {
         //
+    }
+    /**
+     * 
+     */
+    public function usuariosasigancion($id){
+        $asiganacion = asignaciones_registro::where("asignaciones_registros.id_registro","=",$id)->get();
+        return  $asiganacion;
     }
 }

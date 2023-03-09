@@ -81,7 +81,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('doc/elimina/{id}', [App\Http\Controllers\DocumentoController::class, 'destroy']);
 
     #registros
-    Route::post('registro/reporte/{id}', [App\Http\Controllers\RegistroController::class, 'reporte']);
+    Route::get('registro/reporte/{id}', [App\Http\Controllers\RegistroController::class, 'reporte']);
 
     #RUTAS DE LA VISTA DE EMPRESAS.
   
@@ -142,4 +142,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('registro/opnening', [App\Http\Controllers\RegistroController::class, 'opening']);
 
     Route::post('registro/fecha/{id}', [App\Http\Controllers\RegistroController::class, 'fechaopening']);
+
+    Route::get('registro/usuariosasignados/{id}', [App\Http\Controllers\AsignacionesRegistroController::class, 'usuariosasigancion']);
+
+    Route::post('registro/asiganacion', [App\Http\Controllers\AsignacionesRegistroController::class, 'asignar']);
+
 });
