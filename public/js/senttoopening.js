@@ -56,7 +56,7 @@ var registertbl	= $("#tblfilesopnening").DataTable({
                     "<div class='dropdown-divider'></div><a class='dropdown-item itemopening' id='itemtres' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='optionopening' value="+data+">"+
                     "<i class='align-middle me-2 fas fa-fw fa-check' data-feather='edit'></i> Open loan</a>"+
                     "<div class='dropdown-divider'></div><a class='dropdown-item itemopening' id='itemcuatro' data-bs-toggle='modal' data-bs-target=''><input type='hidden' class='optionopening' value="+data+">"+
-                    "<i class='align-middle me-2 fas fa-fw fa-users' data-feather='edit'></i> Asiganciones</a>"+
+                    "<i class='align-middle me-2 fas fa-fw fa-users' data-feather='edit'></i> Assignments</a>"+
                     "</div></div>");
         },
         },
