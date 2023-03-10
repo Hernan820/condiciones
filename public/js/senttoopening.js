@@ -168,6 +168,9 @@ $(document).on('click', '.itemopening',function() {
 
       $("#selectusuarios").select2("data", null);
       $("#selectusuarios").empty();
+      $("#formasignacion")[0].reset();
+      $("#usuariosderesgitro").val('');
+      $("#registroid").val('');
 
       var arryaRutas = ['condiciones/Users','registro/reporte/'+idregistro,'registro/usuariosasignados/'+idregistro];
       Promise.all(arryaRutas.map( item => { return axios.get(principalUrl +item) }))

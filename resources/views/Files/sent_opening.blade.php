@@ -62,45 +62,48 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
-                <div class="col-12 col-lg-7 col-xxl-12 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-header">
-                            <h5 class="card-title">Loan details</h5>
-                            <h6 class="card-subtitle text-muted">Details of the loan to be assigned to users
-                            </h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12 col-xl-4">
-                                    <div class="mb-3">
-                                        <label class="form-label">Contract receipt date</label>
-                                        <input class="form-control" type="text" name="fechacontrato" id="fechacontrato" disabled
-                                            value="" />
+                <form action="" id="formasignacion">
+                    <div class="col-12 col-lg-7 col-xxl-12 d-flex">
+                        <div class="card flex-fill">
+                            <div class="card-header">
+                                <h5 class="card-title">Loan details</h5>
+                                <h6 class="card-subtitle text-muted">Details of the loan to be assigned to users
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 col-xl-4">
+                                        <div class="mb-3">
+                                            <label class="form-label">Contract receipt date</label>
+                                            <input class="form-control" type="text" name="fechacontrato"
+                                                id="fechacontrato" disabled value="" />
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-12 col-xl-8">
-                                    <div class="mb-3">
-                                        <label class="form-label">Client Owner</label>
-                                        <input class="form-control" type="text" name="clienteregistro" id="clienteregistro"disabled />
+                                    <div class="col-12 col-xl-8">
+                                        <div class="mb-3">
+                                            <label class="form-label">Client Owner</label>
+                                            <input class="form-control" type="text" name="clienteregistro"
+                                                id="clienteregistro" disabled />
+                                        </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="mb-3 error-placeholder">
-                    <label class="form-label">Users to assign</label>
-                    <div class="d-flex">
-                        <select class="form-control" id="selectusuarios" name="validation-select2-multi" multiple style="width: 100%">
+                    <div class="mb-3 error-placeholder">
+                        <label class="form-label">Users to assign</label>
+                        <div class="d-flex">
+                            <select class="form-control" id="selectusuarios" name="validation-select2-multi" multiple
+                                style="width: 100%">
 
-                        </select>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <input type="hidden" name="usuariosderesgitro" id="usuariosderesgitro" value="">
-				<input type="hidden" name="registroid" id="registroid" value="">
+                    <input type="hidden" name="usuariosderesgitro" id="usuariosderesgitro" value="">
+                    <input type="hidden" name="registroid" id="registroid" value="">
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
