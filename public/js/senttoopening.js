@@ -1,16 +1,12 @@
 
 $(document).ready(function () {
-    $("#selectusuarios").empty();
 
     $("#selectusuarios").select2({
         dropdownParent: $('#modalAsignacion'),
         placeholder: "Select the users",
-        tags: false,
     });
-    $("#selectusuarios").html('');
-    $("#selectusuarios").select2("val", "");
-    $("#selectusuarios").val(null).trigger('change');
-    filesopening();
+
+   filesopening();
 });
 
 // Cuando la vista se cierra o se oculta, vacía el Select2
@@ -170,9 +166,8 @@ $(document).on('click', '.itemopening',function() {
 		});
     }else if(item == 'itemcuatro'){
 
-      $("#selectusuarios").html('');
-      $("#selectusuarios").select2("val", "");
-      $("#selectusuarios").val(null).trigger('change');
+      $("#selectusuarios").select2("data", null);
+      $("#selectusuarios").empty();
 
       var arryaRutas = ['condiciones/Users','registro/reporte/'+idregistro,'registro/usuariosasignados/'+idregistro];
       Promise.all(arryaRutas.map( item => { return axios.get(principalUrl +item) }))
@@ -192,9 +187,15 @@ $(document).on('click', '.itemopening',function() {
                     }
                 }
              });
+            // $.fn.select2.defaults.reset();
 
-            nuevo_arreglo[0].data.forEach(function (element) {
-                $("#selectusuarios").append("<option value="+element.id+" >"+element.name+"</option>"); 
+             var usuarios = $.map(nuevo_arreglo[0].data, function(item) {
+                return {id: item.id, text: item.name};
+             })
+             $("#selectusuarios").select2({
+                dropdownParent: $('#modalAsignacion'),
+                placeholder: "Select the users",
+                data: usuarios
              });
              $("#fechacontrato").val(nuevo_arreglo[1].data.registros[0].fecha_firma);
              $("#clienteregistro").val(nuevo_arreglo[1].data.registros[0].nombre_cliente);
