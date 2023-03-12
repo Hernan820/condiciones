@@ -86,7 +86,7 @@ $(document).ready(function () {
 					  "</td>"+
 		   "</tr><tr>"+
 			   "<th>SSN</th>"+
-			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' placeholder='(000) 000-0000' name='ssn_"+element.id+"' id='ssn_"+element.id+"' value='"+element.socials_number+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
+			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' placeholder='000-00-0000' name='ssn_"+element.id+"' id='ssn_"+element.id+"' value='"+element.socials_number+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
 		   "</tr><tr>"+
 			   "<th>Email</th>"+
 			   "<td><div class='col-md-12'><div class='col-sm-12'><input type='text' name='correo_"+element.id+"' id='correo_"+element.id+"' value='"+element.correo+"' class='form-control cliente' style='border: 0px;'></div></div></td>"+
@@ -121,7 +121,7 @@ function tbldetalleregistro(detalleregistro,tiposprestamos) {
 		"<tr><th>Drive</th><td></td></tr>"+
 		"<tr><td colspan='2'><input type='text' onchange='registrodetalle(this)' name='drive_"+element.id+"' id='drive_"+element.id+"' value='"+element.drive+"' class='form-control detalleregistro' autocomplete='off' style='border: 0px;'>    </td></tr>"+
 		"<tr><th>Realtor name</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text'  onchange='registrodetalle(this)' name='procesadorname_"+element.id+"' id='procesadorname_"+element.id+"' value='"+element.procesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>"+
-		"<tr><th>Telephone</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text'  onchange='registrodetalle(this)' name='telefonoprecesor_"+element.id+"' id='telefonoprecesor_"+element.id+"' value='"+element.telefono_precesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>");
+		"<tr><th>Telephone</th><td><div class='col-md-12'><div class='col-sm-12'><input type='text' placeholder='(000) 000-0000'  onchange='registrodetalle(this)' name='telefonoprecesor_"+element.id+"' id='telefonoprecesor_"+element.id+"' value='"+element.telefono_precesador+"' class='form-control detalleregistro'  autocomplete='off' style='border: 0px;'></div></div></td></tr>");
 		$('#telefonoprecesor_'+element.id).mask('(000) 000-0000');
 		$('#dowpayment_'+element.id).mask('00%');
 		$('#notaderegistro').append('<textarea rows="6" class="form-control detalleregistro" placeholder="Leave a note" onchange="registrodetalle(this)" name="notes_'+element.id+'" id="notes_'+element.id+'" style="border:0px">'+element.notas+'</textarea>');
