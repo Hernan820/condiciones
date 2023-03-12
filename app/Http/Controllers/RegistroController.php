@@ -308,11 +308,13 @@ class RegistroController extends Controller
      */
     public function opening(){
 
-        $sql = "SELECT prestamos.*, clientes.*, registros.*, registros.id as idregister FROM `registros` 
+        $sql = "SELECT asignaciones_registros.id as idasigancionr , prestamos.*, clientes.*, registros.*, registros.id as idregister FROM `registros` 
         INNER JOIN clientes_registros on clientes_registros.id_registro = registros.id
         INNER JOIN clientes on clientes.id = clientes_registros.id_cliente
         INNER JOIN prestamos on prestamos.id = registros.id_prestamo
-        WHERE registros.id_etapa  in(2)  AND clientes.tipe_client = 1  AND registros.id_estado != 3;";
+        LEFT JOIN asignaciones_registros on asignaciones_registros.id_registro = registros.id
+        WHERE registros.id_etapa  in(2)  AND clientes.tipe_client = 1  AND registros.id_estado != 3
+        GROUP BY registros.id;";
 
         $registros = DB::select($sql);
 

@@ -63,13 +63,11 @@ var registertbl	= $("#tblfilesopnening").DataTable({
     ],
     createdRow: (row, data, dataIndex, cells) => {
         $(row).addClass(' text-center'); 
-        if(data.fecha_abierto != null){
-            $(row).addClass(' table-success');
 
+        if(data.idasigancionr == null){
+            $(row).addClass(' table-warning');
         }else{
-        if (data.id_estado == 2){
-            $(row).addClass(' table-danger');
-         }
+            $(row).addClass(' table-success');
         }
     }
 });
@@ -239,10 +237,11 @@ $('#btnAsigancion').on('click', function() {
         Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Open loan!",
+            title: "record assigned successfully!",
             showConfirmButton: false,
             timer: 1000,
         });
+        filesopening()
 	  $('#modalAsignacion').modal('hide');
     })
     .catch((error) => {
