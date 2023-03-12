@@ -135,6 +135,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('rol/actualiza', [App\Http\Controllers\RolController::class, 'update'])->name('rol.update');
     Route::post('rol/delete/{id}', [App\Http\Controllers\RolController::class, 'destroy'])->name('rol.destroy');
 
+    #vista tareas
+    Route::get('task/index',[App\Http\Controllers\TareasController::class,'index'])->name('task.index');
+    Route::post('task/add',[App\Http\Controllers\TareasController::class,'create'])->name('task.create');
 
   #VISTA DE TO OPENING
     Route::get('vista/opening', [App\Http\Controllers\RegistroController::class, 'index']);

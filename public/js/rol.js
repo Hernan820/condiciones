@@ -7,108 +7,148 @@ $("#btnnewRole").on("click", function () {
 });
 
 $(document).ready(function () {
-   tblRoles();
-   namepermisos();
+    tblRoles();
+    namepermisos();
    $('#name_rol').keyup(function (e){
     var str = $('#name_rol').val();
     str = str.replace(/\W+(?!$)/g, '_').toLowerCase();
     $('#name_rol').val(str);
     $('name_rol').attr('placeholder,str');
-});
+    });
 
 });
-//agregar permisos
-$("#btn-addpermi").on("click", function () {
-    var inputSelect= $("#permisos").val();
-    var validoPermiso = true;
-    if(inputSelect == ""){
-        Swal.fire("¡Add permission!");
-        return (validoPermiso = false);
+//FUNCION PARA VALIDACION
+function validaRol() {
+    var valido = true;
+    var name = $("#name_rol").val();
+    const permisos = $("input[name='permiso[]']").length
+
+    if (name == "") {
+        Swal.fire("¡Add Name Rol!");
+        $("title").focus();
+        return (valido = false);
     }
 
-    var tr = $('<tr >');
+    if (permisos == "") {
+        Swal.fire("¡Add Permission!");
+        return (valido = false);
+    } 
 
-    $("#filasRolPermisos").append(tr);
+   return valido;
+}
+//agregar permisos
+$("#btn-addpermi").on("click", function () {
     
-    tr.append("<td >"+$('#permisos').val()+" <input type='hidden' class='Permiso_nombre' name='permiso[]'  value="+$('#permisos').val()+"> </td>");
-    tr.append('<td class="table-action" >&nbsp;<a href="#" class="eliminaPermiso"><i class="align-middle fas fa-fw fa-trash"></i></a></td>');
+    var validar =true;
+    var selectInput =$('#permisos').val();
 
+    const values = $('input[name="permiso[]"]').map(function () { return this.value;}).get();
+
+	if (values.includes(selectInput)) {
+		Swal.fire("¡repeated permission!");
+        $("#permisos").val(""); 
+		return valido = false; 
+        
+	  }
+
+    if(selectInput ==""){
+        Swal.fire("¡Add Permission Please!");
+        return (validar=false)
+    }
+    
+    var tr = $("<tr >");
+    $("#filasRolPermisos").append(tr);
+    tr.append(
+        "<td >" +
+            $("#permisos").val() +
+            " <input type='hidden' id ='arraypermisos'class='Permiso_nombre' name='permiso[]'  value=" +
+            $("#permisos").val() +
+            "> </td>"
+    );
+    tr.append(
+        '<td class="table-action" >&nbsp;<a href="#" class="eliminaPermiso"><i class="align-middle fas fa-fw fa-trash"></i></a></td>'
+    );
+
+    $("#permisos").val("");
 });
 
-$(document).on('click', '.eliminaPermiso',function() {
-	Swal.fire({
-		title: "Remove",
-		text: "you want to delete this permission?",
-		icon: "warning",
-		showCancelButton: true,
-		confirmButtonColor: "#3085d6",
-		cancelButtonColor: "#d33",
-		confirmButtonText: "Continue ",
-		cancelButtonText: "Cancel",
-	}).then((result) => {
-		if (result.isConfirmed) {
-			$(this).closest('tr').remove();
-			
-		} else {
-		}
-	});
-
+$(document).on("click", ".eliminaPermiso", function () {
+    Swal.fire({
+        title: "Remove",
+        text: "you want to delete this permission?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Continue ",
+        cancelButtonText: "Cancel",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $(this).closest("tr").remove();
+        } else {
+        }
+    });
 });
 // REGISTRAR NUEVO ROL
 $("#btnsave-rol").on("click", function () {
+    
+    if (validaRol() == false) {
+        return;
+    }
     var rol = new FormData(document.getElementById("formRol"));
 
-    $("input[name='permiso[]']").each(function(indice, inputDatos){
+    $("input[name='permiso[]']").each(function (indice, inputDatos) {
         console.log($(this).val());
-	})
-    console.log("inputid "+$("#idRol").val());
+    });
+    console.log("inputid " + $("#idRol").val());
     if ($("#idRol").val() != "") {
         axios
-        .post(principalUrl + "rol/actualiza", rol)
-        .then((respuesta) => {
-            console.log(respuesta.data)
-           Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "actualized Rol!",
-                showConfirmButton: false,
-                timer: 1200,
+            .post(principalUrl + "rol/actualiza", rol)
+            .then((respuesta) => {
+                console.log(respuesta.data);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "actualized Rol!",
+                    showConfirmButton: false,
+                    timer: 1200,
+                });
+                tblRoles();
+                namepermisos();
+                $("#idRol").val("");
+                $("#name_Rol").val("");
+                $("#permisos").val("");
+                $("#ModalRol").modal("hide");
+            })
+            .catch((error) => {
+                if (error.response) {
+                    console.log(error.response.data);
+                }
             });
-            tblRoles();
-            namepermisos();
-            $("#idRol").val("");
-            $("#name_Rol").val("");
-            $("#permisos").val("");
-            $("#ModalRol").modal("hide");
-        })
-        .catch((error) => {
-            if (error.response) {
-                console.log(error.response.data);
-            }
-        });
     } else {
-        axios.post(principalUrl + "rol/add",rol)
-        .then((respuesta) => {
-            $('#ModalRol').modal('hide');
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "record saved!",
-                showConfirmButton: false,
-                timer: 1200,
+        axios
+            .post(principalUrl + "rol/add", rol)
+            .then((respuesta) => {
+                $("#ModalRol").modal("hide");
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "record saved!",
+                    showConfirmButton: false,
+                    timer: 1200,
+                });
+                tblRoles();
+                namepermisos();
+                $("#idRol").val("");
+                $("#name_Rol").val("");
+                $("#permisos").val("");
+                $("#ModalRol").modal("hide");
+            })
+            .catch((error) => {
+                if (error.response) {
+                    console.log(error.response.data);
+                }
             });
-            tblRoles();
-            namepermisos();
-            $("#idRol").val("");
-            $("#name_Rol").val("");
-            $("#permisos").val("");
-            $("#ModalRol").modal("hide");
-        })
-        .catch((error) => {
-            if (error.response) {
-                console.log(error.response.data);
-            }
-        });
     }
 });
 
@@ -117,17 +157,18 @@ function tblRoles() {
     var RolesTabla = $("#tabla-roles").DataTable();
     RolesTabla.destroy();
 
-    var RolesTabla  = $("#tabla-roles").DataTable({
+    var RolesTabla = $("#tabla-roles").DataTable({
         responsive: true,
         ajax: {
             url: principalUrl + "roles/show",
             dataSrc: "",
         },
         columns: [
-            {data:"id"},
-            { data:"namerol" },
-            {data: "permisosname"},
-            { data: "id",
+            { data: "id" },
+            { data: "namerol" },
+            { data: "permisosname" },
+            {
+                data: "id",
                 render: function (data) {
                     return (
                         "<div class='btn-group'><button type='button' class='btn mb-1 btn-primary dropdown-toggle' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Options </button><div class='dropdown-menu' style=''><a class='dropdown-item opcionesRoles' id='editRol' href='#'><input type='hidden' class='data' value=" +
@@ -157,12 +198,18 @@ $(document).on("click", ".opcionesRoles", function () {
                 $("#name_rol").val(respuesta.data[0].namerol);
                 $("#permisos").val("");
                 respuesta.data.forEach(function (element) {
-                    $("#filasRolPermisos").append("<tr> <td>"+element.name+" <input type='hidden' class='Permiso_nombre' name='permiso[]'  value="+element.name+"></td>  <td class='table-action' >&nbsp;<a href='#' class='eliminaPermiso'><i class='align-middle fas fa-fw fa-trash'></i></a></td> </tr>"); 
-                   });
+                    $("#filasRolPermisos").append(
+                        "<tr> <td>" +
+                            element.name +
+                            " <input type='hidden' class='Permiso_nombre' name='permiso[]'  value=" +
+                            element.name +
+                            "></td>  <td class='table-action' >&nbsp;<a href='#' class='eliminaPermiso'><i class='align-middle fas fa-fw fa-trash'></i></a></td> </tr>"
+                    );
+                });
                 document.getElementById("btnsave-rol").innerText = "Update";
                 $("#ModalRol").modal("show");
 
-            console.log(respuesta.data);
+                console.log(respuesta.data);
             })
             .catch((error) => {
                 if (error.response) {
@@ -199,28 +246,37 @@ $(document).on("click", ".opcionesRoles", function () {
                             console.log(error.response.data);
                         }
                     });
-            } 
+            }
         });
     }
 });
 
 //name permission  funcion.
-function namepermisos(){
+function namepermisos() {
     $("#permisos").empty();
-    axios.get(principalUrl + "permisos/name")
-    .then((respuesta) => {
-        respuesta.data
-        $("#permisos").append("<option value='' selected>Choose...</option>"); 
-    
-        respuesta.data.forEach(function (element) {
-           $("#permisos").append("<option value="+element.name+" >"+element.name+"</option>"); 
-        });
-    
-    })
-    .catch((error) => {
-        if (error.response) {
-            console.log(error.response.data);
-        }
-    });
+    axios
+        .get(principalUrl + "permisos/name")
+        .then((respuesta) => {
+            respuesta.data;
+            $("#permisos").append(
+                "<option value='' selected>Choose...</option>"
+            );
 
+            respuesta.data.forEach(function (element) {
+                $("#permisos").append(
+                    "<option value=" +
+                        element.name +
+                        " >" +
+                        element.name +
+                        "</option>"
+                );
+            });
+        })
+        .catch((error) => {
+            if (error.response) {
+                console.log(error.response.data);
+            }
+        });
 }
+
+console.log("archivo de rol.js");

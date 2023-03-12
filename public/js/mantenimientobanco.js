@@ -146,6 +146,23 @@ $('#vistaCuestionario').on('click', function() {
 
 });
 
+$('#vistaTask').on('click', function() {
+  event.preventDefault();
+
+  $.ajax({
+     type:'GET',
+     url: principalUrl+'task/index',
+     dataType:"html",
+ }).done(function(data) {
+   $(".sidebar-item").removeClass("active");
+   $("#itemTask").addClass("active");
+
+     $('.contenido').html(data);   
+
+   });
+
+});
+
 const availableTags = [
 	"Alaska",
 	"Arizona",
